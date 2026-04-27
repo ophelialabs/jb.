@@ -2,7 +2,8 @@
 version: 1
 project:
   id: 60670856-e56c-489a-9a05-75cad3c3065e
-  # title:
+  references:
+    spec: https://mystmd.org/spec
   # description:
   # keywords: []
   # authors: []

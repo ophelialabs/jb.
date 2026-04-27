@@ -13,4 +13,4 @@ a faster-than-light expansion just after the <wiki:big_bang>.
 
 ---
 
-[](xref:spec/tables#example)
+<xref:spec/tables#example>
