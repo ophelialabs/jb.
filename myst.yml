@@ -14,9 +14,10 @@ extends:
     
 site:
   template: book-theme
-  # options:
+  options:
   #   favicon: favicon.ico
-  #   logo: site_logo.png
+  logo: content/Gemini_Generated_logo.png
+
 
   nav: []
   actions:
