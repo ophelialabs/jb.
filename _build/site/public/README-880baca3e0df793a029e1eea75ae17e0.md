@@ -1,4 +1,4 @@
-[Executable Books](https://executablebooks.org/en/latest/gallery/)
+[Executable Books](xref:gallery/gallery/#gallery-of-jupyter-books)
 
 ```{figure} https://github.com/rowanc1/pics/blob/main/mountains.png?raw=true
 :label: my-fig
