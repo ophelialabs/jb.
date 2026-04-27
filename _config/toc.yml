@@ -1,0 +1,28 @@
+# TOC Structure Guide:
+# - Use patterns for auto-discovered files: 'directory/*.md'
+# - Group related content under parent titles
+# - Keep hierarchy 3 levels deep max for usability
+
+version: 1
+toc:
+  - file: ../content/README.md
+  
+  # ==== Parent 1 ====
+  - title: Parent 1
+    children:
+      - title: Part 1
+        children:
+          - pattern: '../content/parent_1/part_1/*.md'
+      - title: Part 2
+        children:
+          - pattern: '../content/parent_1/part_2/*.md'
+  
+  # ==== Parent 2 ====
+  - title: Parent 2
+    children:
+      - title: Part 1
+        children:
+          - pattern: '../content/parent_2/part_1/*.md'
+      - title: Part 2
+        children:
+          - pattern: '../content/parent_2/part_2/*.md'

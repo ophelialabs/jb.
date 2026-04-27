@@ -1,0 +1,5 @@
+version: 1
+project:
+  references:
+    spec: https://mystmd.org/spec
+    guide: https://mystmd.org/guide

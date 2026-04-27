@@ -2,9 +2,6 @@
 version: 1
 project:
   id: 60670856-e56c-489a-9a05-75cad3c3065e
-  references:
-    spec: https://mystmd.org/spec
-    guide: https://mystmd.org/guide
   # description:
   # keywords: []
   # authors: []
@@ -12,7 +9,8 @@ project:
   # bibliography: []
 
 extends:
-  - toc.yml
+  - _config/toc.yml
+  - _config/references.yml
     
 site:
   template: book-theme
