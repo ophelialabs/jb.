@@ -6,6 +6,3 @@
     * [Tools](https://docs.oracle.com/en-us/iaas/Content/devtoolshome.htm)
 
 - [MS](https://developer.microsoft.com/en-us/)
-- [Apple](https://developer.apple.com/)
-- [GCP](https://developers.google.com/)
-- [AWS](https://developer.amazon.com/)
