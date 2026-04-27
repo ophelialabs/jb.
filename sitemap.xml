@@ -5,6 +5,9 @@
     <loc>http://localhost:3000</loc>
   </url>
   <url>
+    <loc>http://localhost:3000/readme-1</loc>
+  </url>
+  <url>
     <loc>http://localhost:3000/1-1</loc>
   </url>
   <url>
