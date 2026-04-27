@@ -1,0 +1,25 @@
+# See docs at: https://mystmd.org/guide/frontmatter
+version: 1
+project:
+  id: 60670856-e56c-489a-9a05-75cad3c3065e
+  # title:
+  # description:
+  # keywords: []
+  # authors: []
+  # github:
+  # bibliography: []
+
+extends:
+  - toc.yml
+    
+site:
+  template: book-theme
+  # options:
+  #   favicon: favicon.ico
+  #   logo: site_logo.png
+
+  nav: []
+  actions:
+    - title: Learn More
+      url: https://mystmd.org/guide
+  domains: []

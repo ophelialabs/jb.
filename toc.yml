@@ -1,0 +1,30 @@
+# TOC Structure Guide:
+# - Use patterns for auto-discovered files: 'directory/*.md'
+# - Group related content under parent titles
+# - Keep hierarchy 3 levels deep max for usability
+
+version: 1
+toc:
+  - file: README.md
+  
+  # ==== Parent 1 ====
+  - title: Parent 1
+    children:
+      - title: Part 1
+        children:
+          - pattern: 'parent_1/part_1/*.md'
+          # - sort: descending # This will sort files in descending order, so if your files are named with a date at the start, for example, 2025-12-03-reverse-toc.md, this will list files in reverse alphabetical order (newest first)
+          # - hidden: true # This will hide the file from the Table of Contents, but it will still be accessible at its URL (referred to by other pages in the project)
+      - title: Part 2
+        children:
+          - pattern: 'parent_1/part_2/*.md'
+  
+  # ==== Parent 2 ====
+  - title: Parent 2
+    children:
+      - title: Part 1
+        children:
+          - pattern: 'parent_2/part_1/*.md'
+      - title: Part 2
+        children:
+          - pattern: 'parent_2/part_2/*.md'
