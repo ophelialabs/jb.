@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-P8S1FQ4XSG"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-P8S1FQ4XSG');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ophelia Labs - Research, Infrastructure & Resources</title>
+    <meta name="description" content="Comprehensive platform for quantum computing research, enterprise infrastructure, and technical resources.">
+    <meta name="keywords" content="quantum computing, infrastructure, research, deployment, enterprise, Q#, Python, HDF5">
+    <meta property="og:title" content="Ophelia Labs - Research & Infrastructure">
+    <meta property="og:description" content="Comprehensive platform for quantum computing research, enterprise infrastructure, and technical resources.">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <link rel="stylesheet" href="./assets/css/sidebar.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ 
+            startOnLoad: false,
+            theme: 'dark',
+            securityLevel: 'loose',
+            themeVariables: {
+                primaryColor: '#0d0d0d',
+                primaryTextColor: '#fff',
+                primaryBorderColor: '#333',
+                fontSize: '14px',
+                fontFamily: 'Arial, sans-serif'
+            }
+        });
+    </script>
+</head>
+<body>
+    <div id="navbar"></div>
+    <div id="sidebar"></div>
+    <main id="main-content">
+        <div id="home" class="page active"></div>
+        <div id="pipeline" class="page"></div>
+        <div id="pipeline2" class="page"></div>
+        <div id="qsharp" class="page"></div>
+        <div id="rnr" class="page"></div>
+        <div id="hdf5" class="page"></div>
+        <div id="data" class="page"></div>
+        <div id="tools-list" class="page"></div>
+        <div id="bmi" class="page"></div>
+        <div id="dashboard" class="page"></div>
+        <div id="users-list" class="page"></div>
+        <div id="settings" class="page"></div>
+        <div id="journals" class="page"></div>
+        <div id="universities" class="page"></div>
+        <div id="python" class="page"></div>
+
+        <!-- Added page containers for new markdown pages -->
+        <div id="physics-passive" class="page"></div>
+        <div id="optical" class="page"></div>
+        <div id="q-control" class="page"></div>
+
+        <!-- Page containers for RN directory -->
+        <div id="Implant" class="page"></div>
+        <div id="Implant-Index2" class="page"></div>
+        <div id="Implant-Index3" class="page"></div>
+        <div id="Informatics" class="page"></div>
+        <div id="Informatics-Index2" class="page"></div>
+        <div id="Informatics-Index3" class="page"></div>
+        <div id="Curtain" class="page"></div>
+        <div id="Curtain-Index2" class="page"></div>
+        <div id="Curtain-Index3" class="page"></div>
+        <div id="Comm" class="page"></div>
+        <div id="Comm-Index2" class="page"></div>
+        <div id="Comm-Index3" class="page"></div>
+        
+    </main>
+<script src="./assets/js/app.js"></script>
+    <script>
+        // Page configuration
+        // Organize by Navigation/Directories
+        const PAGES = {
+                'home': 'pages/home.html',
+                'pipeline': 'pages/enterprise/pages/pipeline/index.html',
+                'pipeline2': 'pages/learn/pipeline/index2.html',
+                'rnr': 'pages/learn/resources.html',
+                'hdf5': 'pages/enterprise/pages/data/hdf5.html',
+                'data': 'pages/enterprise/pages/data/data.html',
+                'datalakehouse': 'pages/enterprise/pages/data/bigdata/datalakehouse.html',
+                'bigdatalinks': 'pages/enterprise/pages/sdata/bigdata/links.html',
+                'tools-list': 'pages/learn/tools-list.html',
+                'bmi': 'content/public/BMI/README.md',
+                'mat-cs': 'pages/learn/resources/mat-cs/mat-cs.md',
+                'dashboard': 'pages/quantum/content/admin/dashboard.html',
+                'users-list': 'pages/users/users-list.html',
+                'settings': 'pages/quantum/content/admin/settings.html',
+                'architecture': 'pages/enterprise/pages/architecture/arch.md',
+                'publications': 'pages/learn/resources/publications.html',
+                'geofence': 'pages/enterprise/pages/geo/index.md',
+                'journals': 'pages/learn/resources/journals.html',
+                'universities': 'pages/learn/resources/universities.html',
+                'python': 'pages/learn/python.html',
+
+                // New page entries
+                'physics-passive': 'pages/learn/Departments/Physics/passive/README.md',
+                'optical': 'pages/quantum/content/infrastructure/qnet/Q_Control/optical.md',
+                'q-control': 'pages/quantum/content/infrastructure/qnet/Q_Control/README_formatted.md',
+
+                // RN directory
+                'Implant': 'RN/Implant/Index.md',
+                'Implant-Index2': 'RN/Implant/index2.md',
+                'Implant-Index3': 'RN/Implant/index3.md',
+                'Informatics': 'RN/Informatics/Index.md',
+                'Informatics-Index2': 'RN/Informatics/index2.md',
+                'Informatics-Index3': 'RN/Informatics/index3.md',
+                'Curtain': 'RN/Curtain/Index.md',
+                'Curtain-Index2': 'RN/Curtain/index2.md',
+                'Curtain-Index3': 'RN/Curtain/index3.md',
+                'Comm': 'RN/Comm/Index.md',
+                'Comm-Index2': 'RN/Comm/index2.md',
+                'Comm-Index3': 'RN/Comm/index3.md'
+        };
+
+        const loadedPages = new Set();
+
+        // Load navbar and sidebar
+        Promise.all([
+            fetch('assets/layout/navbar.html').then(r => r.text()),
+            fetch('assets/layout/sidebar.html').then(r => r.text())
+        ]).then(([navbar, sidebar]) => {
+            document.getElementById('navbar').innerHTML = navbar;
+            document.getElementById('sidebar').innerHTML = sidebar;
+            initNavbar();
+            initSidebar();
+        }).catch(error => console.error('Error loading layout:', error));
+
+        function loadPageContent(pageId) {
+            if (!PAGES.hasOwnProperty(pageId)) {
+                console.warn('Page not found:', pageId);
+                return Promise.reject('Page not found');
+            }
+
+            const pageElement = document.getElementById(pageId);
+            if (!pageElement) {
+                console.warn('Page element not found:', pageId);
+                return Promise.reject('Element not found');
+            }
+
+            const filePath = PAGES[pageId];
+            const isMarkdown = filePath.endsWith('.md');
+
+            return fetch(filePath)
+                .then(response => {
+                    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                    return response.text();
+                })
+                .then(content => {
+                    if (isMarkdown) {
+                        // Convert markdown to HTML
+                        const html = marked.parse(content);
+                        pageElement.innerHTML = `<div class="content-section">${html}</div>`;
+                    } else {
+                        pageElement.innerHTML = content;
+                    }
+                    loadedPages.add(pageId);
+                    
+                    // Render Mermaid diagrams after content is loaded
+                    if (window.mermaid) {
+                        setTimeout(() => {
+                            try {
+                                mermaid.run();
+                            } catch (err) {
+                                console.warn('Error rendering mermaid diagrams:', err);
+                            }
+                        }, 100);
+                    }
+                })
+                .catch(error => {
+                    console.error(`Error loading page ${pageId}:`, error);
+                    pageElement.innerHTML = `<div class="content-section"><h1>Error Loading Page</h1><p>Could not load content: ${error}</p></div>`;
+                });
+        }
+
+        function navigateToPage(hash) {
+            const pageId = (hash.substring(1) || 'home').toLowerCase();
+            
+            if (!PAGES.hasOwnProperty(pageId)) {
+                console.warn('Invalid page ID:', pageId);
+                return;
+            }
+
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // Show and load target page
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+                
+                // Load content if not already loaded
+                if (!loadedPages.has(pageId)) {
+                    loadPageContent(pageId);
+                } else {
+                    // Already loaded, just render mermaid if needed
+                    if (window.mermaid) {
+                        setTimeout(() => {
+                            try {
+                                mermaid.run();
+                            } catch (err) {
+                                console.warn('Error rendering mermaid:', err);
+                            }
+                        }, 100);
+                    }
+                }
+            }
+        }
+
+        // Initialize when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load initial page
+            navigateToPage(window.location.hash);
+            
+            // Handle hash changes
+            window.addEventListener('hashchange', () => {
+                navigateToPage(window.location.hash);
+            });
+        });
+    </script>
+</body>
+</html>
