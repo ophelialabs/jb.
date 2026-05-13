@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pluto | Ophelia</title>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Framework, cloud, security, and CI/CD quickstart commands and resources for .NET, Flask, Rust, React, Kubernetes, and more.">
+    <meta name="keywords" content="Ophelia, frameworks, cloud, security, CI/CD, .NET, Flask, Rust, React, Kubernetes, Linux, DevOps, quickstart, commands, resources">
+    <meta name="author" content="Ophelia Labs">
+    <link rel="canonical" href="https://ophelialabs.github.io/nav/apps/pluto.html">
+    <!-- Open Graph -->
+    <meta property="og:title" content="Pluto | Ophelia">
+    <meta property="og:description" content="Framework, cloud, security, and CI/CD quickstart commands and resources for .NET, Flask, Rust, React, Kubernetes, and more.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ophelialabs.github.io/nav/apps/pluto.html">
+    <meta property="og:site_name" content="Ophelia">
+    <!-- Bootstrap & Site CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/static/content/site.css" />
+</head>
+<body>
+    <div id="header-include"></div>
+    <main class="container body-content" style="margin-top: 80px;">
+        <!-- BEGIN MAIN CONTENT (copied from original file, minus nav/footer) -->
+        <div class="jumbotron">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" id="frameworkTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="aspire-tab" data-bs-toggle="tab" data-bs-target="#aspire" type="button" role="tab">Aspire</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="flask-tab" data-bs-toggle="tab" data-bs-target="#flask" type="button" role="tab">Flask</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="rust-tab" data-bs-toggle="tab" data-bs-target="#rust" type="button" role="tab">Rust</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="cmake-tab" data-bs-toggle="tab" data-bs-target="#cmake" type="button" role="tab">CMake</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="react-tab" data-bs-toggle="tab" data-bs-target="#react" type="button" role="tab">React</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="k8s-tab" data-bs-toggle="tab" data-bs-target="#k8s" type="button" role="tab">Kubernetes</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="el9-tab" data-bs-toggle="tab" data-bs-target="#el9" type="button" role="tab">EL</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="ros-tab" data-bs-toggle="tab" data-bs-target="#ros" type="button" role="tab">Ros</button>
+                </li>
+            </ul>
+            <!-- Tab content -->
+            <div class="tab-content mt-3">
+                <div class="tab-pane fade show active" id="aspire" role="tabpanel">
+                    <div class="bg-white p-3 rounded shadow-sm">
+                        <a class="btn btn-primary w-100 mb-2" href="https://github.com/jlabclouds/FrameworkTemplates/blob/main/FrameworkTemplates/ReadMe.md" target="_blank"><h5>Aspire</h5></a>
+                        <pre class="bg-light p-3 mt-2" style="height: 200px; overflow-y: auto;">
+# Basic .NET Commands
+ dotnet new list
+ dotnet new webapi
+ dotnet build
+ dotnet run
+ dotnet test
+ dotnet publish
+
+ # Package Management
+ dotnet add package Azure.Identity
+ dotnet add package Azure.Security.KeyVault.Secrets
+ dotnet add package Microsoft.ML
+ dotnet add package Microsoft.EntityFrameworkCore
+ dotnet package find -verbosity detailed azure.authentication
+
+ # Project Templates
+ dotnet new aspire-starter --name MyProject
+ dotnet new blazor
+ dotnet new mvc
+
+ # Authentication & Security
+ dotnet add package Microsoft.Identity.Web
+ dotnet add package Azure.Identity
+ dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer
+
+ # Monitoring & Logging
+ dotnet add package Application Insights
+ dotnet add package Serilog.AspNetCore
+ dotnet add package OpenTelemetry
+
+# Data & Storage
+dotnet add package Microsoft.EntityFrameworkCore
+dotnet add package Microsoft.EntityFrameworkCore.SQLite
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL
+dotnet add package Oracle.EntityFrameworkCore
+dotnet add package MySql.EntityFrameworkCore
+dotnet add package Pomelo.EntityFrameworkCore.MySql
+dotnet add package Azure.Storage.Blobs
+dotnet add package Microsoft.Azure.Cosmos
+dotnet add package MongoDB.Driver
+dotnet add package Cassandra.Driver
+dotnet add package StackExchange.Redis
+
+ # Messaging & Integration
+ dotnet add package Azure.Messaging.ServiceBus
+ dotnet add package MassTransit
+ dotnet add package RabbitMQ.Client
+
+ # Configuration & Secrets
+ dotnet add package Azure.Security.KeyVault.Secrets
+ dotnet add package Microsoft.Extensions.Configuration.AzureKeyVault
+                                                      
+ # Caching & Performance
+ dotnet add package Microsoft.Extensions.Caching.StackExchangeRedis
+ dotnet add package Polly
+                                                      
+ # ML.NET and AI Packages
+ dotnet add package TorchSharp
+ dotnet add package Microsoft.ML.TorchSharp
+ dotnet add package Microsoft.SemanticKernel
+ dotnet add package Microsoft.ML.FastTree
+ dotnet add package Microsoft.ML.LightGbm
+ dotnet add package PytorchSharp.OpenCL
+ dotnet add package Microsoft.ML.OnnxRuntime
+ dotnet add package Microsoft.ML.Vision
+ dotnet add package Microsoft.ML.Recommender
+ dotnet add package Microsoft.ML.AutoML
+                        
+# Quantum Development
+ dotnet add package Microsoft.Quantum.Development.Kit
+ dotnet add package Microsoft.Quantum.Runtime.Core
+ dotnet add package Microsoft.Quantum.Simulators
+ dotnet add package Microsoft.Quantum.Standard
+ dotnet add package Microsoft.Quantum.Numerics
+ dotnet add package Microsoft.Quantum.QSharp.Core
+ dotnet add package Microsoft.Quantum.EntryPoint.Runtime
+ dotnet add package Microsoft.Quantum.NetworkingLibrary</pre>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="flask" role="tabpanel">
+                    <div class="bg-white p-3 rounded shadow-sm">
+                        <a class="btn btn-primary w-100 mb-2" href="https://github.com/jlabclouds/Flask/blob/master/README.md" target="_blank"><h5>Flask</h5></a>
+                        <pre class="bg-light p-3 mt-2" style="height: 200px; overflow-y: auto;">
+    # Virtual Environment Setup
+    python -m venv venv
+    source venv/bin/activate
+
+    # Essential Packages
+    pip install flask>=3.0.3
+    opentelemetry-distro                       
+    pip install python-dotenv
+    pip install pytest
+    pip install gunicorn
+    pip install uwsgi
+    pip install mod_wsgi
+
+    # Authentication & Security
+    pip install flask-login
+    pip install flask-security
+    pip install PyJWT
+    pip install flask-jwt-extended
+    pip install passlib
+    pip install bcrypt
+
+    # ML/AI/Quantum Packages
+    pip install torch torchvision
+    pip install tensorflow
+    pip install transformers
+    pip install huggingface_hub[cli,torch,tensorflow]
+    pip install scikit-learn
+    pip install pandas numpy
+    pip install qiskit
+    pip install cirq
+    pip install pennylane
+
+    # Monitoring and Logging
+    pip install prometheus_client
+    pip install logging
+    pip install sentry-sdk
+    pip install elastic-apm
+    opentelemetry-exporter-otlp-proto-grpc
+    opentelemetry-instrumentation-flask 
+
+    # Databases
+    pip install sqlalchemy
+    pip install flask-sqlalchemy
+    pip install flask-migrate
+    pip install redis
+    pip install celery
+    pip install cx_Oracle
+    pip install oracle-db
+    pip install psycopg2-binary
+    pip install pymongo
+
+    # Server Deployment
+    pip install apache2-utils
+    pip install mod_wsgi
+    pip install supervisor
+
+    flask run</pre> 
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="rust" role="tabpanel">
+                    <div class="bg-white p-3 rounded shadow-sm">
+                        <h5>Rust Project</h5>
+                        <a class="btn btn-primary w-100 mb-2" href="https://github.com/jlabclouds/rust-template" target="_blank">View Documentation</a>
+                        <pre class="bg-light p-3 mt-2">
+    cargo new my_project
+    cd my_project
+    cargo build
+    cargo run</pre>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="cmake" role="tabpanel">
+                    <div class="bg-white p-3 rounded shadow-sm">
+                        <h5>CMake C/C++ Project</h5>
+                        <a class="btn btn-primary w-100 mb-2" href="https://github.com/jlabclouds/FrameworkTemplates/blob/main/FrameworkTemplates/CMake/cmake-main/README.md" target="_blank">View Documentation</a>
+                        <pre class="bg-light p-3 mt-2">
+    mkdir build && cd build
+    cmake ..
+    make</pre>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="react" role="tabpanel">
+                    <div class="bg-white p-3 rounded shadow-sm">
+                        <h5>React Application</h5>
+                        <a class="btn btn-primary w-100 mb-2" href="https://github.com/jlabclouds/React-ASP-TS-CS" target="_blank">View Documentation</a>
+                        <pre class="bg-light p-3 mt-2">
+    npm create vite@latest my-app -- --template react-ts
+    cd my-app
+    npm install
+    npm run dev</pre>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="k8s" role="tabpanel">
+                    <div class="bg-white p-3 rounded shadow-sm">
+                        <h5>Kubernetes Deployment</h5>
+                        <a class="btn btn-primary w-100 mb-2" href="https://github.com/jlabclouds/k8s-template" target="_blank">View Documentation</a>
+                        <pre class="bg-light p-3 mt-2">
+    kubectl create namespace my-app
+    kubectl apply -f deployment.yaml
+    kubectl get pods -n my-app</pre>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="el9" role="tabpanel">
+                    <div class="bg-white p-3 rounded shadow-sm">
+                        <h5>Enterprise Linux</h5>
+                        <a class="btn btn-primary w-100 mb-2" href="linux/README.md" target="_blank">View Documentation</a>
+                        <p><a class="btn btn-primary w-100" href="linux/el9_setup.html" target="_blank">Setup</a></p>
+                        <button class="btn btn-default w-100 mb-2" onclick="copyCurlCommand(`curl -fsSL https://raw.githubusercontent.com/jlabclouds/jlabclouds.github.io/refs/heads/main/linux/el9_setup.sh -o el9_setup.sh
+                        sudo bash el9_setup.sh`)">Curl</button>
+                        <pre class="bg-light p-3 mt-2">
+                                
+                        </pre>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="ros" role="tabpanel">
+                    <div class="bg-white p-3 rounded shadow-sm">
+                        <h5>Ros</h5>
+                        <a class="btn btn-primary w-100 mb-2" href="https://github.com/jlabclouds/k8s-template" target="_blank">View Documentation</a>
+                        <button class="btn btn-default w-100 mb-2" onclick="copyCurlCommand('curl -fsSL https://raw.githubusercontent.com/jlabclouds/jlabclouds.github.io/refs/heads/main/linux/el9_setup.sh -o el9_setup.sh\nsudo bash el9_setup.sh')">Copy curl command</button>
+                        <p><a class="btn btn-primary w-100" href="https://raw.githubusercontent.com/jlabclouds/jlabclouds.github.io/refs/heads/main/linux/el9_setup.sh" target="_blank">Raw</a></p>
+                        <pre class="bg-light p-3 mt-2">
+                                
+                        </pre>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">            
+        <div class="row mt-4">
+            <!-- Security Frameworks -->
+            <div class="col-md-4 mb-3">
+                <div class="bg-white p-3 rounded shadow-sm">
+                <h2>Security Frameworks <a class="btn btn-default" href="https://www.nist.gov/cyberframework" target="_blank">Learn more &raquo;</a></h2>
+                <a class="btn btn-default" href="https://www.nist.gov/cyberframework" target="_blank" rel="noopener noreferrer" title="NIST Cybersecurity Framework">
+                <img src="https://www.nist.gov/sites/default/files/favicon.ico" alt="NIST Logo" style="width: 32px; height: 32px;" />
+                </a>
+                <a class="btn btn-default" href="https://www.cisa.gov/cybersecurity" target="_blank" rel="noopener noreferrer" title="CISA">
+                <img src="https://www.cisa.gov/sites/default/files/2023-10/favicon.ico" alt="CISA Logo" style="width: 32px; height: 32px;" />
+                </a>
+                <a class="btn btn-default" href="https://www.iso.org/standard/27001" target="_blank" rel="noopener noreferrer" title="ISO 27001">
+                <img src="https://www.iso.org/favicon.ico" alt="ISO Logo" style="width: 32px; height: 32px;" />
+                </a>
+            </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="bg-white p-3 rounded shadow-sm">
+                    <h2>Distro/Svr <a class="btn btn-default" href="http://azure.microsoft.com">Learn more &raquo;</a></h2>
+                        <!-- Distro icons here (unchanged for brevity) -->
+            <a class="btn btn-default" href="https://yum.oracle.com/oracle-linux-isos.html" target="_blank" rel="noopener noreferrer" title="Oracle Linux ISOs">
+                <img src="https://www.kernel.org/theme/images/logos/favicon.png" alt="Linux Distros logo" style="width: 32px; height: 32px;" />
+            </a> 
+            <a class="btn btn-default" href="https://docs.oracle.com/en/operating-systems/oracle-linux/9/" target="_blank" rel="noopener noreferrer" title="Oracle Linux Docs">
+                <img src="https://docs.oracle.com/sp_common/site-template/ohc-common/img/o-icon/favicon.ico" alt="Rhel logo" style="width: 32px; height: 32px;" />
+            </a>
+            <a class="btn btn-default" href="https://alpinelinux.org/downloads/" target="_blank" rel="noopener noreferrer" title="Alpine Linux">
+                <img src="https://alpinelinux.org/alpine-logo.ico" alt="Alpine logo" style="width: 32px; height: 32px;" />
+            </a>
+            <a class="btn btn-default" href="https://www.centos.org/" target="_blank" rel="noopener noreferrer" title="CentOS">
+                <img src="https://www.centos.org/assets/icons/apple-touch-icon.png" alt="" style="width: 32px; height: 32px;" />
+            </a> 
+            <a class="btn btn-default" href="https://www.debian.org/" target="_blank" rel="noopener noreferrer" title="Debian">
+                <img src="https://www.debian.org/favicon.ico" alt="" style="width: 32px; height: 32px;" />
+            </a>
+            <a class="btn btn-default" href="https://www.ubuntu.com/" target="_blank" rel="noopener noreferrer" title="ROS2 , Gazebo">
+                <img src="https://assets.ubuntu.com/v1/f38b9c7e-COF%20apple-touch-icon.png" alt="" style="width: 32px; height: 32px;" />
+            </a> 
+            <a class="btn btn-default" href="https://www.suse.com/" target="_blank" rel="noopener noreferrer" title="SUSE">
+                <img src="https://www.suse.com/favicon.ico" alt="" style="width: 32px; height: 32px;" />
+            </a>
+            <a class="btn btn-default" href="https://www.fedoraproject.org/" target="_blank" rel="noopener noreferrer" title="Fedora">
+                <img src="https://www.fedoraproject.org/favicon.ico" alt="" style="width: 32px; height: 32px;" />
+            </a> 
+            <a class="btn btn-default" href="https://www.kali.org/tools/" target="_blank" rel="noopener noreferrer" title="Kali tools">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Kali-dragon-icon.svg" alt="" style="width: 32px; height: 32px;" />
+            </a>
+            <a class="btn btn-default" href="https://www.freebsd.org/" target="_blank" rel="noopener noreferrer" title="FreeBSD">
+                <img src="https://docs.freebsd.org/favicon.ico" alt="" style="width: 32px; height: 32px;" />
+            </a>
+            <a class="btn btn-default" href="https://www.microsoft.com/en-us/software-download/" target="_blank" rel="noopener noreferrer" title="Windows ISOs">
+                <img src="https://www.microsoft.com/favicon.ico?v2" alt="" style="width: 32px; height: 32px;" />
+            </a>
+            <a class="btn btn-default" href="https://www.microsoft.com/en-us/evalcenter" target="_blank" rel="noopener noreferrer" title="Windows Server ISOs">
+                <img src="https://www.microsoft.com/favicon.ico?v2" alt="" style="width: 32px; height: 32px;" />
+            </a>
+                </div>
+            </div>
+            <!-- Cloud -->
+            <div class="col-md-4 mb-3">
+                <div class="bg-white p-3 rounded shadow-sm">
+                    <h2>Cloud <a class="btn btn-default" href="http://azure.microsoft.com">Learn more &raquo;</a></h2>
+                        <!-- Cloud icons here (unchanged for brevity) -->
+            <a class="btn btn-default" href="https://support.broadcom.com" target="_blank" rel="noopener noreferrer" title="VMware Account Creation / Support Portal">
+                    <img src="https://www.broadcom.com/favicon-96x96.png" alt="" style="width: 32px; height: 32px;" />
+            </a>
+            <a class="btn btn-default" href="https://cloud.google.com" target="_blank" rel="noopener noreferrer" title="GCP Portal">
+                    <img src="https://www.gstatic.com/devrel-devsite/prod/v0d244f667a3683225cca86d0ecf9b9b81b1e734e55a030bdcd3f3094b835c987/cloud/images/favicons/onecloud/super_cloud.png" alt="" style="width: 32px; height: 32px;" />
+            </a>
+            <a class="btn btn-default" href="https://www.oracle.com/cloud/" target="_blank" rel="noopener noreferrer" title="OCI Portal">
+                    <img src="https://docs.oracle.com/sp_common/site-template/ohc-common/img/o-icon/favicon.ico" alt="" style="width: 32px; height: 32px;" />
+            </a> 
+            <a class="btn btn-default" href="https://portal.azure.com" target="_blank" rel="noopener noreferrer" title="AZ Portal">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Microsoft_Azure.svg" alt="" style="width: 32px; height: 32px;" />
+            </a>
+            <a class="btn btn-default" href="https://aex.dev.azure.com" target="_blank" rel="noopener noreferrer" title="AZ Repos">
+                    <img src="https://aex.dev.azure.com/favicon.ico" alt="" style="width: 32px; height: 32px;" />
+            </a>
+            <a class="btn btn-default" href="https://www.microsoft.com/en-us/power-platform/products/power-pages" target="_blank" rel="noopener noreferrer" title="Power Pages">
+                    <img src="https://www.microsoft.com/content/dam/microsoft/final/en-us/microsoft-brand/icons/PP-Hero_Icon_PowerPages.svg" alt="" style="width: 32px; height: 32px;" />
+            </a>
+            <a class="btn btn-default" href="https://aws.amazon.com/" target="_blank" rel="noopener noreferrer" title="AWS Portal / BrowserStack>App Automate>Appium">
+                    <img src="https://aws.amazon.com/favicon.ico" alt="" style="width: 32px; height: 32px;" />
+            </a>
+            <a class="btn btn-default" href="https://www.ibm.com/cloud" target="_blank" rel="noopener noreferrer" title="IBM Cloud">
+                    <img src="https://www.ibm.com/favicon.ico" alt="" style="width: 32px; height: 32px;" />
+            </a>
+            <a class="btn btn-default" href="https://www.salesforce.com/" target="_blank" rel="noopener noreferrer" title="SF Portal">
+                    <img src="https://www.salesforce.com/c2/public/app/favicon.ico" alt="" style="width: 32px; height: 32px;" />
+            </a>
+            <a class="btn btn-default" href="https://www.atlassian.com/software/confluence" target="_blank" rel="noopener noreferrer" title="Confluence">
+                    <img src="https://confluence.atlassian.com/favicon.ico" alt="Atlassian Logo" style="width: 32px; height: 32px;" />
+            </a>
+            <a class="btn btn-default" href="https://jira.atlassian.com" target="_blank" rel="noopener noreferrer" title="Jira">
+                    <img src="https://jira.atlassian.com/s/nbfadq/9120022/1rg1jpn/_/jira-favicon-hires.png" alt="Jira Logo" style="width: 32px; height: 32px;" />
+            </a>
+            <a class="btn btn-default" href="https://www.servicenow.com/" target="_blank" rel="noopener noreferrer" title="ServiceNow">
+                    <img src="https://www.servicenow.com/content/dam/servicenow-assets/public/en-us/images/og-images/favicon.ico" alt="ServiceNow Logo" style="width: 32px; height: 32px;" />
+            </a>
+            <a class="btn btn-default" href="https://www.infosys.com/services/cyber-security.html" target="_blank" rel="no opener noreferrer" title="Infosys Consultation">
+                    <img src="https://www.infosys.com/content/dam/infosys-web/en/global-resource/icons/apple-touch-icon.png" alt="" style="width: 32px; height: 32px;" />
+            </a> 
+            <a class="btn btn-default" href="https://www.flocksafety.com/" target="_blank" rel="noopener noreferrer" title="Flock">
+                    <img src="https://cdn.prod.website-files.com/6821cc9ecc966b7f252b372e/682b0cbd11cc8b08424afe0f_Webclip%20or%20Apple%20Touch%20Icon.png" alt="Flock Logo" style="width: 32px; height: 32px;" />
+            </a>
+                </div>
+            </div>
+            <!-- CI/CD -->
+            <div class="col-md-4 mb-3">
+                <div class="bg-white p-3 rounded shadow-sm">
+                    <h2>CI/CD <a class="btn btn-default" href="http://azure.microsoft.com">Learn more &raquo;</a></h2>
+                        <!-- CI/CD icons here (unchanged for brevity) -->
+            <a class="btn btn-default" href="https://www.docker.com" target="_blank" rel="noopener noreferrer" title="Docker">
+                    <img src="https://docs.docker.com/favicons/docs@2x.ico" alt="Docker Logo" style="width: 32px; height: 32px;" />
+            </a>
+            <a class="btn btn-default" href="https://podman.io/get-started" target="_blank" rel="noopener noreferrer" title="Podman">
+                    <img src="https://podman.io/favicon.ico" alt="Podman Logo" style="width: 32px; height: 32px;" />
+            </a>
+            <a class="btn btn-default" href="https://go-vela.github.io/docs/installation/install-vela" target="_blank" rel="noopener noreferrer" title="Vela">
+                    <img src="https://go-vela.github.io/docs/img/favicon.ico" alt="Vela Logo" style="width: 32px; height: 32px;" />
+            </a>
+            <a class="btn btn-default" href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/Repositories.html" target="_blank" rel="noopener noreferrer" title="AWS ECR">
+                    <img src="https://docs.aws.amazon.com/assets/images/favicon.ico" alt="AWS ECR Logo" style="width: 32px; height: 32px;" />
+            </a>
+            <a class="btn btn-default" href="https://jfrog.com/integrations/" target="_blank" rel="noopener noreferrer" title="JFrog">
+                    <img src="" alt="JFrog" style="width: 32px; height: 32px;" />
+            <a class="btn btn-default" href="https://www.openpolicyagent.org" target="_blank" rel="noopener noreferrer" title="OPA">
+                    <img src="https://www.openpolicyagent.org/assets/images/default-92a1aebfb4ea664b7d9c550b29f450a5.png" alt="JFrog" style="width: 32px; height: 32px;" />
+            </a>
+                </div>
+            </div>
+            <!-- Libraries -->
+            <div class="col-md-4 mb-3">
+                <div class="bg-white p-3 rounded shadow-sm">
+                    <h2>Libraries <a class="btn btn-default" href="http://azure.microsoft.com">Learn more &raquo;</a></h2>
+                        <!-- Library icons here (unchanged for brevity) -->
+            <a class="btn btn-default" href="https://developer.mozilla.org/en-US/" target="_blank" rel="noopener noreferrer" title="">
+                <img src="https://developer.mozilla.org/apple-touch-icon.528534bba673c38049c2.png" alt="" style="width: 32px; height: 32px;" />
+            </a> 
+            <a class="btn btn-default" href="https://www.w3schools.com" target="_blank" rel="noopener noreferrer" title="W3">
+                <img src="https://www.w3schools.com/favicon-32x32.png" alt="" style="width: 32px; height: 32px;" />
+            </a>
+            <a class="btn btn-default" href="https://it-tools.tech">
+                <img src="https://it-tools.tech/favicon-32x32.png" alt="it-tools logo" />
+            </a> 
+            <a class="btn btn-default" href="https://react.dev/" target="_blank" rel="noopener noreferrer" title="React">
+                <img src="https://react.dev/apple-touch-icon.png" alt="" style="width: 32px; height: 32px;" />
+            </a>
+            <a class="btn btn-default" href="https://codesandbox.io/p/sandbox/react-new" target="_blank" rel="noopener noreferrer" title="React Sandbox">
+                <img src="https://codesandbox.io/csb-ios.svg" alt="" style="width: 32px; height: 32px;" />
+            </a>                
+            <a class="btn btn-default" href="https://go.dev/" target="_blank" rel="noopener noreferrer" title="GoLang">
+                <img src="https://go.dev/images/favicon-gopher-plain.png" alt="" style="width: 32px; height: 32px;" />
+            </a> 
+            <a class="btn btn-default" href="https://k8s.io" target="_blank" rel="noopener noreferrer" title="Kubernetes">
+                <img src="https://kubernetes.io/images/kubernetes.png" alt="" style="width: 32px; height: 32px;" />
+            </a>
+            <!--
+            <a href="https://k8s.gcr.io" target="_blank" rel="noopener noreferrer">
+                <img src=" alt="" style="width: 32px; height: 32px;" />
+            </a> 
+            -->
+            <a class="btn btn-default" href="https://fastapi.tiangolo.com/" target="_blank" rel="noopener noreferrer" title="FastAPI">
+                <img src="https://fastapi.tiangolo.com/img/favicon.png" alt="" style="width: 32px; height: 32px;" />
+            </a>                 
+            <a class="btn btn-default" href="https://angular.dev/" target="_blank" rel="noopener noreferrer" title="Angular">
+                <img src="https://angular.dev/assets/icons/apple-touch-icon.png" alt="" style="width: 32px; height: 32px;" />
+            </a> 
+            <a class="btn btn-default" href="https://www.ansible.com/" target="_blank" rel="noopener noreferrer" title="Ansible">
+                <img src="https://docs.ansible.com/ansible/latest/_static/images/Ansible-Mark-RGB_Black.png" alt="" style="width: 32px; height: 32px;" />
+            </a> 
+            <a class="btn btn-default" href="https://developer.hashicorp.com/" target="_blank" rel="noopener noreferrer" title="Hashicorp / Vault">
+                <img src="https://developer.hashicorp.com/favicon.ico" alt="" style="width: 32px; height: 32px;" />
+            </a>
+            <a class="btn btn-default" href="https://kotlinlang.org/" target="_blank" rel="noopener noreferrer" title="Kotlin / Cart / Fun">
+                <img src="https://kotlinlang.org/assets/images/favicon.svg?v2" alt="" style="width: 32px; height: 32px;" />
+            </a> 
+            <a class="btn btn-default" href="https://www.rust-lang.org/learn" target="_blank" rel="noopener noreferrer" title="Rust">
+                <img src="https://www.rust-lang.org/static/images/apple-touch-icon.png?v=ngJW8jGAmR" alt="" style="width: 32px; height: 32px;" />
+            </a> 
+            <a class="btn btn-default" href="https://doc.rust-lang.org/cargo/" target="_blank" rel="noopener noreferrer" title="Rust">
+                <img src="https://doc.rust-lang.org/cargo/favicon-ba9a2803.png" alt="Cargo logo" style="width: 32px; height: 32px;" />
+            </a>
+            <a class="btn btn-default" href="https://www.ruby-lang.org/" target="_blank" rel="noopener noreferrer" title="Ruby">
+                <img src="https://www.ruby-lang.org/favicon.ico" alt="" style="width: 32px; height: 32px;" />
+            </a>
+            <a class="btn btn-default" href="https://www.perl.org/" target="_blank" rel="noopener noreferrer" title="Perl">
+                <img src="https://cdn.perl.org/perlweb/favicon.ico" alt="" style="width: 32px; height: 32px;" />
+            </a>                
+            <a class="btn btn-default" href="https://www.scala-lang.org/" target="_blank" rel="noopener noreferrer" title="Scala">
+                <img src="https://www.scala-lang.org/resources/apple-touch-icon.png" alt="" style="width: 32px; height: 32px;" />
+            </a> 
+            <a class="btn btn-default" href="https://www.swift.org/" target="_blank" rel="noopener noreferrer" title="Swift / iOS">
+                <img src="https://www.swift.org/apple-touch-icon-180x180.png" alt="" style="width: 32px; height: 32px;" />
+            </a>
+            <a class="btn btn-default" href="https://github.com/target/strelka-ui?tab=readme-ov-file" target=_blank" rel="noopener noreferrer" title="Strelka UI">
+                <img src="" alt="Strelka" style="width: 32px; height: 32px;" />
+            </a>
+            <a class="btn btn-default" href="https://grafana.com/" target="_blank" rel="noopener noreferrer" title="Grafana Observality Dashboards">
+                <img src="https://grafana.com/static/assets/img/fav32.png" alt="Grafana Logo" style="width: 32px; height: 32px;" />
+            </a>
+            </div>
+        </div>
+            <!-- Libraries -->
+            <div class="col-md-4 mb-3">
+                <div class="bg-white p-3 rounded shadow-sm">
+                    <h2>Libraries <a class="btn btn-default" href="http://azure.microsoft.com">Learn more &raquo;</a></h2>
+            <a class="btn btn-default" href="https://www.python.org/" target="_blank" rel="noopener noreferrer" title="Python">
+                <img src="https://www.python.org/static/apple-touch-icon-144x144-precomposed.png" alt="Python Logo" style="width: 32px; height: 32px;" />
+            </a>
+            <a class="btn btn-default" href="https://jupyter.org/" target="_blank" rel="noopener noreferrer" title="Jupyter Notebooks">
+                <img src="https://jupyter.org/favicon.ico" alt="Jupyter Notebook Logo" style="width: 32px; height: 32px;" />
+            </a>
+            <a class="btn btn-default" href="https://huggingface.co/docs/huggingface_hub/guides/cli" target="_blank" rel="noopener noreferrer" title="Jupyter Notebooks">
+                <img src="" alt="Hugging Face Logo" style="width: 32px; height: 32px;" />
+            </a>
+            <a class="btn btn-default" href="https://www.tensorflow.org/install" target="_blank" rel="noopener noreferrer" title="Jupyter Notebooks">
+                <img src="" alt="TensorFlow Logo" style="width: 32px; height: 32px;" />
+            </a>
+                </div>
+            </div>
+        </div>
+        <hr />
+    </main>
+    <div id="footer-include"></div>
+    <script>
+    // Dynamic header/footer includes
+    fetch('/main/header.html').then(r => r.text()).then(t => {
+        document.getElementById('header-include').innerHTML = t;
+    });
+    fetch('/main/footer.html').then(r => r.text()).then(t => {
+        document.getElementById('footer-include').innerHTML = t;
+    });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Optionally, add any page-specific JS here -->
+</body>
+</html>

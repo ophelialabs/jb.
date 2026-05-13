@@ -1,0 +1,12 @@
+micronaut:
+  application:
+    name: cartService
+kafka:
+  bootstrap:
+    servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+datasources:
+  default:
+    url: ${DATASOURCES_DEFAULT_URL:`jdbc:postgresql://localhost:5432/cart_db`}
+    driverClassName: org.postgresql.Driver
+    username: ${DATASOURCES_DEFAULT_USERNAME:user}
+    password: ${DATASOURCES_DEFAULT_PASSWORD:password}

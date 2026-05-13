@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>qsharp Project Generator Script</title>
+    <!-- Bootstrap 5.3 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- PrismJS for code highlighting -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css" rel="stylesheet">
+    <!-- Fluent UI Bootstrap theme (Bootswatch 'Flatly' as a Fluent-like example) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.3/dist/flatly/bootstrap.min.css" rel="stylesheet">
+    <link href="static/pipeline.css">
+        <style>
+        pre code {
+            font-size: 0.95em;
+            background: #23272e;
+            color: #f8f8f2;
+            border-radius: 0.3em;
+            padding: 1em;
+            display: block;
+            overflow-x: auto;
+        }
+        .card-title {
+            font-weight: 700;
+        }
+        .alert-info {
+            background: #e3f2fd;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fluent-navbar bg-primary mb-4">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="../../../index.html">
+                <svg width="32" height="32" fill="#fff" class="me-2" viewBox="0 0 16 16"><rect width="16" height="16" rx="4"/></svg>
+                <span style="font-weight:600;letter-spacing:0.03em;">Ophelia</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <div class="navbar-nav ms-auto">
+                    <a class="nav-link fluent-btn" href="qsharp.html">Generator</a>
+                    <a class="nav-link fluent-btn" href="generator.sh">Download</a>
+                    <a class="nav-link fluent-btn" href="#" target="_blank" rel="noopener noreferrer">Docs</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <main class="container my-5">
+        <div class="row">
+            <div class="col-12">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h1 class="card-title">Q# Project Generator</h1>
+
+<div class="alert alert-info mt-3">
+    <h5>Description</h5>
+    <p>This shell script automatically generates a complete Quantum Computing project structure with the following features:</p>
+    <ul>
+        <li>Creates a standardized quantum project structure</li>
+        <li>Sets up quantum circuit templates</li>
+        <li>Configures quantum simulator integration</li>
+        <li>Includes deployment options for various quantum platforms</li>
+
+
+
+                                                            <h1 class="card-title">Q# Project Generator Script <span class="badge bg-info">Wiki</span></h1>
+                                                            <div class="alert alert-info mt-3">
+                                                                    <h5>Overview</h5>
+                                                                    <p>This page documents a shell script for generating Q# quantum computing project structures. The script supports templates for Medical Research, Robotics (IoT), Scientific Research, and a Full Advanced structure (ML, LLM, AI, Teleportation, etc.).
+
+Common IoT Communication Protocols
+
+    MQTT (Message Queue Telemetry Transport):
+    A lightweight, publish/subscribe protocol ideal for low-bandwidth and unreliable networks. It's often used for smart factories and sensor data collection. 
+
+CoAP (Constrained Application Protocol):
+Similar to HTTP but designed for constrained devices with limited processing power, memory, and bandwidth. 
+HTTP (Hypertext Transfer Protocol):
+The well-known web protocol, used for transmitting information between IoT devices and the internet. 
+Wi-Fi:
+A popular short-to-medium range wireless protocol for connecting devices within a local network. 
+Bluetooth:
+Another short-range wireless protocol, with Bluetooth Low Energy (BLE) specifically designed for low-power applications like wearables and sensor data transmission. 
+NFC (Near Field Communication):
+Used for very short-range, contactless communication, such as for payments or device pairing. 
+NB-IoT (Narrowband IoT):
+A Low Power Wide Area (LPWA) technology that offers low power consumption, wide coverage, and good indoor penetration for long-lasting batteries in smart buildings. 
+LoRa:
+Another long-range, low-power radio communication technology for widespread IoT deployments. 
+
+Industry-Specific Protocols
+
+    OPC-UA:
+    A standard protocol for industrial automation, ensuring seamless data exchange and control in connected industries. 
+
+Modbus:
+An industrial serial communication protocol widely used in industrial control systems. 
+
+Key Considerations for Choosing a Protocol
+The best protocol depends on the specific needs of the IoT system: 
+
+    Bandwidth and Power Consumption:
+    Some protocols are designed for high bandwidth, while others are optimized for low-power, low-data applications. 
+
+Latency Requirements:
+Systems needing real-time communication may require different protocols than those with more relaxed timing needs. 
+Range:
+The physical distance between devices dictates the choice between short-range (Bluetooth, Wi-Fi) and long-range (LoRa, NB-IoT) protocols. 
+Security:
+The chosen protocol must provide appropriate security measures for data being exchanged. 
+                                                                    </p>
+                                                            </div>
+
+                                                            <h2 id="usage">Usage</h2>
+                                                            <ol>
+                                                                    <li>Copy the script below into a file named <code>qsharp_project_generator.sh</code>.</li>
+                                                                    <li>Make it executable: <code>chmod +x qsharp_project_generator.sh</code></li>
+                                                                    <li>Run it: <code>bash qsharp_project_generator.sh</code></li>
+                                                            </ol>
+
+                                                            <h2 id="script">Script</h2>
+                                                            <pre><code class="language-bash">#!/bin/bash
+
+            # Q# Project Generator Script
+            # Generates Q# project structures for Medical Research, Robotics (IoT), Scientific Research, or Full Advanced
+
+            set -e
+
+            echo "Q# Project Generator"
+            echo "======================="
+            echo "Select the type of Q# project to create:"
+            echo "1) Medical Research"
+            echo "2) Robotics (IoT)"
+            echo "3) Scientific Research"
+            echo "4) Networking and Communication"
+            echo "5) Full Advanced (ML, LLM, AI, Teleportation, etc.)"
+            echo
+            read -p "Enter your choice [1-4]: " choice
+
+            read -p "Enter your project name: " project_name
+
+            if [[ -z "$project_name" ]]; then
+                echo "Project name cannot be empty. Exiting."
+                exit 1
+            fi
+
+            mkdir -p "$project_name"
+            cd "$project_name"
+
+            # Common structure
+            mkdir -p src/Quantum src/Classical tests/Quantum tests/Classical lib config docs tools
+
+            generate_medical() {
+                mkdir -p src/Specializations/Medical/Imaging
+                mkdir -p src/Specializations/Medical/Diagnostics
+                echo '// Placeholder for Medical Imaging Q# code' > src/Specializations/Medical/Imaging/Imaging.qs
+                echo '// Placeholder for Medical Diagnostics Q# code' > src/Specializations/Medical/Diagnostics/Diagnostics.qs
+            }
+
+            generate_robotics() {
+                mkdir -p src/Specializations/Robotics/Control
+                mkdir -p src/Specializations/Robotics/Sensing
+                echo '// Placeholder for Robotics Control Q# code' > src/Specializations/Robotics/Control/Control.qs
+                echo '// Placeholder for Robotics Sensing Q# code' > src/Specializations/Robotics/Sensing/Sensing.qs
+            }
+
+            generate_scientific() {
+                mkdir -p src/Quantum/Algorithms/QFT
+                mkdir -p src/Quantum/Algorithms/Grover
+                mkdir -p src/Quantum/Algorithms/Shor
+                echo '// Placeholder for QFT algorithm' > src/Quantum/Algorithms/QFT/QuantumFourierTransform.qs
+                echo '// Placeholder for Grover algorithm' > src/Quantum/Algorithms/Grover/SearchAlgorithm.qs
+                echo '// Placeholder for Shor algorithm' > src/Quantum/Algorithms/Shor/FactorizationAlgorithm.qs
+            }
+
+            generate_full_advanced() {
+                # ML
+                mkdir -p src/ML/QuantumNeuralNetworks src/ML/QuantumKernels src/ML/Classifiers src/ML/Training
+                echo '// QNN' > src/ML/QuantumNeuralNetworks/QNN.qs
+                echo '// Quantum Layers' > src/ML/QuantumNeuralNetworks/QuantumLayers.qs
+                echo '// SVM Kernel' > src/ML/QuantumKernels/SVMKernel.qs
+                echo '// Quantum Perceptron' > src/ML/Classifiers/QuantumPerceptron.qs
+                echo '// QKNeighbors' > src/ML/Classifiers/QKNeighbors.qs
+                echo '// Parameter Optimization' > src/ML/Training/ParameterOptimization.qs
+                echo '// Gradient Descent' > src/ML/Training/GradientDescent.qs
+                # LLM
+                mkdir -p src/LLM/QuantumTransformers src/LLM/Inference
+                echo '// QAttention' > src/LLM/QuantumTransformers/QAttention.qs
+                echo '// QEmbeddings' > src/LLM/QuantumTransformers/QEmbeddings.qs
+                echo '// Quantum Inference' > src/LLM/Inference/QuantumInference.qs
+                # AI
+                mkdir -p src/AI/QuantumRL src/AI/Generative
+                echo '// QValue Network' > src/AI/QuantumRL/QValueNetwork.qs
+                echo '// QGAN' > src/AI/Generative/QGAN.qs
+                echo '// Quantum Autoencoder' > src/AI/Generative/QuantumAutoencoder.qs
+                # Teleportation & Entanglement
+                mkdir -p src/Circuits/Templates src/Circuits/Custom
+                echo '// Basic Gates' > src/Circuits/Templates/BasicGates.qs
+                echo '// Standard Operations' > src/Circuits/Templates/StandardOperations.qs
+                echo '// Teleportation' > src/Circuits/Custom/Teleportation.qs
+                echo '// Entanglement Protocols' > src/Circuits/Custom/EntanglementProtocols.qs
+                # Optimization
+                mkdir -p src/Quantum/Optimization/QAOA src/Quantum/Optimization/VQE
+                echo '// MaxCut Solver' > src/Quantum/Optimization/QAOA/MaxCutSolver.qs
+                echo '// Molecular Simulation' > src/Quantum/Optimization/VQE/MolecularSimulation.qs
+                # Utils
+                mkdir -p src/Quantum/Utils/Gates src/Quantum/Utils/Measurements
+                echo '// Custom Gates' > src/Quantum/Utils/Gates/CustomGates.qs
+                echo '// Custom Measurements' > src/Quantum/Utils/Measurements/CustomMeasurements.qs
+                # Tests
+                mkdir -p Tests/Unit Tests/Integration
+                echo '// Teleportation Tests' > Tests/Unit/TeleportationTests.qs
+                echo '// Algorithm Tests' > Tests/Unit/AlgorithmTests.qs
+                echo '// System Tests' > Tests/Integration/SystemTests.qs
+                # Lib
+                mkdir -p Lib
+                echo '// StandardLib' > Lib/StandardLib.qs
+                echo '// QuantumLibrary' > Lib/QuantumLibrary.qs
+                # Examples
+                mkdir -p Examples
+                echo '// Teleportation Demo' > Examples/TeleportationDemo.qs
+                echo '// Grover Demo' > Examples/GroverDemo.qs
+                # Config
+                mkdir -p Config
+                echo '{ "qubits": 4 }' > Config/qubitConfig.json
+                # Docs
+                mkdir -p Docs/Tutorials
+                echo '# API' > Docs/API.md
+                echo '# Teleportation Tutorial' > Docs/Tutorials/Teleportation.md
+                # Project files
+                echo '<Project Sdk="Microsoft.Quantum.Sdk/0.28.302812">\n  <PropertyGroup>\n    <OutputType>Exe</OutputType>\n    <TargetFramework>net6.0</TargetFramework>\n  </PropertyGroup>\n</Project>' > QuantumProject.csproj
+                echo '// Program.qs' > Program.qs
+                echo '// Operations.qs' > Operations.qs
+            }
+
+            case $choice in
+                1)
+                    generate_medical
+                    ;;
+                2)
+                    generate_robotics
+                    ;;
+                3)
+                    generate_scientific
+                    ;;
+                4)
+                    generate_full_advanced
+                    ;;
+                *)
+                    echo "Invalid choice. Exiting."
+                    exit 1
+                    ;;
+            esac
+
+            echo
+             echo "Q# project '$project_name' created successfully!"</code></pre>
+
+                                                            <h2 id="templates">Templates</h2>
+                                                            <ul>
+                                                                    <li><b>Medical Research</b>: Imaging and Diagnostics folders with Q# placeholders.</li>
+                                                                    <li><b>Robotics (IoT)</b>: Control and Sensing folders for robotics Q# code.</li>
+                                                                    <li><b>Scientific Research</b>: Quantum algorithm folders (QFT, Grover, Shor) with starter files.</li>
+                                                                    <li><b>Full Advanced</b>: All features, including ML, LLM, AI, Teleportation, Optimization, and more.</li>
+                                                            </ul>
+
+                                                            <h2 id="customization">Customization & Further Changes</h2>
+                                                            <ul>
+                                                                    <li><b>Add new templates</b>: Define a new <code>generate_*</code> function and add it to the menu/case statement.</li>
+                                                                    <li><b>Modify folder structure</b>: Edit the <code>mkdir -p</code> and <code>echo</code> lines in each template function.</li>
+                                                                    <li><b>Add more starter files</b>: Add more <code>echo</code> lines to create additional Q# or config files.</li>
+                                                                    <li><b>Change Q# SDK version</b>: Edit the <code>QuantumProject.csproj</code> line in <code>generate_full_advanced</code>.</li>
+                                                                    <li><b>Integrate with dotnet</b>: Add <code>dotnet new console -lang Q#</code> or similar commands for real Q# project bootstrapping.</li>
+                                                            </ul>
+
+                                                            <h2 id="examples">Example: Teleportation Operation</h2>
+                                                            <pre><code class="language-qsharp">// Teleportation.qs
+                        <h1 class="card-title">Q# Project Generator Script</h1>
+                        <div class="alert alert-info mt-3">
+                            <h5>Description</h5>
+                            <p>This page describes a shell script and project structure for generating a modern Q# quantum computing project, including advanced features for quantum machine learning, LLMs, AI, and teleportation protocols.</p>
+                            <ul>
+                                <li>Quantum Network Protocols</li>
+                                <li>Quantum-Classical Hybrid Systems</li>
+                                <li>Medical Imaging & Diagnostics</li>
+                                <li>Quantum Machine Learning</li>
+                                <li>Robotics Control Systems</li>
+
+                                                            <h2 id="projectfile">Q# Project File Example</h2>
+                                                            <pre><code class="language-xml">&lt;Project Sdk="Microsoft.Quantum.Sdk/0.28.302812"&gt;
+                                <li>Teleportation and Entanglement Protocols</li>
+                            </ul>
+                            <h5 class="mt-3" id="structure">Project Structure</h5>
+                            <pre class="mb-0"><code class="language-bash">QuantumProject/
+    </ul>
+    <h5 class="mt-3">Project Structure</h5>
+    <pre class="mb-0"><code>project_name/
+├── src/
+│   ├── Classical/
+│   │   └── Host.cs
+│   ├── Quantum/
+│   │   ├── Operations.qs
+│   │   ├── Algorithms/
+│   │   ├── ErrorCorrection/
+│   │   └── Utilities/
+│   ├── Specializations/
+│   │   ├── Medical/
+│   │   │   ├── Imaging/
+│   │   │   └── Diagnostics/
+│   │   ├── Robotics/
+│   │   │   ├── Control/
+│   │   │   └── Sensing/
+│   │   └── Networks/
+│   │       ├── Protocols/
+│   │       └── Entanglement/
+│   └── QML/
+│       ├── Models/
+│       └── Training/
+├── tests/
+│   ├── Classical/
+│   └── Quantum/
+├── lib/
+├── config/
+├── docs/
+└── tools/</code></pre>
+</div>
+
+    Q# project structure including teleportation and libraries:
+
+```
+
+QuantumProject/
+├── src/
+│   ├── [Previous directories remain the same...]
+│   ├── ML/
+│   │   ├── QuantumNeuralNetworks/
+│   │   │   ├── QNN.qs
+│   │   │   └── QuantumLayers.qs
+│   │   ├── QuantumKernels/
+│   │   │   └── SVMKernel.qs
+│   │   ├── Classifiers/
+│   │   │   ├── QuantumPerceptron.qs
+│   │   │   └── QKNeighbors.qs
+│   │   └── Training/
+│   │       ├── ParameterOptimization.qs
+│   │       └── GradientDescent.qs
+│   ├── LLM/
+│   │   ├── QuantumTransformers/
+│   │   │   ├── QAttention.qs
+│   │   │   └── QEmbeddings.qs
+│   │   └── Inference/
+│   │       └── QuantumInference.qs
+│   └── AI/
+│       ├── QuantumRL/
+│       │   └── QValueNetwork.qs
+│       └── Generative/
+│           ├── QGAN.qs
+│           └── QuantumAutoencoder.qs
+└── [Other directories remain the same...]
+
+QuantumProject/
+├── src/
+│   ├── Circuits/
+│   │   ├── Templates/
+│   │   │   ├── BasicGates.qs
+│   │   │   └── StandardOperations.qs
+│   │   └── Custom/
+│   │       ├── Teleportation.qs
+│   │       └── EntanglementProtocols.qs
+│   ├── Algorithms/
+│   │   ├── QFT/
+│   │   │   └── QuantumFourierTransform.qs
+│   │   ├── Grover/
+│   │   │   └── SearchAlgorithm.qs
+│   │   └── Shor/
+│   │       └── FactorizationAlgorithm.qs
+│   ├── Optimization/
+│   │   ├── QAOA/
+│   │   │   └── MaxCutSolver.qs
+│   │   └── VQE/
+│   │       └── MolecularSimulation.qs
+│   └── Utils/
+│       ├── Gates/
+│       │   └── CustomGates.qs
+│       └── Measurements/
+                            <h5 class="mt-3" id="examples">Key Example: Teleportation Operation</h5>
+                            <pre class="mb-0"><code class="language-qsharp">// Teleportation.qs
+│           └── CustomMeasurements.qs
+├── Tests/
+│   ├── Unit/
+│   │   ├── TeleportationTests.qs
+│   │   └── AlgorithmTests.qs
+│   └── Integration/
+│       └── SystemTests.qs
+├── Lib/
+│   ├── StandardLib.qs
+│   └── QuantumLibrary.qs
+                            <h5 class="mt-3">Q# Project File Example</h5>
+                            <pre class="mb-0"><code class="language-xml">&lt;Project Sdk="Microsoft.Quantum.Sdk/0.28.302812"&gt;
+├── Examples/
+│   ├── TeleportationDemo.qs
+│   └── GroverDemo.qs
+├── Config/
+│   └── qubitConfig.json
+├── Docs/
+                        </div>
+│   ├── API.md
+│   └── Tutorials/
+│       └── Teleportation.md
+├── Program.qs
+├── Operations.qs
+└── QuantumProject.csproj
+```
+
+Essential files for teleportation:
+
+```qsharp
+// Teleportation.qs
+namespace QuantumProject.Circuits.Custom {
+    open Microsoft.Quantum.Canon;
+    open Microsoft.Quantum.Intrinsic;
+
+    operation Teleport(msg : Qubit, target : Qubit) : Unit {
+        use aux = Qubit();
+        // Teleportation circuit implementation
+    }
+}
+```
+
+Project file structure:
+```xml
+<Project Sdk="Microsoft.Quantum.Sdk/0.28.302812">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+</Project>
+```
+
+</main>
+
+    <footer class="bg-dark text-light py-3 mt-5">
+        <div class="container">
+            <p class="text-center mb-0">&copy; 2025 Q# Project Generator</p>
+        </div>
+    </footer>
+    <script src="static/scripts/search.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-qsharp.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-xml-doc.min.js"></script>
+</body>
+</html>
+

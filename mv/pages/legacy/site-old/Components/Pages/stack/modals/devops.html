@@ -1,0 +1,59 @@
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+    .link-card {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
+    .link-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    }
+    .link-card .card-body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: start;
+        text-align: center;
+    }
+    .link-card img {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+    }
+    .link-card .card-title {
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+    .link-card .card-text {
+        font-size: 0.75rem;
+    }
+</style>
+
+<div class="container-fluid p-4">
+    <div class="pb-3 mb-4 border-bottom">
+        <h3 class="fw-light">DevOps & Automation</h3>
+        <p class="text-muted mb-0">Tools for containerization, orchestration, and continuous integration.</p>
+    </div>
+
+    <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-4">
+        <!-- Card Items -->
+        <div class="col"><a href="https://www.docker.com" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://docs.docker.com/favicons/docs@2x.ico" class="mb-3" alt="Docker Logo" /><h6 class="card-title">Docker</h6><p class="card-text small">Platform for developing, shipping, and running containerized applications.</p></div></a></div>
+        <div class="col"><a href="https://podman.io/get-started" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://podman.io/favicon.ico" class="mb-3" alt="Podman Logo" /><h6 class="card-title">Podman</h6><p class="card-text small">Daemonless container engine for developing, managing, and running OCI Containers.</p></div></a></div>
+        <div class="col"><a href="https://k8s.io" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://kubernetes.io/images/kubernetes.png" class="mb-3" alt="Kubernetes Logo" /><h6 class="card-title">Kubernetes</h6><p class="card-text small">Open-source system for automating deployment, scaling, and management of containerized applications.</p></div></a></div>
+        <div class="col"><a href="https://go-vela.github.io/docs/installation/install-vela" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://go-vela.github.io/docs/img/favicon.ico" class="mb-3" alt="Vela Logo" /><h6 class="card-title">Vela</h6><p class="card-text small">Pipeline automation tool for CI/CD, built for container-based workflows.</p></div></a></div>
+        <div class="col"><a href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/Repositories.html" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://docs.aws.amazon.com/assets/images/favicon.ico" class="mb-3" alt="AWS ECR Logo" /><h6 class="card-title">AWS ECR</h6><p class="card-text small">Amazon Elastic Container Registry for storing, managing, and deploying Docker container images.</p></div></a></div>
+        <div class="col"><a href="https://jfrog.com/integrations/" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://www.jfrog.com/wp-content/uploads/2016/08/jfrog-logo.png" class="mb-3" alt="JFrog Logo" /><h6 class="card-title">JFrog</h6><p class="card-text small">Universal DevOps solution for artifact management, CI/CD, and security.</p></div></a></div>
+        <div class="col"><a href="https://developer.hashicorp.com/" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://developer.hashicorp.com/favicon.ico" class="mb-3" alt="Hashicorp Logo" /><h6 class="card-title">Hashicorp</h6><p class="card-text small">Infrastructure automation tools for provisioning, securing, and running infrastructure.</p></div></a></div>
+        <div class="col"><a href="https://grafana.com/" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://grafana.com/static/assets/img/fav32.png" class="mb-3" alt="Grafana Logo" /><h6 class="card-title">Grafana</h6><p class="card-text small">Open-source analytics and interactive visualization web application for monitoring and observability.</p></div></a></div>
+        <div class="col"><a href="https://www.ansible.com/" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://docs.ansible.com/ansible/latest/_static/images/Ansible-Mark-RGB_Black.png" class="mb-3" alt="Ansible" /><h6 class="card-title">Ansible</h6><p class="card-text small">Open-source automation platform for configuration management and orchestration.</p></div></a></div>
+        <div class="col"><a href="https://www.terraform.io/" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://www.terraform.io/favicon.ico" class="mb-3" alt="Terraform" /><h6 class="card-title">Terraform</h6><p class="card-text small">Infrastructure as Code software tool by HashiCorp.</p></div></a></div>
+        <div class="col"><a href="https://www.jenkins.io/" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://www.jenkins.io/images/logos/jenkins/jenkins.svg" class="mb-3" alt="Jenkins" /><h6 class="card-title">Jenkins</h6><p class="card-text small">Open source automation server for building, testing, and deploying software.</p></div></a></div>
+        <div class="col"><a href="https://aex.dev.azure.com" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://aex.dev.azure.com/favicon.ico" class="mb-3" alt="Azure Repos" /><h6 class="card-title">Azure Repos</h6><p class="card-text small">Cloud-hosted private Git repos for project collaboration and version control.</p></div></a></div>
+        <div class="col"><a href="https://www.atlassian.com/software/confluence" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://confluence.atlassian.com/favicon.ico" class="mb-3" alt="Atlassian Logo" /><h6 class="card-title">Confluence</h6><p class="card-text small">Team workspace for documentation, collaboration, and knowledge sharing.</p></div></a></div>
+        <div class="col"><a href="https://jira.atlassian.com" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://jira.atlassian.com/s/nbfadq/9120022/1rg1jpn/_/jira-favicon-hires.png" class="mb-3" alt="Jira Logo" /><h6 class="card-title">Jira</h6><p class="card-text small">Agile project management tool for planning, tracking, and releasing software.</p></div></a></div>
+    </div>
+</div>

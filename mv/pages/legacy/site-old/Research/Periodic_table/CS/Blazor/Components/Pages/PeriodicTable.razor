@@ -1,0 +1,73 @@
+@page "/periodictable"
+@using System.Collections.Generic
+@using System.Linq
+
+<h3>Interactive Periodic Table (Blazor C#)</h3>
+
+<div class="periodic-table">
+    @foreach (var element in elementsData.OrderBy(e => e.AtomicNumber))
+    {
+        <!-- Position elements in a CSS grid using their row/column properties -->
+        <div class="element-tile @(element.Group.Replace(" ", "-"))" 
+             style="grid-row: @element.Row; grid-column: @element.Column;"
+             @onclick="() => ShowDetails(element)">
+            <div class="atomic-number">@element.AtomicNumber</div>
+            <div class="symbol">@element.Symbol</div>
+            <div class="name">@element.Name</div>
+        </div>
+    }
+</div>
+
+<!-- Details Pop-up Modal -->
+@if (selectedElement != null)
+{
+    <div class="modal-backdrop" @onclick="CloseDetails"></div>
+    <div class="modal">
+        <div class="modal-content">
+            <span class="close" @onclick="CloseDetails">&times;</span>
+            <h4>@selectedElement.Name (@selectedElement.Symbol)</h4>
+            <p><strong>Atomic Number:</strong> @selectedElement.AtomicNumber</p>
+            <p><strong>Atomic Mass:</strong> @selectedElement.AtomicMass u</p>
+            <p><strong>Group:</strong> @selectedElement.Group</p>
+            <p>This is where more detailed information, similar to the INL data, would go.</p>
+        </div>
+    </div>
+}
+
+@code {
+    private List<Element> elementsData = new List<Element>();
+    private Element selectedElement;
+
+    // Class to represent an element's properties and position in the table
+    public class Element
+    {
+        public int AtomicNumber { get; set; }
+        public string Symbol { get; set; }
+        public string Name { get; set; }
+        public double AtomicMass { get; set; }
+        public string Group { get; set; }
+        public int Row { get; set; }
+        public int Column { get; set; }
+    }
+
+    protected override void OnInitialized()
+    {
+        // Add a few sample elements to demonstrate the layout and interaction
+        elementsData.Add(new Element { AtomicNumber = 1, Symbol = "H", Name = "Hydrogen", AtomicMass = 1.008, Group = "Nonmetal", Row = 1, Column = 1 });
+        elementsData.Add(new Element { AtomicNumber = 2, Symbol = "He", Name = "Helium", AtomicMass = 4.0026, Group = "Noble Gas", Row = 1, Column = 18 });
+        elementsData.Add(new Element { AtomicNumber = 3, Symbol = "Li", Name = "Lithium", AtomicMass = 6.94, Group = "Alkali Metal", Row = 2, Column = 1 });
+        elementsData.Add(new Element { AtomicNumber = 8, Symbol = "O", Name = "Oxygen", AtomicMass = 15.999, Group = "Nonmetal", Row = 2, Column = 16 });
+        elementsData.Add(new Element { AtomicNumber = 10, Symbol = "Ne", Name = "Neon", AtomicMass = 20.180, Group = "Noble Gas", Row = 2, Column = 18 });
+        // In a real application, you would load all 118 elements here, potentially from a JSON file or a database service.
+    }
+
+    private void ShowDetails(Element element)
+    {
+        selectedElement = element;
+    }
+
+    private void CloseDetails()
+    {
+        selectedElement = null;
+    }
+}

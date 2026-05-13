@@ -1,0 +1,1619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📐 Mathematics Cheatsheet</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: white;
+            padding: 30px;
+            border-radius: 10px 10px 0 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 0;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #667eea;
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* Search Bar - Below Header */
+        .search-section {
+            background: white;
+            padding: 15px 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .search-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #667eea;
+            border-radius: 5px;
+            font-size: 0.95em;
+            transition: all 0.3s;
+        }
+
+        .search-bar:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
+            border-color: #764ba2;
+        }
+
+        .search-results {
+            position: absolute;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 1000;
+            min-width: 300px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: none;
+            margin-top: 5px;
+            top: 100%;
+            left: 0;
+            right: 0;
+        }
+
+        .search-results.active {
+            display: block;
+        }
+
+        .search-result-item {
+            padding: 10px 15px;
+            cursor: pointer;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.2s;
+        }
+
+        .search-result-item:hover {
+            background: #f5f5f5;
+        }
+
+        .search-result-item strong {
+            color: #667eea;
+            display: block;
+            font-size: 0.85em;
+        }
+
+        .search-result-item span {
+            display: block;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        /* Top Navigation Menu - Responsive Grid */
+        .top-nav {
+            background: white;
+            padding: 20px 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            align-items: center;
+        }
+
+        .nav-item {
+            padding: 12px 16px;
+            background: #f0f0f0;
+            border: 2px solid #667eea;
+            border-radius: 5px;
+            color: #667eea;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            font-size: 0.95em;
+            text-align: center;
+        }
+
+        .nav-item:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .nav-item.active {
+            background: #667eea;
+            color: white;
+            box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .content {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        section {
+            margin-bottom: 60px;
+            scroll-margin-top: 150px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .section-header h2 {
+            font-size: 2em;
+            color: #667eea;
+            margin: 0;
+        }
+
+        .emoji {
+            font-size: 1.5em;
+        }
+
+        /* Section Subsection Navigation - Card Style */
+        .subsection-nav {
+            background: linear-gradient(135deg, #f5f7ff 0%, #f0f0f5 100%);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 5px solid #667eea;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .subsection-nav h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 0.95em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .subsection-nav ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 10px;
+        }
+
+        .subsection-nav li {
+            margin: 0;
+        }
+
+        .subsection-nav a {
+            color: #764ba2;
+            text-decoration: none;
+            font-size: 0.9em;
+            padding: 10px 12px;
+            border-radius: 5px;
+            transition: all 0.3s;
+            display: block;
+            background: white;
+            border: 1px solid #e0e0e0;
+            font-weight: 500;
+        }
+
+        .subsection-nav a:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(102, 126, 234, 0.2);
+        }
+
+        h3 {
+            color: #764ba2;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            border-left: 4px solid #667eea;
+            padding-left: 15px;
+        }
+
+        h4 {
+            color: #666;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.95em;
+        }
+
+        th {
+            background: #667eea;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            border: 1px solid #ddd;
+            padding: 12px;
+        }
+
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        tr:hover {
+            background: #f0f0f0;
+        }
+
+        .formula {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            border-left: 4px solid #667eea;
+            overflow-x: auto;
+        }
+
+        .boxed-formula {
+            background: #e8eaf6;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            border: 2px solid #667eea;
+            text-align: center;
+        }
+
+        code {
+            background: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #d63384;
+        }
+
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-size: 0.9em;
+        }
+
+        pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+        }
+
+        ul, ol {
+            margin: 15px 0 15px 30px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .card {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .card h4 {
+            color: #667eea;
+            margin-top: 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: white;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 1024px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+
+            .subsection-nav ul {
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            header {
+                padding: 20px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .top-nav {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                padding: 15px 20px;
+                gap: 8px;
+            }
+
+            .nav-item {
+                font-size: 0.85em;
+                padding: 10px 12px;
+            }
+
+            .search-bar {
+                font-size: 0.9em;
+                padding: 10px 12px;
+            }
+
+            .subsection-nav {
+                padding: 15px;
+            }
+
+            .subsection-nav ul {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+
+            .subsection-nav a {
+                font-size: 0.85em;
+                padding: 8px 10px;
+            }
+
+            .search-results {
+                min-width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .section-header h2 {
+                font-size: 1.5em;
+            }
+
+            .top-nav {
+                grid-template-columns: 1fr;
+            }
+
+            .subsection-nav ul {
+                grid-template-columns: 1fr;
+            }
+
+            .content {
+                padding: 15px;
+            }
+
+            table {
+                font-size: 0.85em;
+            }
+
+            th, td {
+                padding: 8px;
+            }
+        }
+
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 4px;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📐 Mathematics Cheatsheet</h1>
+            <p class="subtitle">A comprehensive reference guide for trigonometry, algebra, linear equations, and discrete mathematics.</p>
+        </header>
+
+        <!-- Search Bar Section -->
+        <div class="search-section">
+            <div class="search-container" style="position: relative;">
+                <input 
+                    type="text" 
+                    class="search-bar" 
+                    id="searchBar" 
+                    placeholder="🔍 Search sections, topics..."
+                    autocomplete="off"
+                >
+                <div class="search-results" id="searchResults"></div>
+            </div>
+        </div>
+
+        <!-- Top Navigation Menu -->
+        <nav class="top-nav">
+            <a href="#trig-core" class="nav-item" onclick="setActive(this)">🔵 Trigonometry</a>
+            <a href="#linear-forms" class="nav-item" onclick="setActive(this)">📈 Linear</a>
+            <a href="#quad-form" class="nav-item" onclick="setActive(this)">⬜ Quadratic</a>
+            <a href="#alg-poly" class="nav-item" onclick="setActive(this)">🔤 Algebra</a>
+            <a href="#disc-logic" class="nav-item" onclick="setActive(this)">🎲 Discrete</a>
+        </nav>
+
+        <div class="main-content">
+            <main class="content">
+                <!-- TRIGONOMETRY SECTION -->
+                <section id="trig-core">
+                    <div class="section-header">
+                        <span class="emoji">🔵</span>
+                        <h2>Trigonometric Functions</h2>
+                    </div>
+
+                    <!-- Subsection Navigation - Card Style -->
+                    <div class="subsection-nav">
+                        <h4>📋 Quick Links</h4>
+                        <ul>
+                            <li><a href="#trig-core">Core Definitions</a></li>
+                            <li><a href="#trig-identities">Identities</a></li>
+                            <li><a href="#trig-formulas">Angle Formulas</a></li>
+                            <li><a href="#trig-triangles">Triangles</a></li>
+                            <li><a href="#trig-inverse">Inverse Functions</a></li>
+                            <li><a href="#trig-series">Series & Expansion</a></li>
+                        </ul>
+                    </div>
+
+                    <h3 id="trig-core">Core Definitions (SOHCAHTOA)</h3>
+                    <p>The fundamental trigonometric ratios relate angles in a right triangle to the sides:</p>
+                    <pre>sin(θ) = Opposite / Hypotenuse    |    cos(θ) = Adjacent / Hypotenuse    |    tan(θ) = Opposite / Adjacent</pre>
+
+                    <div class="grid-2">
+                        <div class="card">
+                            <h4>Sine (sin)</h4>
+                            <p>$$\sin(\theta) = \frac{\text{Opposite}}{\text{Hypotenuse}}$$</p>
+                        </div>
+                        <div class="card">
+                            <h4>Cosine (cos)</h4>
+                            <p>$$\cos(\theta) = \frac{\text{Adjacent}}{\text{Hypotenuse}}$$</p>
+                        </div>
+                        <div class="card">
+                            <h4>Tangent (tan)</h4>
+                            <p>$$\tan(\theta) = \frac{\text{Opposite}}{\text{Adjacent}}$$</p>
+                        </div>
+                        <div class="card">
+                            <h4>Fundamental Relationship</h4>
+                            <p>$$\tan(\theta) = \frac{\sin(\theta)}{\cos(\theta)}$$</p>
+                        </div>
+                    </div>
+
+                    <h4>Key Components</h4>
+                    <table>
+                        <tr>
+                            <th>Component</th>
+                            <th>Definition</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Hypotenuse</strong></td>
+                            <td>The longest side, opposite the 90° angle</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Adjacent</strong></td>
+                            <td>The side next to the angle in question</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Opposite</strong></td>
+                            <td>The side across from the angle in question</td>
+                        </tr>
+                    </table>
+
+                    <h3>⚡ Special Angle Values (Quick Reference)</h3>
+                    <table>
+                        <tr>
+                            <th>Angle</th>
+                            <th>Degrees</th>
+                            <th>Radians</th>
+                            <th>sin</th>
+                            <th>cos</th>
+                            <th>tan</th>
+                        </tr>
+                        <tr>
+                            <td>Zero</td>
+                            <td>0°</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td><strong>30°</strong></td>
+                            <td>30°</td>
+                            <td>π/6</td>
+                            <td>1/2</td>
+                            <td>√3/2</td>
+                            <td>√3/3</td>
+                        </tr>
+                        <tr>
+                            <td><strong>45°</strong></td>
+                            <td>45°</td>
+                            <td>π/4</td>
+                            <td>√2/2</td>
+                            <td>√2/2</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td><strong>60°</strong></td>
+                            <td>60°</td>
+                            <td>π/3</td>
+                            <td>√3/2</td>
+                            <td>1/2</td>
+                            <td>√3</td>
+                        </tr>
+                        <tr>
+                            <td>Right</td>
+                            <td>90°</td>
+                            <td>π/2</td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>undefined</td>
+                        </tr>
+                    </table>
+
+                    <h3>🔄 Reciprocal Functions</h3>
+                    <div class="formula">
+                        $$\cot(\theta) = \frac{1}{\tan(\theta)} \quad \sec(\theta) = \frac{1}{\cos(\theta)} \quad \csc(\theta) = \frac{1}{\sin(\theta)}$$
+                    </div>
+
+                    <h3 id="trig-identities">✓ Pythagorean Identities</h3>
+                    <p>Derived from the equation of a circle (x² + y² = r²):</p>
+                    <div class="boxed-formula">
+                        $$\sin^2(\theta) + \cos^2(\theta) = 1$$
+                    </div>
+                    <div class="formula">
+                        $$1 + \tan^2(\theta) = \sec^2(\theta) \quad \text{and} \quad 1 + \cot^2(\theta) = \csc^2(\theta)$$
+                    </div>
+
+                    <h3 id="trig-formulas">🔗 Compound Angle Formulas</h3>
+                    <table>
+                        <tr>
+                            <th>Function</th>
+                            <th>Addition</th>
+                            <th>Subtraction</th>
+                        </tr>
+                        <tr>
+                            <td><strong>sin</strong></td>
+                            <td>$$\sin(A+B) = \sin A\cos B + \cos A\sin B$$</td>
+                            <td>$$\sin(A-B) = \sin A\cos B - \cos A\sin B$$</td>
+                        </tr>
+                        <tr>
+                            <td><strong>cos</strong></td>
+                            <td>$$\cos(A+B) = \cos A\cos B - \sin A\sin B$$</td>
+                            <td>$$\cos(A-B) = \cos A\cos B + \sin A\sin B$$</td>
+                        </tr>
+                        <tr>
+                            <td><strong>tan</strong></td>
+                            <td>$$\tan(A+B) = \frac{\tan A + \tan B}{1 - \tan A\tan B}$$</td>
+                            <td>$$\tan(A-B) = \frac{\tan A - \tan B}{1 + \tan A\tan B}$$</td>
+                        </tr>
+                    </table>
+
+                    <h3>2️⃣ Double Angle Formulas</h3>
+                    <div class="formula">
+                        $$\sin(2\theta) = 2\sin(\theta)\cos(\theta)$$
+                        $$\cos(2\theta) = \cos^2(\theta) - \sin^2(\theta) = 2\cos^2(\theta) - 1 = 1 - 2\sin^2(\theta)$$
+                        $$\tan(2\theta) = \frac{2\tan(\theta)}{1 - \tan^2(\theta)}$$
+                    </div>
+
+                    <h3>½ Half Angle Formulas (Power Reduction)</h3>
+                    <div class="formula">
+                        $$\sin^2(\theta) = \frac{1 - \cos(2\theta)}{2} \quad \cos^2(\theta) = \frac{1 + \cos(2\theta)}{2}$$
+                    </div>
+
+                    <h3 id="trig-triangles">📐 General Triangles (Non-Right)</h3>
+                    <div class="boxed-formula">
+                        $$\frac{a}{\sin A} = \frac{b}{\sin B} = \frac{c}{\sin C} \quad \text{(Law of Sines)}$$
+                    </div>
+                    <div class="boxed-formula">
+                        $$c^2 = a^2 + b^2 - 2ab\cos(C) \quad \text{(Law of Cosines)}$$
+                    </div>
+                    <div class="formula">
+                        $$\text{Area} = \frac{1}{2}ab\sin(C)$$
+                    </div>
+
+                    <h3>🎯 Solving Trigonometric Equations</h3>
+                    <table>
+                        <tr>
+                            <th>Equation</th>
+                            <th>General Solution</th>
+                        </tr>
+                        <tr>
+                            <td>$$\sin(\theta) = \sin(\alpha)$$</td>
+                            <td>$$\theta = n\pi + (-1)^n\alpha$$</td>
+                        </tr>
+                        <tr>
+                            <td>$$\cos(\theta) = \cos(\alpha)$$</td>
+                            <td>$$\theta = 2n\pi \pm \alpha$$</td>
+                        </tr>
+                        <tr>
+                            <td>$$\tan(\theta) = \tan(\alpha)$$</td>
+                            <td>$$\theta = n\pi + \alpha$$</td>
+                        </tr>
+                    </table>
+                    <p><em>where n is any integer</em></p>
+
+                    <h3>🧭 ASTC Rule (Quadrant Signs)</h3>
+                    <table>
+                        <tr>
+                            <th>Quadrant</th>
+                            <th>Functions</th>
+                            <th>Memory</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Q1</strong></td>
+                            <td>All positive</td>
+                            <td><strong>A</strong>ll</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Q2</strong></td>
+                            <td>sin, csc</td>
+                            <td><strong>S</strong>ilver</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Q3</strong></td>
+                            <td>tan, cot</td>
+                            <td><strong>T</strong>ea</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Q4</strong></td>
+                            <td>cos, sec</td>
+                            <td><strong>C</strong>ups</td>
+                        </tr>
+                    </table>
+
+                    <h3 id="trig-inverse">📱 Inverse Trigonometric Functions</h3>
+                    <p>The inverse functions "undo" the original trigonometric functions:</p>
+                    <div class="formula">
+                        $$\sin^{-1}(x) = \arcsin(x) \quad \cos^{-1}(x) = \arccos(x) \quad \tan^{-1}(x) = \arctan(x)$$
+                    </div>
+
+                    <h4>Domain & Range</h4>
+                    <table>
+                        <tr>
+                            <th>Function</th>
+                            <th>Domain</th>
+                            <th>Range</th>
+                        </tr>
+                        <tr>
+                            <td>$$\arcsin(x)$$</td>
+                            <td>[-1, 1]</td>
+                            <td>$$[-\frac{\pi}{2}, \frac{\pi}{2}]$$</td>
+                        </tr>
+                        <tr>
+                            <td>$$\arccos(x)$$</td>
+                            <td>[-1, 1]</td>
+                            <td>[0, π]</td>
+                        </tr>
+                        <tr>
+                            <td>$$\arctan(x)$$</td>
+                            <td>ℝ</td>
+                            <td>$$(-\frac{\pi}{2}, \frac{\pi}{2})$$</td>
+                        </tr>
+                    </table>
+
+                    <h3 id="trig-series">📈 Trigonometric Series & Expansion</h3>
+                    <h4>Taylor Series (around x = 0)</h4>
+                    <div class="formula">
+                        $$\sin(x) = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \frac{x^7}{7!} + \cdots$$
+                        $$\cos(x) = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \frac{x^6}{6!} + \cdots$$
+                        $$\tan(x) = x + \frac{x^3}{3} + \frac{2x^5}{15} + \cdots \quad (|x| < \frac{\pi}{2})$$
+                    </div>
+
+                    <h4>Fourier Series (periodic function decomposition)</h4>
+                    <div class="formula">
+                        $$f(x) = \frac{a_0}{2} + \sum_{n=1}^{\infty} \left[a_n \cos(nx) + b_n \sin(nx)\right]$$
+                        <p>where $$a_n = \frac{1}{\pi} \int_{-\pi}^{\pi} f(x)\cos(nx) dx$$ and $$b_n = \frac{1}{\pi} \int_{-\pi}^{\pi} f(x)\sin(nx) dx$$</p>
+                    </div>
+                </section>
+
+                <!-- LINEAR SECTION -->
+                <section id="linear-forms">
+                    <div class="section-header">
+                        <span class="emoji">📈</span>
+                        <h2>Linear Functions and Equations</h2>
+                    </div>
+
+                    <!-- Subsection Navigation - Card Style -->
+                    <div class="subsection-nav">
+                        <h4>📋 Quick Links</h4>
+                        <ul>
+                            <li><a href="#linear-forms">Standard Forms</a></li>
+                            <li><a href="#linear-slope">Slope Analysis</a></li>
+                            <li><a href="#linear-distance">Distance & Midpoint</a></li>
+                            <li><a href="#linear-systems">Systems</a></li>
+                            <li><a href="#linear-matrices">Matrices</a></li>
+                            <li><a href="#linear-eigen">Eigenvalues</a></li>
+                        </ul>
+                    </div>
+
+                    <h3 id="linear-forms">📋 Standard Forms at a Glance</h3>
+                    <table>
+                        <tr>
+                            <th>Form</th>
+                            <th>Equation</th>
+                            <th>Best For</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Slope-Intercept</strong></td>
+                            <td>$$y = mx + b$$</td>
+                            <td>Graphing, identifying slope & intercept</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Point-Slope</strong></td>
+                            <td>$$y - y_1 = m(x - x_1)$$</td>
+                            <td>Given a point and slope</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Standard</strong></td>
+                            <td>$$Ax + By = C$$</td>
+                            <td>General work, systems</td>
+                        </tr>
+                        <tr>
+                            <td><strong>General</strong></td>
+                            <td>$$Ax + By + C = 0$$</td>
+                            <td>Theoretical applications</td>
+                        </tr>
+                    </table>
+
+                    <h3 id="linear-slope">📊 Slope Analysis</h3>
+                    <div class="formula">
+                        $$m = \frac{\Delta y}{\Delta x} = \frac{y_2 - y_1}{x_2 - x_1}$$
+                    </div>
+
+                    <table>
+                        <tr>
+                            <th>Type</th>
+                            <th>Slope</th>
+                            <th>Visual</th>
+                        </tr>
+                        <tr>
+                            <td>Increasing</td>
+                            <td>m > 0</td>
+                            <td>↗</td>
+                        </tr>
+                        <tr>
+                            <td>Decreasing</td>
+                            <td>m < 0</td>
+                            <td>↘</td>
+                        </tr>
+                        <tr>
+                            <td>Horizontal</td>
+                            <td>m = 0</td>
+                            <td>→</td>
+                        </tr>
+                        <tr>
+                            <td>Vertical</td>
+                            <td>undefined</td>
+                            <td>↑</td>
+                        </tr>
+                    </table>
+
+                    <h3>🔀 Line Relationships</h3>
+                    <ul>
+                        <li><strong>Parallel</strong>: m₁ = m₂</li>
+                        <li><strong>Perpendicular</strong>: m₁ · m₂ = -1</li>
+                    </ul>
+
+                    <h3 id="linear-distance">📍 Distance & Midpoint Formulas</h3>
+                    <div class="boxed-formula">
+                        $$d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2} \quad M = \left(\frac{x_1 + x_2}{2}, \frac{y_1 + y_2}{2}\right)$$
+                    </div>
+
+                    <h3 id="linear-systems">🔧 Systems of Linear Equations (Methods)</h3>
+                    <table>
+                        <tr>
+                            <th>Method</th>
+                            <th>When to Use</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Substitution</strong></td>
+                            <td>One equation easily solves for a variable</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Elimination</strong></td>
+                            <td>Coefficients align well for cancellation</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Matrix/Gaussian</strong></td>
+                            <td>3+ equations or computational work</td>
+                        </tr>
+                    </table>
+
+                    <h3 id="linear-matrices">📊 Matrices and Matrix Operations</h3>
+                    <h4>Basic Matrix</h4>
+                    <div class="formula">
+                        $$A = \begin{pmatrix} a_{11} & a_{12} & \cdots & a_{1n} \\ a_{21} & a_{22} & \cdots & a_{2n} \\ \vdots & \vdots & \ddots & \vdots \\ a_{m1} & a_{m2} & \cdots & a_{mn} \end{pmatrix}$$
+                    </div>
+
+                    <h4>Matrix Operations</h4>
+                    <table>
+                        <tr>
+                            <th>Operation</th>
+                            <th>Rule</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Addition</strong></td>
+                            <td>$$(A + B)_{ij} = a_{ij} + b_{ij}$$</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Scalar Multiplication</strong></td>
+                            <td>$$(cA)_{ij} = c \cdot a_{ij}$$</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Multiplication</strong></td>
+                            <td>$$(AB)_{ij} = \sum_{k} a_{ik}b_{kj}$$</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Transpose</strong></td>
+                            <td>$$(A^T)_{ij} = a_{ji}$$</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Determinant</strong></td>
+                            <td>det(A) (square matrices only)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Inverse</strong></td>
+                            <td>$$A^{-1}$$ such that $$AA^{-1} = I$$</td>
+                        </tr>
+                    </table>
+
+                    <h4>Properties</h4>
+                    <ul>
+                        <li>(AB)C = A(BC) (Associative)</li>
+                        <li>AB ≠ BA (NOT commutative)</li>
+                        <li>$$(AB)^T = B^T A^T$$ (Transpose of product)</li>
+                    </ul>
+
+                    <h3 id="linear-eigen">🔍 Eigenvalues & Eigenvectors</h3>
+                    <p>For matrix A, if $$A\mathbf{v} = \lambda \mathbf{v}$$ where $$\mathbf{v} \neq \mathbf{0}$$:</p>
+                    <ul>
+                        <li>λ is an <strong>eigenvalue</strong></li>
+                        <li><strong>v</strong> is an <strong>eigenvector</strong></li>
+                    </ul>
+
+                    <h4>Characteristic Equation</h4>
+                    <div class="boxed-formula">
+                        $$\det(A - \lambda I) = 0$$
+                    </div>
+
+                    <h4>Finding Eigenvalues</h4>
+                    <ol>
+                        <li>Compute det(A - λI)</li>
+                        <li>Solve the characteristic polynomial</li>
+                        <li>Solutions are eigenvalues</li>
+                    </ol>
+
+                    <h4>Finding Eigenvectors (for each eigenvalue λ)</h4>
+                    <ol>
+                        <li>Solve $$(A - \lambda I)\mathbf{v} = \mathbf{0}$$</li>
+                        <li>Non-trivial solutions form the eigenspace</li>
+                    </ol>
+                </section>
+
+                <!-- QUADRATIC SECTION -->
+                <section id="quad-form">
+                    <div class="section-header">
+                        <span class="emoji">⬜</span>
+                        <h2>Quadratic Functions and Equations</h2>
+                    </div>
+
+                    <!-- Subsection Navigation - Card Style -->
+                    <div class="subsection-nav">
+                        <h4>📋 Quick Links</h4>
+                        <ul>
+                            <li><a href="#quad-form">Standard Form</a></li>
+                            <li><a href="#quad-formula">Quadratic Formula</a></li>
+                            <li><a href="#quad-vertex">Vertex Form</a></li>
+                            <li><a href="#quad-conic">Conic Sections</a></li>
+                        </ul>
+                    </div>
+
+                    <h3 id="quad-form">📝 Standard Form</h3>
+                    <div class="boxed-formula">
+                        $$ax^2 + bx + c = 0 \quad (a \neq 0)$$
+                    </div>
+
+                    <table>
+                        <tr>
+                            <th>Coefficient</th>
+                            <th>Role</th>
+                        </tr>
+                        <tr>
+                            <td>a</td>
+                            <td>Determines parabola direction & width</td>
+                        </tr>
+                        <tr>
+                            <td>b</td>
+                            <td>Affects axis of symmetry</td>
+                        </tr>
+                        <tr>
+                            <td>c</td>
+                            <td>Y-intercept</td>
+                        </tr>
+                    </table>
+
+                    <h3 id="quad-formula">🎯 The Quadratic Formula</h3>
+                    <div class="boxed-formula">
+                        $$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$
+                    </div>
+
+                    <h3>🔍 The Discriminant (D = b² - 4ac)</h3>
+                    <table>
+                        <tr>
+                            <th>Discriminant</th>
+                            <th>Roots</th>
+                            <th>Graph</th>
+                        </tr>
+                        <tr>
+                            <td>D > 0</td>
+                            <td>Two distinct real</td>
+                            <td>Two x-intercepts</td>
+                        </tr>
+                        <tr>
+                            <td>D = 0</td>
+                            <td>One real (repeated)</td>
+                            <td>One x-intercept (tangent)</td>
+                        </tr>
+                        <tr>
+                            <td>D < 0</td>
+                            <td>Two complex conjugates</td>
+                            <td>No x-intercepts</td>
+                        </tr>
+                    </table>
+
+                    <h3>🛠️ Solving Methods Comparison</h3>
+                    <table>
+                        <tr>
+                            <th>Method</th>
+                            <th>Best For</th>
+                            <th>Speed</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Factoring</strong></td>
+                            <td>Simple, factorable trinomials</td>
+                            <td>⚡⚡⚡</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Square Root</strong></td>
+                            <td>$$x^2 = k$$ form (no bx term)</td>
+                            <td>⚡⚡⚡</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Completing Square</strong></td>
+                            <td>Vertex form derivation</td>
+                            <td>⚡⚡</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Quadratic Formula</strong></td>
+                            <td>Any quadratic, messy numbers</td>
+                            <td>⚡</td>
+                        </tr>
+                    </table>
+
+                    <h4>Example</h4>
+                    <p>Solve $$x^2 - 5x + 6 = 0$$</p>
+                    <ol>
+                        <li>Factor: (x - 2)(x - 3) = 0</li>
+                        <li>Solve: x = 2 or x = 3</li>
+                    </ol>
+
+                    <h3 id="quad-vertex">📍 Vertex Form</h3>
+                    <div class="boxed-formula">
+                        $$f(x) = a(x - h)^2 + k$$
+                    </div>
+                    <p>where (h, k) is the vertex (peak or valley)</p>
+
+                    <h4>Converting (Completing the Square)</h4>
+                    <div class="formula">
+                        $$y = ax^2 + bx + c \rightarrow y = a\left(x + \frac{b}{2a}\right)^2 + \left(c - \frac{b^2}{4a}\right)$$
+                    </div>
+
+                    <h3>📐 Parabola Properties</h3>
+                    <table>
+                        <tr>
+                            <th>Property</th>
+                            <th>Formula</th>
+                            <th>Interpretation</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Axis of Symmetry</strong></td>
+                            <td>$$x = -\frac{b}{2a}$$</td>
+                            <td>Vertical line through vertex</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Vertex</strong></td>
+                            <td>$$\left(-\frac{b}{2a}, f\left(-\frac{b}{2a}\right)\right)$$</td>
+                            <td>Min/max point</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Direction</strong></td>
+                            <td>a > 0 opens ↑, a < 0 opens ↓</td>
+                            <td>Concavity</td>
+                        </tr>
+                    </table>
+
+                    <h3 id="quad-conic">🎯 Conic Sections</h3>
+                    <h4>General Form</h4>
+                    <div class="formula">
+                        $$Ax^2 + Bxy + Cy^2 + Dx + Ey + F = 0$$
+                    </div>
+
+                    <h4>Classification (using discriminant Δ = B² - 4AC)</h4>
+                    <table>
+                        <tr>
+                            <th>Conic</th>
+                            <th>Condition</th>
+                            <th>Standard Form</th>
+                            <th>Properties</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Circle</strong></td>
+                            <td>A = C, B = 0</td>
+                            <td>$$(x-h)^2 + (y-k)^2 = r^2$$</td>
+                            <td>Center (h,k), radius r</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ellipse</strong></td>
+                            <td>Δ < 0, A ≠ C</td>
+                            <td>$$\frac{(x-h)^2}{a^2} + \frac{(y-k)^2}{b^2} = 1$$</td>
+                            <td>Semi-major a, semi-minor b</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Parabola</strong></td>
+                            <td>Δ = 0</td>
+                            <td>$$(y-k) = a(x-h)^2$$</td>
+                            <td>Focus & directrix equidistant</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hyperbola</strong></td>
+                            <td>Δ > 0</td>
+                            <td>$$\frac{(x-h)^2}{a^2} - \frac{(y-k)^2}{b^2} = 1$$</td>
+                            <td>Two branches</td>
+                        </tr>
+                    </table>
+                </section>
+
+                <!-- ALGEBRA SECTION -->
+                <section id="alg-poly">
+                    <div class="section-header">
+                        <span class="emoji">🔤</span>
+                        <h2>Algebraic Functions and Equations</h2>
+                    </div>
+
+                    <!-- Subsection Navigation - Card Style -->
+                    <div class="subsection-nav">
+                        <h4>📋 Quick Links</h4>
+                        <ul>
+                            <li><a href="#alg-poly">Polynomials</a></li>
+                            <li><a href="#alg-factor">Factoring</a></li>
+                            <li><a href="#alg-groups">Groups</a></li>
+                            <li><a href="#alg-vectors">Vector Spaces</a></li>
+                            <li><a href="#alg-transforms">Linear Transformations</a></li>
+                            <li><a href="#alg-symmetry">Symmetry Groups</a></li>
+                            <li><a href="#alg-bilinear">Bilinear Forms</a></li>
+                            <li><a href="#alg-linear-groups">Linear Groups</a></li>
+                        </ul>
+                    </div>
+
+                    <h3 id="alg-poly">➕➖ Polynomial Operations</h3>
+                    <table>
+                        <tr>
+                            <th>Operation</th>
+                            <th>Method</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Add/Subtract</strong></td>
+                            <td>Combine like terms</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Multiply</strong></td>
+                            <td>Distributive property or FOIL</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Divide</strong></td>
+                            <td>Long division or synthetic division</td>
+                        </tr>
+                    </table>
+
+                    <h3 id="alg-factor">🧩 Factoring Techniques</h3>
+                    <table>
+                        <tr>
+                            <th>Technique</th>
+                            <th>Form</th>
+                            <th>Example</th>
+                        </tr>
+                        <tr>
+                            <td><strong>GCF</strong></td>
+                            <td>$$ab + ac = a(b + c)$$</td>
+                            <td>$$3x^2 + 6x = 3x(x + 2)$$</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Difference of Squares</strong></td>
+                            <td>$$a^2 - b^2 = (a+b)(a-b)$$</td>
+                            <td>$$x^2 - 9 = (x+3)(x-3)$$</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Perfect Square</strong></td>
+                            <td>$$a^2 \pm 2ab + b^2 = (a \pm b)^2$$</td>
+                            <td>$$x^2 + 4x + 4 = (x+2)^2$$</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sum of Cubes</strong></td>
+                            <td>$$a^3 + b^3 = (a+b)(a^2-ab+b^2)$$</td>
+                            <td>$$x^3 + 8 = (x+2)(x^2-2x+4)$$</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Difference of Cubes</strong></td>
+                            <td>$$a^3 - b^3 = (a-b)(a^2+ab+b^2)$$</td>
+                            <td>$$x^3 - 8 = (x-2)(x^2+2x+4)$$</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Trinomial</strong></td>
+                            <td>$$ax^2 + bx + c$$</td>
+                            <td>$$2x^2 + 5x + 3 = (2x+3)(x+1)$$</td>
+                        </tr>
+                    </table>
+
+                    <h3>💔 Rational Expressions</h3>
+                    <div class="formula">
+                        $$\frac{a}{b} + \frac{c}{d} = \frac{ad + bc}{bd} \quad \frac{a}{b} \cdot \frac{c}{d} = \frac{ac}{bd} \quad \frac{a}{b} \div \frac{c}{d} = \frac{ad}{bc}$$
+                    </div>
+
+                    <h3>⚙️ Exponent Rules</h3>
+                    <div class="formula">
+                        $$a^m \cdot a^n = a^{m+n} \quad \frac{a^m}{a^n} = a^{m-n} \quad (a^m)^n = a^{mn}$$
+                        $$(ab)^n = a^n b^n \quad a^{-n} = \frac{1}{a^n} \quad a^{1/n} = \sqrt[n]{a}$$
+                    </div>
+
+                    <h3>√ Radical Expressions</h3>
+                    <div class="formula">
+                        $$\sqrt{a} \cdot \sqrt{b} = \sqrt{ab} \quad \frac{\sqrt{a}}{\sqrt{b}} = \sqrt{\frac{a}{b}} \quad \frac{1}{\sqrt{a}} = \frac{\sqrt{a}}{a}$$
+                    </div>
+
+                    <h3>|x| Absolute Value Equations</h3>
+                    <h4>Definition</h4>
+                    <div class="formula">
+                        $$|x| = \begin{cases} x & \text{if } x \geq 0 \\ -x & \text{if } x < 0 \end{cases}$$
+                    </div>
+
+                    <h4>Solving $$|ax + b| = c$$ (where c ≥ 0)</h4>
+                    <div class="formula">
+                        $$ax + b = c \quad \text{OR} \quad ax + b = -c$$
+                    </div>
+
+                    <h3 id="alg-groups">🎓 Groups</h3>
+                    <p>A <strong>group</strong> (G, ·) is a set with a binary operation satisfying:</p>
+
+                    <table>
+                        <tr>
+                            <th>Axiom</th>
+                            <th>Definition</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Closure</strong></td>
+                            <td>For all a, b ∈ G: a · b ∈ G</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Associativity</strong></td>
+                            <td>(a · b) · c = a · (b · c)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Identity</strong></td>
+                            <td>∃ e ∈ G: a · e = e · a = a</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Inverse</strong></td>
+                            <td>For each a ∈ G, ∃ a⁻¹: a · a⁻¹ = e</td>
+                        </tr>
+                    </table>
+
+                    <p><strong>Abelian (Commutative) Group</strong>: Additionally, a · b = b · a for all a, b</p>
+
+                    <h4>Examples</h4>
+                    <ul>
+                        <li>(ℤ, +) - Integers under addition</li>
+                        <li>(ℝ*, ×) - Non-zero reals under multiplication</li>
+                        <li>(Sₙ, ∘) - Permutation group of n elements</li>
+                    </ul>
+
+                    <h3 id="alg-vectors">🚀 Vector Spaces</h3>
+                    <p>A <strong>vector space</strong> V over a field 𝔽 (usually ℝ or ℂ) satisfies:</p>
+
+                    <p><strong>Vector Addition</strong>: Commutative, associative, identity, inverse</p>
+                    <p><strong>Scalar Multiplication</strong>: Distributive, associative, identity</p>
+
+                    <h4>Key Concepts</h4>
+                    <table>
+                        <tr>
+                            <th>Concept</th>
+                            <th>Definition</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Subspace</strong></td>
+                            <td>Non-empty subset closed under addition & scalar multiplication</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Linear Independence</strong></td>
+                            <td>Vectors v₁, …, vₙ independent if c₁v₁ + ⋯ + cₙvₙ = 0 only when all cᵢ = 0</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Basis</strong></td>
+                            <td>Linearly independent spanning set</td>
+                        </tr>
+                    </table>
+
+                    <h4>Dimension</h4>
+                    <p>The <strong>dimension</strong> of a vector space is the number of vectors in a basis. It is denoted as dim(V).</p>
+
+                    <h3 id="alg-transforms">🔄 Linear Transformations</h3>
+                    <p>A <strong>linear transformation</strong> T from V to W (T: V → W) satisfies:</p>
+                    <ul>
+                        <li><strong>Preserves addition</strong>: T(v + u) = T(v) + T(u)</li>
+                        <li><strong>Preserves scalar multiplication</strong>: T(cv) = cT(v)</li>
+                    </ul>
+
+                    <h4>Matrix Representation</h4>
+                    <p>If T is represented by matrix A, then T(v) = Av.</p>
+
+                    <h3 id="alg-symmetry">🔍 Symmetry Groups</h3>
+                    <p>A <strong>symmetry group</strong> is the group of all symmetries (isometries) of a given object, including:</p>
+                    <ul>
+                        <li><strong>Translations</strong>: Shifts the object</li>
+                        <li><strong>Rotations</strong>: Turns the object around a point</li>
+                        <li><strong>Reflections</strong>: Flips the object over a line</li>
+                    </ul>
+
+                    <h4>Properties</h4>
+                    <ul>
+                        <li>Closure under composition</li>
+                        <li>Contains inverses (reverse the symmetry)</li>
+                        <li>Contains the identity symmetry (no change)</li>
+                    </ul>
+
+                    <h3 id="alg-bilinear">🛠️ Bilinear Forms</h3>
+                    <p>A <strong>bilinear form</strong> on V is a function B: V × V → ℝ that is:</p>
+                    <ul>
+                        <li><strong>Linear in each argument</strong>: B(u + v, w) = B(u, w) + B(v, w)</li>
+                        <li><strong>Symmetric</strong>: B(u, v) = B(v, u)</li>
+                    </ul>
+
+                    <h4>Matrix Representation</h4>
+                    <p>If B is represented by matrix A, then B(u, v) = uᵀAv.</p>
+
+                    <h3 id="alg-linear-groups">📐 Linear Groups</h3>
+                    <p>A <strong>linear group</strong> is a group of invertible matrices with matrix multiplication as the group operation.</p>
+
+                    <h4>General Linear Group</h4>
+                    <p>The group of all invertible n × n matrices, denoted GL(n, ℝ).</p>
+
+                    <h4>Special Linear Group</h4>
+                    <p>The group of all n × n matrices with determinant 1, denoted SL(n, ℝ).</p>
+                </section>
+
+                <!-- DISCRETE SECTION -->
+                <section id="disc-logic">
+                    <div class="section-header">
+                        <span class="emoji">🎲</span>
+                        <h2>Discrete Mathematics: Logic and Set Theory</h2>
+                    </div>
+
+                    <!-- Subsection Navigation - Card Style -->
+                    <div class="subsection-nav">
+                        <h4>📋 Quick Links</h4>
+                        <ul>
+                            <li><a href="#disc-logic">Logic Basics</a></li>
+                            <li><a href="#set-theory">Set Theory</a></li>
+                            <li><a href="#proof-techniques">Proof Techniques</a></li>
+                            <li><a href="#relations">Relations</a></li>
+                            <li><a href="#functions">Functions</a></li>
+                            <li><a href="#combinatorics">Combinatorics</a></li>
+                        </ul>
+                    </div>
+
+                    <h3 id="disc-logic">🎲 Logic Basics</h3>
+                    <h4>Propositional Logic</h4>
+                    <p>Deals with propositions (statements that are either true or false). Key concepts:</p>
+                    <ul>
+                        <li><strong>Proposition</strong>: A declarative sentence that is either true or false.</li>
+                        <li><strong>Logical Connectives</strong>: Operations that combine propositions (e.g., AND, OR, NOT).</li>
+                        <li><strong>Truth Table</strong>: A table that shows the truth value of a proposition for all possible truth values of its components.</li>
+                    </ul>
+
+                    <h4>Logical Connectives</h4>
+                    <table>
+                        <tr>
+                            <th>Connective</th>
+                            <th>Symbol</th>
+                            <th>Meaning</th>
+                        </tr>
+                        <tr>
+                            <td>Conjunction</td>
+                            <td>∧</td>
+                            <td>True if both propositions are true</td>
+                        </tr>
+                        <tr>
+                            <td>Disjunction</td>
+                            <td>∨</td>
+                            <td>True if at least one proposition is true</td>
+                        </tr>
+                        <tr>
+                            <td>Negation</td>
+                            <td>¬</td>
+                            <td>Inverts the truth value of a proposition</td>
+                        </tr>
+                        <tr>
+                            <td>Implication</td>
+                            <td>→</td>
+                            <td>True unless a true proposition implies a false one</td>
+                        </tr>
+                        <tr>
+                            <td>Bi-implication</td>
+                            <td>↔</td>
+                            <td>True if both propositions are either true or false</td>
+                        </tr>
+                    </table>
+
+                    <h4>Truth Tables</h4>
+                    <p>Used to determine the truth value of complex propositions:</p>
+                    <pre>
+P | Q | P ∧ Q | P ∨ Q | ¬P | P → Q | P ↔ Q
+--|---|-------|-------|----|-------|-------
+T | T |   T   |   T   |  F |   T   |   T
+T | F |   F   |   T   |  F |   F   |   F
+F | T |   F   |   T   |  T |   T   |   F
+F | F |   F   |   F   |  T |   T   |   T
+                    </pre>
+
+                    <h3 id="set-theory">📚 Set Theory</h3>
+                    <h4>Basic Concepts</h4>
+                    <p>Sets are collections of distinct objects. Key concepts:</p>
+                    <ul>
+                        <li><strong>Set</strong>: A collection of distinct objects, considered as an object in its own right.</li>
+                        <li><strong>Element</strong>: An object in a set.</li>
+                        <li><strong>Subset</strong>: A set whose elements are all in another set.</li>
+                        <li><strong>Union</strong>: The set of elements that are in either set.</li>
+                        <li><strong>Intersection</strong>: The set of elements that are in both sets.</li>
+                        <li><strong>Difference</strong>: The set of elements that are in one set but not the other.</li>
+                    </ul>
+
+                    <h4>Venn Diagrams</h4>
+                    <p>Used to represent sets and their relationships:</p>
+                    <img src="https://via.placeholder.com/400x200.png?text=Venn+Diagram" alt="Venn Diagram">
+
+                    <h3 id="proof-techniques">📝 Proof Techniques</h3>
+                    <h4>Direct Proof</h4>
+                    <p>A proof that follows logically from the premises to the conclusion.</p>
+
+                    <h4>Indirect Proof</h4>
+                    <p>A proof that assumes the negation of what you want to prove, and shows that this leads to a contradiction.</p>
+
+                    <h4>Proof by Contradiction</h4>
+                    <p>A proof that assumes the statement is false, and shows that this leads to a contradiction.</p>
+
+                    <h3 id="relations">🔗 Relations</h3>
+                    <h4>Definition</h4>
+                    <p>A relation R from a set A to a set B is a subset of the Cartesian product A × B.</p>
+
+                    <h4>Properties of Relations</h4>
+                    <ul>
+                        <li><strong>Reflexive</strong>: For all a in A, (a, a) is in R.</li>
+                        <li><strong>Symmetric</strong>: If (a, b) is in R, then (b, a) is in R.</li>
+                        <li><strong>Transitive</strong>: If (a, b) is in R and (b, c) is in R, then (a, c) is in R.</li>
+                    </ul>
+
+                    <h3 id="functions">📈 Functions</h3>
+                    <h4>Definition</h4>
+                    <p>A function f from a set A to a set B is a relation that assigns to each element a in A exactly one element b in B.</p>
+
+                    <h4>Notation</h4>
+                    <p>f: A → B, where f(a) = b.</p>
+
+                    <h4>Types of Functions</h4>
+                    <ul>
+                        <li><strong>Injective</strong>: Each element of B is mapped by at most one element of A.</li>
+                        <li><strong>Surjective</strong>: Each element of B is mapped by at least one element of A.</li>
+                        <li><strong>Bijective</strong>: Each element of B is mapped by exactly one element of A.</li>
+                    </ul>
+
+                    <h3 id="combinatorics">🔢 Combinatorics</h3>
+                    <h4>Counting Principles</h4>
+                    <ul>
+                        <li><strong>Multiplication Principle</strong>: If one event can occur in m ways and a second independent event can occur in n ways, then the two events can occur in mn ways.</li>
+                        <li><strong>Addition Principle</strong>: If one event can occur in m ways and a second event can occur in n ways (and the events cannot occur at the same time), then either event can occur in m + n ways.</li>
+                    </ul>
+
+                    <h4>Permutations</h4>
+                    <p>The number of ways to arrange r objects from a set of n objects:</p>
+                    <div class="formula">
+                        $$P(n, r) = \frac{n!}{(n-r)!}$$
+                    </div>
+
+                    <h4>Combinations</h4>
+                    <p>The number of ways to choose r objects from a set of n objects, without regard to order:</p>
+                    <div class="formula">
+                        $$C(n, r) = \binom{n}{r} = \frac{n!}{r!(n-r)!}$$
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <footer>
+            <p><strong>Last Updated</strong>: 2024 | For Educational Purposes</p>
+        </footer>
+    </div>
+
+    <script>
+        // Get all searchable content
+        const searchData = [
+            // Trigonometry
+            { title: "Core Definitions (SOHCAHTOA)", section: "Trigonometry", id: "trig-core" },
+            { title: "Pythagorean Identities", section: "Trigonometry", id: "trig-identities" },
+            { title: "Compound Angle Formulas", section: "Trigonometry", id: "trig-formulas" },
+            { title: "General Triangles", section: "Trigonometry", id: "trig-triangles" },
+            { title: "Inverse Trigonometric Functions", section: "Trigonometry", id: "trig-inverse" },
+            { title: "Trigonometric Series", section: "Trigonometry", id: "trig-series" },
+            // Linear
+            { title: "Standard Forms", section: "Linear", id: "linear-forms" },
+            { title: "Slope Analysis", section: "Linear", id: "linear-slope" },
+            { title: "Distance & Midpoint", section: "Linear", id: "linear-distance" },
+            { title: "Linear Systems", section: "Linear", id: "linear-systems" },
+            { title: "Matrices and Matrix Operations", section: "Linear", id: "linear-matrices" },
+            { title: "Eigenvalues & Eigenvectors", section: "Linear", id: "linear-eigen" },
+            // Quadratic
+            { title: "Quadratic Standard Form", section: "Quadratic", id: "quad-form" },
+            { title: "Quadratic Formula", section: "Quadratic", id: "quad-formula" },
+            { title: "Vertex Form", section: "Quadratic", id: "quad-vertex" },
+            { title: "Conic Sections", section: "Quadratic", id: "quad-conic" },
+            // Algebra
+            { title: "Polynomial Operations", section: "Algebra", id: "alg-poly" },
+            { title: "Factoring Techniques", section: "Algebra", id: "alg-factor" },
+            { title: "Groups", section: "Algebra", id: "alg-groups" },
+            { title: "Vector Spaces", section: "Algebra", id: "alg-vectors" },
+            { title: "Linear Transformations", section: "Algebra", id: "alg-transforms" },
+            { title: "Symmetry Groups", section: "Algebra", id: "alg-symmetry" },
+            { title: "Bilinear Forms", section: "Algebra", id: "alg-bilinear" },
+            { title: "Linear Groups", section: "Algebra", id: "alg-linear-groups" },
+            // Discrete
+            { title: "Logic and Set Theory", section: "Discrete", id: "disc-logic" },
+            { title: "Combinatorics", section: "Discrete", id: "disc-combo" },
+            { title: "Number Theory & Sequences", section: "Discrete", id: "disc-sequences" },
+            { title: "Graph Theory", section: "Discrete", id: "disc-graph" },
+            { title: "Probability", section: "Discrete", id: "disc-prob" },
+            { title: "Boolean Algebra", section: "Discrete", id: "disc-boolean" },
+            { title: "Recurrence Relations", section: "Discrete", id: "disc-recurrence" }
+        ];
+
+        // Search functionality
+        const searchBar = document.getElementById('searchBar');
+        const searchResults = document.getElementById('searchResults');
+
+        searchBar.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            
+            if (query.length < 1) {
+                searchResults.classList.remove('active');
+                return;
+            }
+
+            const results = searchData.filter(item =>
+                item.title.toLowerCase().includes(query) ||
+                item.section.toLowerCase().includes(query)
+            );
+
+            if (results.length === 0) {
+                searchResults.innerHTML = '<div class="search-result-item">No results found</div>';
+                searchResults.classList.add('active');
+                return;
+            }
+
+            searchResults.innerHTML = results.map(result => `
+                <div class="search-result-item" onclick="navigateTo('${result.id}')">
+                    <strong>${result.section}</strong>
+                    <span>${result.title}</span>
+                </div>
+            `).join('');
+
+            searchResults.classList.add('active');
+        });
+
+        // Close search results when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.search-section')) {
+                searchResults.classList.remove('active');
+            }
+        });
+
+        // Navigate to section
+        function navigateTo(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+                searchBar.value = '';
+                searchResults.classList.remove('active');
+            }
+        }
+
+        // Set active nav item
+        function setActive(element) {
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            element.classList.add('active');
+        }
+
+        // Smooth scrolling for all internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

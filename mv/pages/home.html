@@ -1,0 +1,252 @@
+<h1>Enterprise Architecture Pipeline Deployment Strategies</h1>
+
+<!-- Development Pipeline Section -->
+<div class="section">
+    <h2>Development Pipeline</h2>
+    <p>Linear path for creating individual applications and programs with containerization for deployment</p>
+    <p>Multi-Platform Development & Container Orchestration Framework</p>
+    
+    <div class="platform-grid">
+        <!-- Linux Platform -->
+        <div class="platform-card">
+            <h3>🐧 Linux</h3>
+            <ul>
+                <li>Enterprise Linux</li>
+                <li>OCI Integration</li>
+                <li>AWS Setup</li>
+                <li>Azure Setup</li>
+                <li>GCP Setup</li>
+            </ul>
+        </div>
+
+        <!-- Database Platform -->
+        <div class="platform-card">
+            <h3>🗄️ Database</h3>
+            <ul>
+                <li>PostgreSQL</li>
+                <li>MySQL</li>
+                <li>MongoDB</li>
+                <li>Redis</li>
+                <li>Elasticsearch</li>
+            </ul>
+        </div>
+
+        <!-- Java Platform -->
+        <div class="platform-card">
+            <h3>☕ Java</h3>
+            <ul>
+                <li>Spring Initializr</li>
+                <li>Spring Boot</li>
+                <li>J2EE Architecture</li>
+                <li>Maven/Gradle</li>
+                <li>Microservices</li>
+            </ul>
+        </div>
+
+        <!-- .NET Platform -->
+        <div class="platform-card">
+            <h3>.NET</h3>
+            <ul>
+                <li>Aspire Framework</li>
+                <li>C# Language</li>
+                <li>Blazor UI</li>
+                <li>Entity Framework</li>
+                <li>ASP.NET Core</li>
+            </ul>
+        </div>
+
+        <!-- Python Platform -->
+        <div class="platform-card">
+            <h3>🐍 Python</h3>
+            <ul>
+                <li>Flask Framework</li>
+                <li>Django Web Framework</li>
+                <li>HTML Templates</li>
+                <li>Data Processing</li>
+                <li>API Development</li>
+            </ul>
+        </div>
+
+        <!-- Rust Platform -->
+        <div class="platform-card">
+            <h3>🦀 Rust</h3>
+            <ul>
+                <li>Cargo Package Manager</li>
+                <li>TOML Configuration</li>
+                <li>Memory Safety</li>
+                <li>High Performance</li>
+                <li>Concurrent Systems</li>
+            </ul>
+        </div>
+
+        <!-- CMake Platform -->
+        <div class="platform-card">
+            <h3>⚙️ CMake</h3>
+            <ul>
+                <li>Build System</li>
+                <li>Cross-Platform</li>
+                <li>C/C++ Support</li>
+                <li>Multi-Configuration</li>
+                <li>Complex Projects</li>
+            </ul>
+        </div>
+
+        <!-- ROS Platform -->
+        <div class="platform-card">
+            <h3>🤖 ROS</h3>
+            <ul>
+                <li>ROS 2 Framework</li>
+                <li>Robotics Systems</li>
+                <li>DRAKE Simulation</li>
+                <li>Middleware</li>
+                <li>Distributed Computing</li>
+            </ul>
+        </div>
+
+        <!-- Quantum Platform -->
+        <div class="platform-card">
+            <h3>⚛️ Q#</h3>
+            <ul>
+                <li>Quantum Computing</li>
+                <li>Classical Hybrid</li>
+                <li>AI Integration</li>
+                <li>Job Submission</li>
+                <li>QIR Code Preparation</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<!-- Individual Backend Architecture -->
+<div class="section">
+    <h2>Individual Backend Setup Architecture</h2>
+    <img src="public/Gemini_Generated_Image_individualbackend.png" alt="Individual Backend Setup Architecture" width="100%" height="auto">
+    <div class="mermaid">
+graph TD
+    A["Application Development"] --> B["Backend Framework Selection"]
+    B --> C1["Java<br/>Spring Framework"]
+    B --> C2["Python<br/>Flask/Django"]
+    B --> C3[".NET/Aspire<br/>C#/Blazor"]
+    B --> C4["Rust<br/>Cargo"]
+    C1 --> D["Build & Package"]
+    C2 --> D
+    C3 --> D
+    C4 --> D
+    D --> E["Containerization<br/>Docker"]
+    E --> F["Container Registry<br/>Docker/JFrog/OCR"]
+    F --> G["Container Orchestration<br/>Kubernetes"]
+    G --> H["Enterprise Deployment"]
+    </div>
+</div>
+
+<!-- Container & Registry Architecture -->
+<div class="section">
+    <h2>Container & Registry Architecture</h2>
+    <div class="mermaid">
+graph LR
+    A["Application Code"] --> B["Build"]
+    B --> C["Container Image<br/>Docker"]
+    C --> D["Container Registries"]
+    D --> E1["Docker Hub"]
+    D --> E2["JFrog Artifactory"]
+    D --> E3["OCR Registry"]
+    E1 --> F["Kubernetes Cluster"]
+    E2 --> F
+    E3 --> F
+    F --> G1["Pod 1"]
+    F --> G2["Pod 2"]
+    F --> G3["Pod N"]
+    G1 --> H["Load Balancer"]
+    G2 --> H
+    G3 --> H
+    H --> I["Enterprise Services"]
+    </div>
+</div>
+
+<!-- Kubernetes Deployment Strategy -->
+<div class="section">
+    <h2>Kubernetes Deployment Strategy</h2>
+    <div class="mermaid">
+graph TB
+    A["Container Registry"] --> B["Kubernetes Cluster"]
+    B --> C["Namespace Management"]
+    C --> C1["Production"]
+    C --> C2["Staging"]
+    C --> C3["Development"]
+    C1 --> D["Pod Orchestration"]
+    D --> D1["Resource Allocation"]
+    D --> D2["Service Discovery"]
+    D --> D3["Load Balancing"]
+    D1 --> E["Port Management<br/>Minimize Exhaustion"]
+    D2 --> E
+    D3 --> E
+    E --> F["Enterprise Deployment"]
+    </div>
+</div>
+
+<!-- Unified Enterprise Deployment -->
+<div class="section">
+    <h2>Unified Enterprise Deployment Architecture</h2>
+    <img src="public/Gemini_Generated_Image_Unified.png" alt="Unified Enterprise Deployment Architecture" width="100%" height="auto">
+    <div class="mermaid">
+graph TB
+    subgraph "Development Layer"
+        A1["Java/Spring"]
+        A2["Python/Flask"]
+        A3[".NET/Aspire"]
+        A4["Rust/Cargo"]
+    end
+    
+    subgraph "Build & Container Layer"
+        B1["Build System<br/>Maven/Gradle/CMake"]
+        B2["Containerization<br/>Docker"]
+    end
+    
+    subgraph "Registry Layer"
+        C1["Docker Hub"]
+        C2["JFrog"]
+        C3["OCR"]
+    end
+    
+    subgraph "Cloud Providers"
+        D1["AWS"]
+        D2["Azure"]
+        D3["GCP"]
+        D4["OCI"]
+    end
+    
+    subgraph "Orchestration Layer"
+        E1["Kubernetes"]
+        E2["Service Mesh"]
+        E3["Config Management"]
+    end
+    
+    subgraph "Specialized Domains"
+        F1["ROS 2<br/>Robotics"]
+        F2["Quantum Q#<br/>AI Integration"]
+    end
+    
+    A1 --> B1
+    A2 --> B1
+    A3 --> B1
+    A4 --> B1
+    B1 --> B2
+    B2 --> C1
+    B2 --> C2
+    B2 --> C3
+    C1 --> D1
+    C1 --> D2
+    C2 --> D3
+    C3 --> D4
+    D1 --> E1
+    D2 --> E1
+    D3 --> E1
+    D4 --> E1
+    E1 --> E2
+    E2 --> E3
+    E3 --> F1
+    E3 --> F2
+    </div>
+</div>
+            

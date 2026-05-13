@@ -1,0 +1,51 @@
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+    .link-card {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
+    .link-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    }
+    .link-card .card-body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: start;
+        text-align: center;
+    }
+    .link-card img {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+    }
+    .link-card .card-title {
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+    .link-card .card-text {
+        font-size: 0.75rem;
+    }
+</style>
+
+<div class="container-fluid p-4">
+    <div class="pb-3 mb-4 border-bottom">
+        <h3 class="fw-light">Security Tools & Services</h3>
+        <p class="text-muted mb-0">Resources for enterprise security, risk management, and threat intelligence.</p>
+    </div>
+
+    <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-4">
+        <!-- Card Items -->
+        <div class="col"><a href="https://www.infosys.com/services/cyber-security.html" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://www.infosys.com/content/dam/infosys-web/en/global-resource/icons/apple-touch-icon.png" class="mb-3" alt="Infosys" /><h6 class="card-title">Infosys Cyber Security</h6><p class="card-text small">Consulting and services for enterprise cyber security and risk management.</p></div></a></div>
+        <div class="col"><a href="https://www.flocksafety.com/" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://cdn.prod.website-files.com/6821cc9ecc966b7f252b372e/682b0cbd11cc8b08424afe0f_Webclip%20or%20Apple%20Touch%20Icon.png" class="mb-3" alt="Flock Logo" /><h6 class="card-title">Flock Safety</h6><p class="card-text small">Cloud-based public safety platform for communities and law enforcement.</p></div></a></div>
+        <div class="col"><a href="https://www.openpolicyagent.org" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://www.openpolicyagent.org/assets/images/default-92a1aebfb4ea664b7d9c550b29f450a5.png" class="mb-3" alt="OPA Logo" /><h6 class="card-title">Open Policy Agent</h6><p class="card-text small">Policy engine for cloud-native environments, enabling unified policy enforcement.</p></div></a></div>
+        <div class="col"><a href="https://github.com/target/strelka-ui?tab=readme-ov-file" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://avatars.githubusercontent.com/u/17269759?s=200&v=4" class="mb-3" alt="Strelka Logo" /><h6 class="card-title">Strelka UI</h6><p class="card-text small">Real-time file scanning at enterprise scale.</p></div></a></div>
+        <div class="col"><a href="https://www.wireshark.org/" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://www.wireshark.org/assets/images/wireshark-icon-128.png" class="mb-3" alt="Wireshark Logo" /><h6 class="card-title">Wireshark</h6><p class="card-text small">The world's foremost network protocol analyzer.</p></div></a></div>
+        <div class="col"><a href="https://nmap.org/" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://nmap.org/images/nmap-logo-256x256.png" class="mb-3" alt="Nmap Logo" /><h6 class="card-title">Nmap</h6><p class="card-text small">Free and open source utility for network discovery and security auditing.</p></div></a></div>
+    </div>
+</div>

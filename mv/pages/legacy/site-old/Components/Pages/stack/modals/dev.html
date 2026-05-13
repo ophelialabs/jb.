@@ -1,0 +1,64 @@
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+    .link-card {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
+    .link-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    }
+    .link-card .card-body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: start;
+        text-align: center;
+    }
+    .link-card img {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+    }
+    .link-card .card-title {
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+    .link-card .card-text {
+        font-size: 0.75rem;
+    }
+</style>
+
+<div class="container-fluid p-4">
+    <div class="pb-3 mb-4 border-bottom">
+        <h3 class="fw-light">Development Tools & Languages</h3>
+        <p class="text-muted mb-0">Essential resources, frameworks, and languages for modern development.</p>
+    </div>
+
+    <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-4">
+        <!-- Card Items -->
+        <div class="col"><a href="https://developer.mozilla.org/en-US/" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://developer.mozilla.org/apple-touch-icon.528534bba673c38049c2.png" class="mb-3" alt="MDN" /><h6 class="card-title">MDN Web Docs</h6><p class="card-text small">Comprehensive resource for web standards, HTML, CSS, and JavaScript documentation.</p></div></a></div>
+        <div class="col"><a href="https://www.w3schools.com" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://www.w3schools.com/favicon-32x32.png" class="mb-3" alt="W3Schools" /><h6 class="card-title">W3Schools</h6><p class="card-text small">Tutorials and references for web development languages and frameworks.</p></div></a></div>
+        <div class="col"><a href="https://it-tools.tech" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://it-tools.tech/favicon-32x32.png" class="mb-3" alt="it-tools logo" /><h6 class="card-title">IT Tools</h6><p class="card-text small">Handy online tools for developers: encoders, decoders, formatters, and more.</p></div></a></div>
+        <div class="col"><a href="https://react.dev/" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://react.dev/apple-touch-icon.png" class="mb-3" alt="React" /><h6 class="card-title">React</h6><p class="card-text small">A JavaScript library for building user interfaces, maintained by Meta.</p></div></a></div>
+        <div class="col"><a href="https://codesandbox.io/p/sandbox/react-new" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://codesandbox.io/csb-ios.svg" class="mb-3" alt="CodeSandbox" /><h6 class="card-title">CodeSandbox</h6><p class="card-text small">Online code editor and prototyping tool for rapid web development.</p></div></a></div>
+        <div class="col"><a href="https://go.dev/" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://go.dev/images/favicon-gopher-plain.png" class="mb-3" alt="GoLang" /><h6 class="card-title">GoLang</h6><p class="card-text small">Open-source programming language designed for simplicity and reliability.</p></div></a></div>
+        <div class="col"><a href="https://fastapi.tiangolo.com/" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://fastapi.tiangolo.com/img/favicon.png" class="mb-3" alt="FastAPI" /><h6 class="card-title">FastAPI</h6><p class="card-text small">Modern, fast (high-performance) web framework for building APIs with Python 3.7+.</p></div></a></div>
+        <div class="col"><a href="https://angular.dev/" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://angular.dev/assets/icons/apple-touch-icon.png" class="mb-3" alt="Angular" /><h6 class="card-title">Angular</h6><p class="card-text small">Web application framework for building scalable single-page applications.</p></div></a></div>
+        <div class="col"><a href="https://kotlinlang.org/" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://kotlinlang.org/assets/images/favicon.svg?v2" class="mb-3" alt="Kotlin" /><h6 class="card-title">Kotlin</h6><p class="card-text small">Modern programming language targeting JVM, Android, JavaScript, and Native.</p></div></a></div>
+        <div class="col"><a href="https://www.rust-lang.org/learn" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://www.rust-lang.org/static/images/apple-touch-icon.png?v=ngJW8jGAmR" class="mb-3" alt="Rust" /><h6 class="card-title">Rust</h6><p class="card-text small">A language empowering everyone to build reliable and efficient software.</p></div></a></div>
+        <div class="col"><a href="https://doc.rust-lang.org/cargo/" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://doc.rust-lang.org/cargo/favicon-ba9a2803.png" class="mb-3" alt="Cargo" /><h6 class="card-title">Cargo</h6><p class="card-text small">Rust's package manager and build system for managing dependencies and projects.</p></div></a></div>
+        <div class="col"><a href="https://www.ruby-lang.org/" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://www.ruby-lang.org/favicon.ico" class="mb-3" alt="Ruby" /><h6 class="card-title">Ruby</h6><p class="card-text small">Dynamic, open source programming language with a focus on simplicity and productivity.</p></div></a></div>
+        <div class="col"><a href="https://www.perl.org/" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://cdn.perl.org/perlweb/favicon.ico" class="mb-3" alt="Perl" /><h6 class="card-title">Perl</h6><p class="card-text small">Highly capable, feature-rich programming language with over 30 years of development.</p></div></a></div>
+        <div class="col"><a href="https://www.scala-lang.org/" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://www.scala-lang.org/resources/apple-touch-icon.png" class="mb-3" alt="Scala" /><h6 class="card-title">Scala</h6><p class="card-text small">A hybrid functional and object-oriented programming language for the JVM.</p></div></a></div>
+        <div class="col"><a href="https://www.swift.org/" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://www.swift.org/apple-touch-icon-180x180.png" class="mb-3" alt="Swift" /><h6 class="card-title">Swift</h6><p class="card-text small">Powerful and intuitive programming language for macOS, iOS, watchOS, and tvOS.</p></div></a></div>
+        <div class="col"><a href="https://www.python.org/" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://www.python.org/static/apple-touch-icon-144x144-precomposed.png" class="mb-3" alt="Python Logo" /><h6 class="card-title">Python</h6><p class="card-text small">Official Python programming language site for downloads, docs, and resources.</p></div></a></div>
+        <div class="col"><a href="https://jupyter.org/" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://jupyter.org/favicon.ico" class="mb-3" alt="Jupyter Notebook Logo" /><h6 class="card-title">Jupyter Notebooks</h6><p class="card-text small">Interactive computing environment for creating and sharing code, equations, and visualizations.</p></div></a></div>
+        <div class="col"><a href="https://huggingface.co/docs/huggingface_hub/guides/cli" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" class="mb-3" alt="Hugging Face Logo" /><h6 class="card-title">Hugging Face CLI</h6><p class="card-text small">Command-line interface for managing models and datasets on Hugging Face Hub.</p></div></a></div>
+        <div class="col"><a href="https://www.tensorflow.org/install" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://avatars.githubusercontent.com/u/15658638?s=200&v=4" class="mb-3" alt="TensorFlow Logo" /><h6 class="card-title">TensorFlow</h6><p class="card-text small">Open-source platform for machine learning and deep learning by Google.</p></div></a></div>
+    </div>
+</div>

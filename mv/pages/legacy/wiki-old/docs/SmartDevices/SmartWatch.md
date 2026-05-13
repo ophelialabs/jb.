@@ -1,0 +1,15 @@
+- [FreeCAD](https://www.freecad.org/)
+- [KiCAD Free PCB Design](https://www.kicad.org/)
+- [Voltara PCB](https://www.voltera.io/products/printing-service)
+- [Antenna's and Frequency Ranges](https://www.emscience.org/article/doi/10.23919/emsci.2023.0052)
+- [PineTime](https://github.com/InfiniTimeOrg/InfiniTime)
+- [PebbleOS](https://github.com/google/pebble)
+- [Gadgetbridge](https://gadgetbridge.org/)
+- [3D printing of polymer composites: Materials, processes, and applications](https://www.sciencedirect.com/science/article/pii/S2590238521005178)
+- [Fiber-based Sensor](https://www.nature.com/articles/s41528-025-00465-w)
+- Proprietary BLE
+- Build companion app
+- *Note that when a magnetic force is applied, the watch will expectedly stop functioning. How to seperate or encase?*
+- If using a textile MEG in the form of a wristband, when a sufficient change in magnetism is applied, it will undoubtedly effect dipoles and/or thermal energy generation. How can it be used to work together collectively?  Using momentum (swinging of arm) to power device?
+- Adding sensors (electrophysiological, chemical, temp)
+- Using MEGs MI layer

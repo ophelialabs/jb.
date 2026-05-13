@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aspire Project Generator Script</title>
+    <!-- Bootstrap 5.3 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- PrismJS for code highlighting -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css" rel="stylesheet">
+    <!-- Fluent UI Bootstrap theme (Bootswatch 'Flatly' as a Fluent-like example) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.3/dist/flatly/bootstrap.min.css" rel="stylesheet">
+    <link href="static/pipeline.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fluent-navbar bg-primary mb-4">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="../../../index.html">
+                <svg width="32" height="32" fill="#fff" class="me-2" viewBox="0 0 16 16"><rect width="16" height="16" rx="4"/></svg>
+                <span style="font-weight:600;letter-spacing:0.03em;">Ophelia</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <div class="navbar-nav ms-auto">
+                    <a class="nav-link fluent-btn" href="aspire.html">Generator</a>
+                    <a class="nav-link fluent-btn" href="generator.sh">Download</a>
+                    <a class="nav-link fluent-btn" href="#" target="_blank" rel="noopener noreferrer">Docs</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h1>Aspire</h1>
+        <p class="lead mb-4">
+            Aspire is a modern web application that leverages <strong>Blazor</strong> for building interactive, client-side UIs with .NET, and uses <strong>Redis</strong> as a high-performance caching layer to optimize data access and scalability.
+        </p>
+
+        <h2 class="section-title">Features</h2>
+        <ul>
+            <li><strong>Blazor Frontend</strong>: Rich, responsive user interfaces built with C# and Razor components.</li>
+            <li><strong>Redis Caching</strong>: Fast, in-memory data storage to reduce database load and improve performance.</li>
+            <li><strong>.NET Backend</strong>: Seamless integration between frontend and backend using ASP.NET Core.</li>
+            <li><strong>Scalable Architecture</strong>: Designed for cloud deployment and horizontal scaling.</li>
+        </ul>
+
+        <h2 class="section-title">Getting Started</h2>
+        <h3>Prerequisites</h3>
+        <ul>
+            <li><a href="https://dotnet.microsoft.com/download" target="_blank">.NET SDK</a></li>
+            <li><a href="https://redis.io/download" target="_blank">Redis</a></li>
+            <li><a href="https://nodejs.org/" target="_blank">Node.js</a> (if using Blazor WebAssembly with npm packages)</li>
+        </ul>
+
+        <h3>Running the App</h3>
+        <ol>
+            <li>
+                <strong>Start Redis</strong><br>
+                Ensure Redis is running locally or update the connection string in <code>appsettings.json</code>.
+            </li>
+            <li>
+                <strong>Build and Run the App</strong>
+                <pre><code>dotnet build
+dotnet run</code></pre>
+            </li>
+            <li>
+                <strong>Access the App</strong><br>
+                Open your browser at <code>http://localhost:5000</code> (or the configured port).
+            </li>
+        </ol>
+
+        <h2 class="section-title">Configuration</h2>
+        <p>Update Redis connection settings in <code>appsettings.json</code>:</p>
+        <div class="json-block">
+            <pre><code>{
+    "Redis": {
+        "ConnectionString": "localhost:6379"
+    }
+}</code></pre>
+        </div>
+
+        <h2 class="section-title">.NET &amp; Azure Commands Reference</h2>
+        <pre>
+# Basic .NET Commands
+dotnet new list
+dotnet new webapi
+dotnet build
+dotnet run
+dotnet test
+dotnet publish
+
+# Package Management
+dotnet add package Azure.Identity
+dotnet add package Azure.Security.KeyVault.Secrets
+dotnet add package Microsoft.ML
+dotnet add package Microsoft.EntityFrameworkCore
+dotnet package find -verbosity detailed azure.authentication
+
+# Project Templates
+dotnet new aspire-starter --name MyProject
+dotnet new blazor
+dotnet new mvc
+
+# Authentication & Security
+dotnet add package Microsoft.Identity.Web
+dotnet add package Azure.Identity
+dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer
+
+# Monitoring & Logging
+dotnet add package Application Insights
+dotnet add package Serilog.AspNetCore
+dotnet add package OpenTelemetry
+
+# Data & Storage
+dotnet add package Microsoft.EntityFrameworkCore
+dotnet add package Microsoft.EntityFrameworkCore.SQLite
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL
+dotnet add package Oracle.EntityFrameworkCore
+dotnet add package MySql.EntityFrameworkCore
+dotnet add package Pomelo.EntityFrameworkCore.MySql
+dotnet add package Azure.Storage.Blobs
+dotnet add package Microsoft.Azure.Cosmos
+dotnet add package MongoDB.Driver
+dotnet add package Cassandra.Driver
+dotnet add package StackExchange.Redis
+
+# Messaging & Integration
+dotnet add package Azure.Messaging.ServiceBus
+dotnet add package MassTransit
+dotnet add package RabbitMQ.Client
+
+# Configuration & Secrets
+dotnet add package Azure.Security.KeyVault.Secrets
+dotnet add package Microsoft.Extensions.Configuration.AzureKeyVault
+
+# Caching & Performance
+dotnet add package Microsoft.Extensions.Caching.StackExchangeRedis
+dotnet add package Polly
+
+# ML.NET and AI Packages
+dotnet add package TorchSharp
+dotnet add package Microsoft.ML.TorchSharp
+dotnet add package Microsoft.SemanticKernel
+dotnet add package Microsoft.ML.FastTree
+dotnet add package Microsoft.ML.LightGbm
+dotnet add package PytorchSharp.OpenCL
+dotnet add package Microsoft.ML.OnnxRuntime
+dotnet add package Microsoft.ML.Vision
+dotnet add package Microsoft.ML.Recommender
+dotnet add package Microsoft.ML.AutoML
+
+# Quantum Development
+dotnet add package Microsoft.Quantum.Development.Kit
+dotnet add package Microsoft.Quantum.Runtime.Core
+dotnet add package Microsoft.Quantum.Simulators
+dotnet add package Microsoft.Quantum.Standard
+dotnet add package Microsoft.Quantum.Numerics
+dotnet add package Microsoft.Quantum.QSharp.Core
+dotnet add package Microsoft.Quantum.EntryPoint.Runtime
+dotnet add package Microsoft.Quantum.NetworkingLibrary
+        </pre>
+
+        <div class="license">
+            <strong>License:</strong> This project is licensed under the MIT License.
+        </div>
+    </div>
+        <footer class="fluent-footer py-3 mt-5">
+        <div class="container">
+            <p class="text-center mb-0">&copy; 2024 Aspire Project Generator</p>
+        </div>
+    </footer>
+   <script src="static/scripts/search.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+</body>
+</html>

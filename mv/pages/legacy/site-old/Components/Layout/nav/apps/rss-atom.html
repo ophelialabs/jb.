@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSS & Atom Feeds | Ophelia Labs</title>
+    <meta name="description" content="Learn how to find, fetch, and merge RSS/Atom feeds for federated search. Includes code examples and best practices for Ophelia Labs.">
+    <meta name="keywords" content="RSS, Atom, Feeds, XML, Search, Federation, JavaScript, SEO, Ophelia Labs">
+    <meta name="author" content="Ophelia Labs">
+    <link rel="canonical" href="https://ophelialabs.com/nav/apps/rss-atom.html">
+    <meta property="og:title" content="RSS & Atom Feeds | Ophelia Labs">
+    <meta property="og:description" content="How to find, fetch, and merge RSS/Atom feeds for federated search. Includes code examples and best practices.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://ophelialabs.com/nav/apps/rss-atom.html">
+    <meta property="og:site_name" content="Ophelia Labs">
+    <meta name="robots" content="index, follow">
+    <link rel="stylesheet" href="/static/site.css">
+</head>
+<body>
+    <div id="header-include"></div>
+    <main class="container body-content" style="margin-top: 80px;">
+        <h1>RSS & Atom Feeds: Federated Search Guide</h1>
+        <nav aria-label="breadcrumb">
+            <ol>
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/nav/apps/">Apps</a></li>
+                <li aria-current="page">RSS & Atom</li>
+            </ol>
+        </nav>
+        <section>
+            <h2>What Are RSS/Atom Feeds?</h2>
+            <p>RSS and Atom are XML-based formats for publishing frequently updated content such as blogs, news, or project updates. Many sites expose their latest content via a feed URL (e.g., <code>https://example.com/feed.xml</code> or <code>https://blog.example.com/rss</code>).</p>
+        </section>
+        <section>
+            <h2>How to Find a Site’s Feed</h2>
+            <ul>
+                <li>Look for the RSS icon <span aria-label="RSS icon" title="RSS">&#128241;</span> or links labeled "RSS" or "Atom".</li>
+                <li>Common feed URLs: <code>/feed</code>, <code>/rss</code>, <code>/atom.xml</code>, <code>/feed.xml</code></li>
+                <li>Check the HTML <code>&lt;head&gt;</code> for:
+                    <pre><code>&lt;link rel="alternate" type="application/rss+xml" href="https://example.com/feed.xml" /&gt;</code></pre>
+                </li>
+            </ul>
+        </section>
+        <section>
+            <h2>Fetching and Parsing RSS/Atom Feeds in JavaScript</h2>
+            <p><strong>Note:</strong> Browsers block cross-origin requests to most RSS feeds (CORS). Use a public RSS-to-JSON proxy (like <a href="https://rss2json.com/" rel="nofollow">rss2json.com</a>, rss.app, or your own backend) to fetch and parse feeds.</p>
+            <h3>Example: Fetch and Search RSS Feed Client-Side</h3>
+            <pre><code class="language-js">const feedUrl = encodeURIComponent('https://blog.example.com/feed.xml');
+fetch(`https://api.rss2json.com/v1/api.json?rss_url=${feedUrl}`)
+  .then(res => res.json())
+  .then(data => {
+    // data.items is an array of feed entries
+    const results = data.items.filter(item =>
+      item.title.toLowerCase().includes(query.toLowerCase()) ||
+      item.description.toLowerCase().includes(query.toLowerCase())
+    );
+    // Display results
+  });
+</code></pre>
+        </section>
+        <section>
+            <h2>Merging RSS Results with Your Own</h2>
+            <ol>
+                <li>Fetch your local site index as before.</li>
+                <li>Fetch and search RSS feeds as above.</li>
+                <li>Combine and display both sets of results, labeling the source.</li>
+            </ol>
+        </section>
+        <section>
+            <h2>Example: Combined Search with RSS</h2>
+            <pre><code class="language-js">Promise.all([
+  fetch('/static/content/site-index.json').then(r => r.json()),
+  fetch('https://api.rss2json.com/v1/api.json?rss_url=https://blog.example.com/feed.xml').then(r => r.json())
+]).then(([localPages, rssData]) => {
+  const localResults = localPages.filter(page =>
+    page.title.toLowerCase().includes(query.toLowerCase()) ||
+    page.content.toLowerCase().includes(query.toLowerCase())
+  );
+  const rssResults = rssData.items.filter(item =>
+    item.title.toLowerCase().includes(query.toLowerCase()) ||
+    item.description.toLowerCase().includes(query.toLowerCase())
+  );
+  // Render localResults and rssResults
+});
+</code></pre>
+        </section>
+        <section>
+            <h2>Displaying Results</h2>
+            <h3>Results from Ophelia Labs</h3>
+            <!-- local results here -->
+            <h3>Results from Blog</h3>
+            <!-- rss results here -->
+        </section>
+        <section>
+            <h2>Best Practices & Notes</h2>
+            <ul>
+                <li>Respect API limits of RSS-to-JSON proxies.</li>
+                <li>For production, consider running your own backend proxy to fetch and parse feeds server-side.</li>
+                <li>Always credit the source of each result.</li>
+            </ul>
+        </section>
+        <section>
+            <h2>Summary</h2>
+            <ol>
+                <li>Find the RSS/Atom feed URL for the site(s) you want to federate.</li>
+                <li>Use a proxy to fetch and parse the feed as JSON.</li>
+                <li>Search the entries client-side and merge with your own results.</li>
+                <li>Display all results, clearly labeled by source.</li>
+            </ol>
+        </section>
+        <section>
+            <h2>Ready-to-use Search Integration</h2>
+            <p>See <code>static/scripts/search.js</code> for a complete example that:</p>
+            <ul>
+                <li>Searches your local site index (<code>site-index.json</code>)</li>
+                <li>Searches a blog/news RSS feed (using rss2json.com as a proxy)</li>
+                <li>Combines and displays both result sets, clearly labeled</li>
+            </ul>
+            <p>Replace the RSS feed URL with your actual feed. No API keys are needed for rss2json.com for basic usage.</p>
+        </section>
+    </main>
+    <div id="footer-include"></div>
+    <script>
+    // Dynamic header/footer includes
+    fetch('/main/header.html').then(r => r.text()).then(t => {
+        document.getElementById('header-include').innerHTML = t;
+    });
+    fetch('/main/footer.html').then(r => r.text()).then(t => {
+        document.getElementById('footer-include').innerHTML = t;
+    });
+    </script>
+</body>
+</html>

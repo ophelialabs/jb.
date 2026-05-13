@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Architecture Pipeline Deployment</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>Enterprise Architecture Pipeline Deployment</h1>
+            <p class="subtitle">Multi-Platform Development & Container Orchestration Framework</p>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="navbar">
+            <ul>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#architecture">Architecture</a></li>
+                <li><a href="#platforms">Platforms</a></li>
+                <li><a href="#deployment">Deployment</a></li>
+                <li><a href="#roadmap">Roadmap</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Overview Section -->
+            <section id="overview" class="section">
+                <h2>Overview</h2>
+                <div class="overview-content">
+                    <div class="overview-item">
+                        <h3>Development Pipeline</h3>
+                        <p>Linear path for creating individual applications and programs with containerization for deployment</p>
+                    </div>
+                    <div class="overview-item">
+                        <h3>Architecture Visualization</h3>
+                        <p>Mermaid diagrams for both individual backend setups and unified enterprise deployments</p>
+                    </div>
+                    <div class="overview-item">
+                        <h3>Enterprise Integration</h3>
+                        <p>Multi-cloud support with OCI, AWS, Azure, and GCP integration</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Individual Backend Architecture -->
+            <section id="architecture" class="section">
+                <h2>Individual Backend Setup Architecture</h2>
+                <div class="mermaid">
+graph TD
+    A["Application Development"] --> B["Backend Framework Selection"]
+    B --> C1["Java<br/>Spring Framework"]
+    B --> C2["Python<br/>Flask/Django"]
+    B --> C3[".NET/Aspire<br/>C#/Blazor"]
+    B --> C4["Rust<br/>Cargo"]
+    C1 --> D["Build & Package"]
+    C2 --> D
+    C3 --> D
+    C4 --> D
+    D --> E["Containerization<br/>Docker"]
+    E --> F["Container Registry<br/>Docker/JFrog/OCR"]
+    F --> G["Container Orchestration<br/>Kubernetes"]
+    G --> H["Enterprise Deployment"]
+                </div>
+            </section>
+
+            <!-- Platform Support Section -->
+            <section id="platforms" class="section">
+                <h2>Supported Platforms</h2>
+                
+                <div class="platform-grid">
+                    <!-- Linux Platform -->
+                    <div class="platform-card">
+                        <h3>🐧 Linux</h3>
+                        <ul>
+                            <li>Enterprise Linux</li>
+                            <li>OCI Integration</li>
+                            <li>AWS Setup</li>
+                            <li>Azure Setup</li>
+                            <li>GCP Setup</li>
+                        </ul>
+                    </div>
+
+                    <!-- Java Platform -->
+                    <div class="platform-card">
+                        <h3>☕ Java</h3>
+                        <ul>
+                            <li>Spring Initializr</li>
+                            <li>Spring Boot</li>
+                            <li>J2EE Architecture</li>
+                            <li>Maven/Gradle</li>
+                            <li>Microservices</li>
+                        </ul>
+                    </div>
+
+                    <!-- .NET Platform -->
+                    <div class="platform-card">
+                        <h3>.NET</h3>
+                        <ul>
+                            <li>Aspire Framework</li>
+                            <li>C# Language</li>
+                            <li>Blazor UI</li>
+                            <li>Entity Framework</li>
+                            <li>ASP.NET Core</li>
+                        </ul>
+                    </div>
+
+                    <!-- Python Platform -->
+                    <div class="platform-card">
+                        <h3>🐍 Python</h3>
+                        <ul>
+                            <li>Flask Framework</li>
+                            <li>Django Web Framework</li>
+                            <li>HTML Templates</li>
+                            <li>Data Processing</li>
+                            <li>API Development</li>
+                        </ul>
+                    </div>
+
+                    <!-- Rust Platform -->
+                    <div class="platform-card">
+                        <h3>🦀 Rust</h3>
+                        <ul>
+                            <li>Cargo Package Manager</li>
+                            <li>TOML Configuration</li>
+                            <li>Memory Safety</li>
+                            <li>High Performance</li>
+                            <li>Concurrent Systems</li>
+                        </ul>
+                    </div>
+
+                    <!-- CMake Platform -->
+                    <div class="platform-card">
+                        <h3>⚙️ CMake</h3>
+                        <ul>
+                            <li>Build System</li>
+                            <li>Cross-Platform</li>
+                            <li>C/C++ Support</li>
+                            <li>Multi-Configuration</li>
+                            <li>Complex Projects</li>
+                        </ul>
+                    </div>
+
+                    <!-- ROS Platform -->
+                    <div class="platform-card">
+                        <h3>🤖 ROS</h3>
+                        <ul>
+                            <li>ROS 2 Framework</li>
+                            <li>Robotics Systems</li>
+                            <li>DRAKE Simulation</li>
+                            <li>Middleware</li>
+                            <li>Distributed Computing</li>
+                        </ul>
+                    </div>
+
+                    <!-- Quantum Platform -->
+                    <div class="platform-card">
+                        <h3>⚛️ Q#</h3>
+                        <ul>
+                            <li>Quantum Computing</li>
+                            <li>Classical Hybrid</li>
+                            <li>AI Integration</li>
+                            <li>Job Submission</li>
+                            <li>QIR Code Preparation</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Container & Registry Architecture -->
+            <section id="deployment" class="section">
+                <h2>Container & Registry Architecture</h2>
+                <div class="mermaid">
+graph LR
+    A["Application Code"] --> B["Build"]
+    B --> C["Container Image<br/>Docker"]
+    C --> D["Container Registries"]
+    D --> E1["Docker Hub"]
+    D --> E2["JFrog Artifactory"]
+    D --> E3["OCR Registry"]
+    E1 --> F["Kubernetes Cluster"]
+    E2 --> F
+    E3 --> F
+    F --> G1["Pod 1"]
+    F --> G2["Pod 2"]
+    F --> G3["Pod N"]
+    G1 --> H["Load Balancer"]
+    G2 --> H
+    G3 --> H
+    H --> I["Enterprise Services"]
+                </div>
+            </section>
+
+            <!-- Kubernetes Deployment Strategy -->
+            <section id="kubernetes" class="section">
+                <h2>Kubernetes Deployment Strategy</h2>
+                <div class="mermaid">
+graph TB
+    A["Container Registry"] --> B["Kubernetes Cluster"]
+    B --> C["Namespace Management"]
+    C --> C1["Production"]
+    C --> C2["Staging"]
+    C --> C3["Development"]
+    C1 --> D["Pod Orchestration"]
+    D --> D1["Resource Allocation"]
+    D --> D2["Service Discovery"]
+    D --> D3["Load Balancing"]
+    D1 --> E["Port Management<br/>Minimize Exhaustion"]
+    D2 --> E
+    D3 --> E
+    E --> F["Enterprise Deployment"]
+                </div>
+            </section>
+
+            <!-- Unified Enterprise Deployment -->
+            <section id="enterprise" class="section">
+                <h2>Unified Enterprise Deployment Architecture</h2>
+                <div class="mermaid">
+graph TB
+    subgraph "Development Layer"
+        A1["Java/Spring"]
+        A2["Python/Flask"]
+        A3[".NET/Aspire"]
+        A4["Rust/Cargo"]
+    end
+    
+    subgraph "Build & Container Layer"
+        B1["Build System<br/>Maven/Gradle/CMake"]
+        B2["Containerization<br/>Docker"]
+    end
+    
+    subgraph "Registry Layer"
+        C1["Docker Hub"]
+        C2["JFrog"]
+        C3["OCR"]
+    end
+    
+    subgraph "Cloud Providers"
+        D1["AWS"]
+        D2["Azure"]
+        D3["GCP"]
+        D4["OCI"]
+    end
+    
+    subgraph "Orchestration Layer"
+        E1["Kubernetes"]
+        E2["Service Mesh"]
+        E3["Config Management"]
+    end
+    
+    subgraph "Specialized Domains"
+        F1["ROS 2<br/>Robotics"]
+        F2["Quantum Q#<br/>AI Integration"]
+    end
+    
+    A1 --> B1
+    A2 --> B1
+    A3 --> B1
+    A4 --> B1
+    B1 --> B2
+    B2 --> C1
+    B2 --> C2
+    B2 --> C3
+    C1 --> D1
+    C1 --> D2
+    C2 --> D3
+    C3 --> D4
+    D1 --> E1
+    D2 --> E1
+    D3 --> E1
+    D4 --> E1
+    E1 --> E2
+    E2 --> E3
+    E3 --> F1
+    E3 --> F2
+                </div>
+            </section>
+
+            <!-- Roadmap Section -->
+            <section id="roadmap" class="section">
+                <h2>Implementation Roadmap</h2>
+                <div class="roadmap">
+                    <div class="roadmap-item">
+                        <span class="phase">Phase 1</span>
+                        <h4>Foundation Setup</h4>
+                        <ul>
+                            <li>Linux enterprise environment</li>
+                            <li>Docker containerization</li>
+                            <li>Single backend service</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="roadmap-item">
+                        <span class="phase">Phase 2</span>
+                        <h4>Multi-Platform Support</h4>
+                        <ul>
+                            <li>Java/Spring integration</li>
+                            <li>Python/Flask support</li>
+                            <li>.NET/Aspire integration</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="roadmap-item">
+                        <span class="phase">Phase 3</span>
+                        <h4>Orchestration</h4>
+                        <ul>
+                            <li>Kubernetes deployment</li>
+                            <li>Container registries</li>
+                            <li>Service management</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="roadmap-item">
+                        <span class="phase">Phase 4</span>
+                        <h4>Advanced Features</h4>
+                        <ul>
+                            <li>Multi-cloud integration</li>
+                            <li>ROS 2 robotics</li>
+                            <li>Quantum computing Q#</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="roadmap-item">
+                        <span class="phase">Phase 5</span>
+                        <h4>Enterprise Scale</h4>
+                        <ul>
+                            <li>High availability</li>
+                            <li>Disaster recovery</li>
+                            <li>Performance optimization</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="roadmap-item">
+                        <span class="phase">Phase 6</span>
+                        <h4>Future-Ready</h4>
+                        <ul>
+                            <li>AI/ML integration</li>
+                            <li>Edge computing</li>
+                            <li>Full quantum integration</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Technology Stack -->
+            <section id="stack" class="section">
+                <h2>Technology Stack Summary</h2>
+                <div class="stack-grid">
+                    <div class="stack-category">
+                        <h4>Languages</h4>
+                        <p>Java, Python, C#, Rust, C++, Q#</p>
+                    </div>
+                    <div class="stack-category">
+                        <h4>Frameworks</h4>
+                        <p>Spring, Flask, .NET Aspire, Cargo, ROS 2, DRAKE</p>
+                    </div>
+                    <div class="stack-category">
+                        <h4>Containerization</h4>
+                        <p>Docker, Container Registries, JFrog Artifactory</p>
+                    </div>
+                    <div class="stack-category">
+                        <h4>Orchestration</h4>
+                        <p>Kubernetes, Service Mesh, Pod Management</p>
+                    </div>
+                    <div class="stack-category">
+                        <h4>Cloud Platforms</h4>
+                        <p>AWS, Azure, GCP, OCI</p>
+                    </div>
+                    <div class="stack-category">
+                        <h4>Specializations</h4>
+                        <p>Robotics (ROS 2), Quantum (Q#), Simulation (DRAKE)</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2025 Enterprise Architecture Pipeline. All rights reserved.</p>
+            <p>Building scalable, multi-platform, cloud-native solutions.</p>
+        </footer>
+    </div>
+
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+        mermaid.contentLoaded();
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

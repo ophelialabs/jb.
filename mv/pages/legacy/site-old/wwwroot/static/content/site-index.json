@@ -1,0 +1,32 @@
+[
+  {
+    "title": "Home",
+    "url": "/index.html",
+    "content": "Welcome to Ophelia Labs. Professional software engineering portfolio and technical resource hub.",
+    "snippet": "Welcome to Ophelia Labs – your resource for cloud, security, and architecture expertise."
+  },
+  {
+    "title": "About",
+    "url": "/about.html",
+    "content": "Learn more about Ophelia Labs, our mission, and our team.",
+    "snippet": "Discover the mission and team behind Ophelia Labs."
+  },
+  {
+    "title": "Cloud Solutions",
+    "url": "/cloud.html",
+    "content": "Multi-cloud architecture, implementation, and best practices.",
+    "snippet": "Explore our expertise in multi-cloud architecture and solutions."
+  },
+  {
+    "title": "Security",
+    "url": "/security.html",
+    "content": "Enterprise security architecture, compliance, and risk management.",
+    "snippet": "Enterprise security and compliance services from Ophelia Labs."
+  },
+  {
+    "title": "Portfolio",
+    "url": "/portfolio.html",
+    "content": "A showcase of projects, case studies, and technical achievements.",
+    "snippet": "Browse our portfolio of projects and technical case studies."
+  }
+]

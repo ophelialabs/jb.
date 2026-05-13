@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+
+        pre {
+            background-color: #ecf0f1;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+
+        }
+        .objective-card {
+            background: rgb(213, 213, 213);
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08); 
+        }
+        .objective-icon {
+            margin-right: 10px;
+            color: #27ae60;
+        }
+        .code-block {
+            background-color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .card-number {
+            font-size: 24px;
+            font-weight: bold;
+            margin-right: 10px;
+            color: #2980b9;
+        }
+        .card-meta {
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 8px 12px;
+            margin-top: 10px;
+            background-color: #2980b9;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <h2>Overview</h2>
+    <p>Learn SQL fundamentals including database concepts, SELECT statements, and basic queries for data retrieval.</p>
+    <p>SQL (Structured Query Language) is a standard programming language specifically designed for managing and manipulating relational databases. It allows users to perform various operations such as querying data, updating records, and managing database structures.</p>  
+    <a href="https://arxiv.org/html/2405.12511v1#bib.bib6">Quantum Computing for Databases: Overview and Challenges
+    
+        <section class="content">
+            <h2>Key Topics</h2>
+            <div class="objectives-grid">
+                <div class="objective-card">
+                    <span class="objective-icon">📂</span>
+                    Database Structure
+                    <div class="card-meta">Understanding tables, rows, and columns. A structured collection of data stored electronically.</div>
+                    <a href="#" class="btn btn-primary">Start</a>
+                </div>
+                <div class="objective-card">
+                    <span class="objective-icon">📊</span>
+                    Data Retrieval
+                    <div class="card-meta">Using SELECT statements to query data from tables. A request for data or information from a database.</div>
+                    <a href="#" class="btn btn-primary">Start</a>
+                </div>
+               <div class="objective-card">
+                    <span class="objective-icon">⚙️</span>
+                    CRUD Operations
+                    <div class="card-meta">Performing Create, Read, Update, and Delete operations on database records. The four basic operations: Create, Read, Update, Delete.</div>
+                    <a href="#" class="btn btn-primary">Start</a>
+            </div>
+        </section>
+
+    <h2>Basic SQL Commands</h2>
+    <pre><code>
+        <table><thead><tr><th>Command</th><th>Description</th><th>Example</th></tr></thead><tbody><tr><td>SELECT</td><td>Retrieve data from a database.</td><td>SELECT column1, column2 FROM table_name;</td></tr><tr><td>INSERT</td><td>Add new records to a table.</td><td>INSERT INTO table_name (column1, column2) VALUES (value1, value2);</td></tr><tr><td>UPDATE</td><td>Modify existing records in a table.</td><td>UPDATE table_name SET column1 = value1 WHERE condition;</td></tr><tr><td>DELETE</td><td>Remove records from a table.</td><td>DELETE FROM table_name WHERE condition;</td></tr></tbody></table>
+    </code></pre>
+  
+        <section class="content-section">
+            <h2>Code Example</h2>
+            <div class="code-block">
+                <pre><code>-- Top Earners by Department and City
+SELECT department, city, MAX(salary) AS top_earner
+FROM employees
+GROUP BY department, city
+ORDER BY department, city;</code></pre>
+</div>
+            <p>Example 2:</p>
+            <div class="code-block">
+                <pre><code>WITH ranked AS (
+    Select
+    id, name, city, department, salary,
+    Rank() OVER (
+        PARTITION BY department
+        ORDER BY salary DESC
+    ) AS dept_rank,
+    Rank() OVER (
+        PARTITION BY city
+        ORDER BY salary DESC
+    ) AS city_rank
+    From employees
+)Select
+    id, name, city, department, salary, dept_rank, city_rank,
+    CASE WHEN dept_rank = 1 THEN 1 ELSE 0 END AS is_top_in_dept,
+    CASE WHEN city_rank = 1 THEN 1 ELSE 0 END AS is_top_in_city
+From ranked;
+WHERE dept_rank = 1 OR city_rank = 1;
+ORDER BY department, city, salary DESC, name;</code></pre>
+            </div>
+        </section>
+    </div>
+</div>
+
+    <h2>Review:</h2>
+    <ul class="topics-list">
+        <li>1. What is SQL and its primary purpose?</li>
+        <li>2. Explain the structure of a relational database.</li>
+        <li>3. Describe the function of the SELECT statement in SQL.</li>
+        <li>4. What are CRUD operations in the context of databases?</li>
+        <li>5. Provide an example of a basic SQL query to retrieve data from a table.</li>
+        <li>6. How can example 2 be modified for different scenarios?</li>
+    </ul>
+    
+</body>
+</html>
+
+
+            

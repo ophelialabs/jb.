@@ -1,0 +1,103 @@
+<h3 class="h4 fw-normal">Lead Java Developer</h3>
+<div class="card border-0">
+    <div class="card-body">
+        <section id="project-example" class="mb-4">
+            <h4 class="card-title border-bottom pb-2 mb-3">Example: Real-Time Personalized Recommendation Engine</h4>
+            <p>A Lead Java Developer orchestrates diverse technologies to build complex systems. Here’s how the stack comes together for a recommendation engine for a large e-commerce platform:</p>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Core Microservices (Java/Kotlin & J2EE):</strong> The backbone is a set of high-performance microservices. A <code>UserProfile-Service</code> (Java) manages user data, while a <code>Recommendation-Service</code> (Kotlin) serves recommendations via REST API, built on frameworks like Micronaut or Spring Boot.</li>
+                <li class="list-group-item"><strong>Data Science & Machine Learning (Python):</strong> ML models are trained to predict user preferences. A Python service (FastAPI) exposes these models for real-time querying.</li>
+                <li class="list-group-item"><strong>Diverse Data Storage (SQL/NoSQL):</strong>
+                    <ul class="mt-2 text-muted">
+                        <li><strong>Postgres/SQL Server (RDBMS):</strong> Stores structured, critical data like user accounts and the product catalog.</li>
+                        <li><strong>Cassandra (NoSQL):</strong> Captures massive streams of user event data (clicks, views, purchases) for offline model training, leveraging its high write throughput.</li>
+                        <li><strong>Graph DB (e.g., Neo4j):</strong> Stores relationships (e.g., "Users who bought X also bought Y") for generating fast, real-time "people also bought" recommendations.</li>
+                        <li><strong>MongoDB (NoSQL):</strong> Used to store flexible data like user session information or A/B testing configurations in a document format.</li>
+                    </ul>
+                </li>
+                <li class="list-group-item"><strong>Infrastructure & DevOps (Cloud, Kubernetes, Drone, Chef/Ansible):</strong>
+                    <ul class="mt-2 text-muted">
+                        <li><strong>Cloud Tech:</strong> The entire infrastructure runs on a major cloud provider like GCP or Azure.</li>
+                        <li><strong>Kubernetes:</strong> All microservices (Java, Kotlin, Python) are packaged into containers and deployed on a Kubernetes cluster for scalability, resilience, and isolation.</li>
+                        <li><strong>Drone (CI/CD):</strong> When a developer commits code, a Drone pipeline automatically builds, tests, and deploys the service to Kubernetes.</li>
+                        <li><strong>Chef/Ansible:</strong> Configures the underlying virtual machines that form the Kubernetes cluster, ensuring they are standardized and secure.</li>
+                    </ul>
+                </li>
+                <li class="list-group-item"><strong>Ruby:</strong> A smaller script, perhaps written in Ruby, could be used for periodic data cleanup or reporting tasks.</li>
+            </ul>
+        </section>
+
+        <section id="project-lifecycle">
+            <h4 class="card-title border-bottom pb-2 mb-3">Full-Cycle Implementation: A Detailed Roadmap</h4>
+            <p>A "full-cycle implementation" means leading a project from idea to production and maintenance. Here is a detailed roadmap for our Recommendation Engine project.</p>
+            <div class="accordion" id="roadmapAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <strong>Phase 1: Discovery & Architectural Design (Weeks 1-4)</strong>
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#roadmapAccordion">
+                        <div class="accordion-body">
+                            <strong>Goal:</strong> Define what to build and how to build it. <br>
+                            <strong>Activities:</strong> Collaborate with product managers on business requirements (e.g., "increase user engagement by 15%"), author a technical specification outlining architecture and API contracts, build Proofs of Concept (PoCs) to validate risky assumptions (e.g., test Graph DB query load), and break down work into an agile backlog.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <strong>Phase 2: Core Infrastructure & Service Scaffolding (Weeks 5-10)</strong>
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#roadmapAccordion">
+                        <div class="accordion-body">
+                            <strong>Goal:</strong> Build the foundational "scaffolding" for the application. <br>
+                            <strong>Activities:</strong> Set up the cloud environment and Kubernetes cluster using Infrastructure as Code (e.g., Terraform), create initial CI/CD pipelines with Drone, provision database clusters, and initialize Git repositories for the microservices.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            <strong>Phase 3: MVP Development (Weeks 11-24)</strong>
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#roadmapAccordion">
+                        <div class="accordion-body">
+                            <strong>Goal:</strong> Build and launch the first functional version of the product. <br>
+                            <strong>Activities:</strong> Develop core features (user profile service, data pipelines, initial ML model, recommendation service), write comprehensive tests, and perform a canary release to a small percentage of users (e.g., 1%) to monitor performance and business impact.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingFour">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            <strong>Phase 4: Iteration & Enhancement (Weeks 25+)</strong>
+                        </button>
+                    </h2>
+                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#roadmapAccordion">
+                        <div class="accordion-body">
+                            <strong>Goal:</strong> Continuously improve the product based on data and feedback. <br>
+                            <strong>Activities:</strong> Launch new features (like "People Also Bought") as A/B tests, analyze metrics to identify and fix performance bottlenecks (e.g., optimizing DB queries, tuning JVM), pay down technical debt through refactoring, and begin planning the next feature cycle.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingFive">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                            <strong>Phase 5: Maintenance & Sunsetting (Year 2+)</strong>
+                        </button>
+                    </h2>
+                    <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#roadmapAccordion">
+                        <div class="accordion-body">
+                            <strong>Goal:</strong> Ensure long-term stability and eventually retire the system gracefully. <br>
+                            <strong>Activities:</strong> Actively monitor dashboards and alerts to address production issues. When a replacement system is ready, create a deprecation plan to migrate users and safely decommission all infrastructure for a seamless transition.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <p class="text-muted fst-italic mt-4">By navigating these phases, the Lead Java Developer demonstrates a complete command of the project lifecycle, leveraging a wide array of technologies to deliver a robust, scalable, and impactful product.</p>
+    </div>
+</div>

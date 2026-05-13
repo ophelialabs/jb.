@@ -1,0 +1,36 @@
+        body {
+            background-color: #f3f6fc;
+        }
+        .fluent-card {
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            border: none;
+            background: #fff;
+        }
+        .fluent-navbar {
+            border-radius: 0 0 16px 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .fluent-btn {
+            border-radius: 8px;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+        }
+        .fluent-section-title {
+            font-weight: 700;
+            color: #2564cf;
+            letter-spacing: 0.01em;
+        }
+        .fluent-footer {
+            border-radius: 16px 16px 0 0;
+            background: #2564cf;
+            color: #fff;
+        }
+        pre, code {
+            border-radius: 8px;
+        }
+        .fluent-alert {
+            background: #eaf1fb;
+            border-left: 4px solid #2564cf;
+            color: #1b1b1b;
+        }

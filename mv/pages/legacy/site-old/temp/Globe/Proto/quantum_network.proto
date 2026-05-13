@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package quantumnetwork;
+
+service QuantumNetworkService {
+  rpc RegisterNode (NodeInfo) returns (Registration);
+  rpc SendQuantumState (QuantumState) returns (StateResponse);
+  rpc EstablishMeshConnection (MeshRequest) returns (MeshResponse);
+}
+
+message NodeInfo {
+  string node_id = 1;
+  string type = 2;
+  double latitude = 3;
+  double longitude = 4;
+  repeated string capabilities = 5;
+}
+
+message Registration {
+  string status = 1;
+  string mesh_id = 2;
+}
+
+message QuantumState {
+  string source_id = 1;
+  string target_id = 2;
+  double fidelity = 3;
+  int32 qubit_count = 4;
+}
+
+message StateResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message MeshRequest {
+  string node_id = 1;
+  repeated string peer_ids = 2;
+}
+
+message MeshResponse {
+  bool success = 1;
+  repeated string connected_peers = 2;
+}

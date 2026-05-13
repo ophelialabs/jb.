@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>RHEL9 Documentation</title>
+<style>
+pre {
+    background-color: #f5f5f5;
+    padding: 10px;
+    border-radius: 5px;
+}
+</style>
+</head>
+<body>
+
+<h1><a href="https://docs.oracle.com/en/operating-systems/oracle-linux/9/">RHEL9 Docs</a></h1>
+
+<h2>Important Directories</h2>
+<ul>
+    <li>/home, /tmp, /var, /var/tmp, /var/log, /var/log/audit, /boot</li>
+    <li>Always shred or clean drives and motherboards upon disposal to prevent credential harvesting.</li>
+</ul>
+<h6>Using Yum repository for backwards compatability</h6>
+
+<hr>
+
+<h2>Network and Development Tools</h2>
+<ul>
+    <li>java, javac, node.js, php, lynx</li>
+</ul>
+
+<hr>
+
+<h2><a href="https://developer.hashicorp.com/terraform/install">Terraform</a></h2>
+<pre><code>sudo yum install -y yum-utils
+sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
+sudo yum -y install terraform</code></pre>
+
+<hr>
+
+<h2><a href="https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html-single/managing_systems_using_the_rhel_9_web_console/index">Cockpit</a></h2>
+<p>Cockpit supports Ubuntu Focal (20.04), ROS-Noetic, and Gazebo (Gazebo not supported on RHEL9).</p>
+<pre><code>$ systemctl enable --now cockpit.socket
+$ sudo dnf install -y cockpit-machines</code></pre>
+
+<a href="linux/el9_setup.md">Setup</a>
+<a href="linux/el9_sec.md">Security</a>
+<a href="linux/el9_net.md">Networking</a>
+<a href="linux/el9_mtt.md">Mtt</a>
+<a href="linux/el9_db.md">Database</a>
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+    .link-card {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
+    .link-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    }
+    .link-card .card-body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: start;
+        text-align: center;
+    }
+    .link-card img {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+    }
+    .link-card .card-title {
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+    .link-card .card-text {
+        font-size: 0.75rem;
+    }
+</style>
+
+<div class="container-fluid p-4">
+    <div class="pb-3 mb-4 border-bottom">
+        <h3 class="fw-light">Cloud Platforms & Services</h3>
+        <p class="text-muted mb-0">Services for building, deploying, and scaling applications in the cloud.</p>
+    </div>
+
+    <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-4">
+        <!-- Card Items -->
+        <div class="col"><a href="https://support.broadcom.com" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://www.broadcom.com/favicon-96x96.png" class="mb-3" alt="VMware" /><h6 class="card-title">VMware Support</h6><p class="card-text small">Account creation and support portal for VMware and Broadcom cloud products.</p></div></a></div>
+        <div class="col"><a href="https://cloud.google.com" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://www.gstatic.com/devrel-devsite/prod/v0d244f667a3683225cca86d0ecf9b9b81b1e734e55a030bdcd3f3094b835c987/cloud/images/favicons/onecloud/super_cloud.png" class="mb-3" alt="Google Cloud" /><h6 class="card-title">Google Cloud Platform</h6><p class="card-text small">Cloud computing services for building, deploying, and scaling applications.</p></div></a></div>
+        <div class="col"><a href="https://www.oracle.com/cloud/" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://docs.oracle.com/sp_common/site-template/ohc-common/img/o-icon/favicon.ico" class="mb-3" alt="Oracle Cloud" /><h6 class="card-title">Oracle Cloud Infrastructure</h6><p class="card-text small">Enterprise-grade cloud platform for compute, storage, and networking.</p></div></a></div>
+        <div class="col"><a href="https://portal.azure.com" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Microsoft_Azure.svg" class="mb-3" alt="Azure" /><h6 class="card-title">Microsoft Azure</h6><p class="card-text small">Comprehensive cloud services for building, deploying, and managing applications.</p></div></a></div>
+        <div class="col"><a href="https://www.microsoft.com/en-us/power-platform/products/power-pages" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://www.microsoft.com/content/dam/microsoft/final/en-us/microsoft-brand/icons/PP-Hero_Icon_PowerPages.svg" class="mb-3" alt="Power Pages" /><h6 class="card-title">Power Pages</h6><p class="card-text small">Low-code development platform for building secure, data-powered websites.</p></div></a></div>
+        <div class="col"><a href="https://aws.amazon.com/" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://aws.amazon.com/favicon.ico" class="mb-3" alt="AWS" /><h6 class="card-title">Amazon Web Services</h6><p class="card-text small">Scalable cloud computing platform for compute, storage, and more.</p></div></a></div>
+        <div class="col"><a href="https://www.ibm.com/cloud" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://www.ibm.com/favicon.ico" class="mb-3" alt="IBM Cloud" /><h6 class="card-title">IBM Cloud</h6><p class="card-text small">Cloud platform with AI, data, and security services for enterprise workloads.</p></div></a></div>
+        <div class="col"><a href="https://www.salesforce.com/" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://www.salesforce.com/c2/public/app/favicon.ico" class="mb-3" alt="Salesforce" /><h6 class="card-title">Salesforce</h6><p class="card-text small">Cloud-based CRM platform for sales, service, marketing, and more.</p></div></a></div>
+        <div class="col"><a href="https://www.servicenow.com/" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://www.servicenow.com/content/dam/servicenow-assets/public/en-us/images/og-images/favicon.ico" class="mb-3" alt="ServiceNow Logo" /><h6 class="card-title">ServiceNow</h6><p class="card-text small">Cloud-based platform for IT service management and workflow automation.</p></div></a></div>
+    </div>
+</div>

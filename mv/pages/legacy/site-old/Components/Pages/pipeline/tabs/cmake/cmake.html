@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cmake Project Generator Script</title>
+    <!-- Bootstrap 5.3 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- PrismJS for code highlighting -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css" rel="stylesheet">
+    <!-- Fluent UI Bootstrap theme (Bootswatch 'Flatly' as a Fluent-like example) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.3/dist/flatly/bootstrap.min.css" rel="stylesheet">
+    <link href="static/pipeline.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fluent-navbar bg-primary mb-4">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="../../../index.html">
+                <svg width="32" height="32" fill="#fff" class="me-2" viewBox="0 0 16 16"><rect width="16" height="16" rx="4"/></svg>
+                <span style="font-weight:600;letter-spacing:0.03em;">Ophelia</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <div class="navbar-nav ms-auto">
+                    <a class="nav-link fluent-btn" href="cmake.html">Generator</a>
+                    <a class="nav-link fluent-btn" href="generator.sh">Download</a>
+                    <a class="nav-link fluent-btn" href="#" target="_blank" rel="noopener noreferrer">Docs</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-5">
+        <div class="row">
+            <div class="col-12">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h1 class="card-title">CMake Project Generator Script</h1>
+                        
+                        <div class="alert alert-info mt-3">
+                            <h5>Description</h5>
+                            <p>This shell script automatically generates a complete CMake project structure with the following features:</p>
+                            <ul>
+                                <li>Creates a modern CMake project structure</li>
+                                <li>Sets up testing framework integration</li>
+                                <li>Configures external dependencies</li>
+                                <li>Includes build configurations for different platforms</li>
+                                <li>Generates necessary toolchain files</li>
+                            </ul>
+                            <h5 class="mt-3">Project Structure</h5>
+                            <pre class="mb-0"><code>project_name/
+├── cmake/
+│   ├── modules/
+│   ├── toolchains/
+│   └── utils/
+├── include/
+│   └── project_name/
+├── src/
+│   ├── core/
+│   ├── modules/
+│   └── main.cpp
+├── tests/
+│   ├── integration/
+│   └── unit/
+├── extern/
+│   └── dependencies/
+├── docs/
+│   └── api/
+├── scripts/
+├── build/
+├── .gitignore
+├── CMakeLists.txt
+└── README.md</code></pre>
+                        </div>
+
+                        <h5 class="mt-4">Script Source Code</h5>
+                        <pre><code class="language-bash">#!/bin/bash
+
+# Ask for project name
+read -p "Enter your CMake project name: " project_name
+
+# Basic project structure generation
+mkdir -p "$project_name"/{src,include,tests,docs,cmake,extern,build}
+mkdir -p "$project_name/cmake/"{modules,toolchains,utils}
+mkdir -p "$project_name/src/"{core,modules}
+mkdir -p "$project_name/tests/"{unit,integration}
+mkdir -p "$project_name/include/$project_name"
+
+# Generate main CMakeLists.txt
+cat > "$project_name/CMakeLists.txt" << EOF
+cmake_minimum_required(VERSION 3.15)
+project($project_name VERSION 1.0.0 LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# Options
+option(BUILD_TESTS "Build tests" ON)
+option(BUILD_DOCS "Build documentation" OFF)
+
+# Add cmake modules
+list(APPEND CMAKE_MODULE_PATH "\${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules")
+
+# Dependencies
+include(FetchContent)
+# Add your dependencies here
+
+# Main library
+add_subdirectory(src)
+
+# Tests
+if(BUILD_TESTS)
+    enable_testing()
+    add_subdirectory(tests)
+endif()
+
+# Documentation
+if(BUILD_DOCS)
+    add_subdirectory(docs)
+endif()
+EOF
+
+# Create example source file
+cat > "$project_name/src/main.cpp" << EOF
+#include <iostream>
+
+int main() {
+    std::cout << "Hello from $project_name!" << std::endl;
+    return 0;
+}
+EOF
+
+# Create source CMakeLists.txt
+cat > "$project_name/src/CMakeLists.txt" << EOF
+add_executable(\${PROJECT_NAME} main.cpp)
+target_include_directories(\${PROJECT_NAME} PUBLIC
+    \${CMAKE_SOURCE_DIR}/include
+)
+EOF
+
+# Create test CMakeLists.txt
+cat > "$project_name/tests/CMakeLists.txt" << EOF
+find_package(GTest REQUIRED)
+enable_testing()
+
+add_executable(unit_tests unit/test_main.cpp)
+target_link_libraries(unit_tests PRIVATE GTest::GTest GTest::Main)
+add_test(NAME unit_tests COMMAND unit_tests)
+EOF
+
+echo "CMake project '$project_name' created successfully!"
+</code></pre>
+
+                        <div class="mt-4">
+                            <h5>Usage</h5>
+                            <ol>
+                                <li>Save the script as <code>create_cmake_project.sh</code></li>
+                                <li>Make it executable: <code>chmod +x create_cmake_project.sh</code></li>
+                                <li>Run: <code>./create_cmake_project.sh</code></li>
+                                <li>Build your project:
+                                    <pre><code>cd project_name/build
+cmake ..
+make</code></pre>
+                                </li>
+                            </ol>
+                        </div>
+                                <div class="mt-4">
+    <h5>Supporting Different Programming Languages</h5>
+    <p>The script can be modified to support various programming languages. Here's how:</p>
+    
+    <h6>For C</h6>
+    <ul>
+        <li>Change <code>LANGUAGES CXX</code> to <code>LANGUAGES C</code> in CMakeLists.txt</li>
+        <li>Rename <code>main.cpp</code> to <code>main.c</code></li>
+        <li>Remove C++ standard settings</li>
+    </ul>
+
+    <h6>For Mixed C/C++</h6>
+    <ul>
+        <li>Use <code>LANGUAGES C CXX</code> in CMakeLists.txt</li>
+        <li>Set both standards: 
+            <pre><code>set(CMAKE_C_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)</code></pre>
+        </li>
+    </ul>
+
+    <h6>For CUDA</h6>
+    <ul>
+        <li>Add <code>CUDA</code> to languages: <code>LANGUAGES CXX CUDA</code></li>
+        <li>Set CUDA standard: <code>set(CMAKE_CUDA_STANDARD 14)</code></li>
+        <li>Use <code>.cu</code> extension for CUDA files</li>
+    </ul>
+
+    <h6>For Fortran</h6>
+    <ul>
+        <li>Add <code>LANGUAGES Fortran</code></li>
+        <li>Use <code>.f90</code> or <code>.f95</code> extensions</li>
+        <li>Add Fortran-specific compiler flags as needed</li>
+    </ul>
+</div>
+<h2 class="section-title">Getting Started</h2>
+    <ol>
+        <li>
+            <strong>Clone the repository:</strong>
+            <pre><code>git clone https://github.com/yourusername/CMakeProject.git
+cd CMakeProject</code></pre>
+        </li>
+        <li>
+            <strong>Create a build directory and configure the project:</strong>
+            <pre><code>mkdir build
+cd build
+cmake ..</code></pre>
+        </li>
+        <li>
+            <strong>Build the project:</strong>
+            <pre><code>cmake --build .</code></pre>
+        </li>
+        <li>
+            <strong>Run tests (if available):</strong>
+            <pre><code>ctest</code></pre>
+        </li>
+        <li>
+            <strong>Install (optional):</strong>
+            <pre><code>cmake --install . --prefix ../install</code></pre>
+        </li>
+        <li>
+            <strong>Package (optional):</strong>
+            <pre><code>cpack</code></pre>
+        </li>
+    </ol>
+    </div>
+    <h2 class="section-title">CMake &amp; Toolchain Setup</h2>
+    <div class="code-scroll mb-4">
+<pre>
+# Install CMake (if not already installed)
+# On Ubuntu:
+sudo apt-get update
+sudo apt-get install cmake build-essential
+
+# On macOS:
+brew install cmake
+
+# On Windows:
+# Download from https://cmake.org/download/
+
+# Install Ninja (optional, for faster builds)
+sudo apt-get install ninja-build
+
+# Install GoogleTest (optional, for unit testing)
+# Using FetchContent in CMakeLists.txt is recommended
+
+# Example: Build and run
+mkdir build
+cd build
+cmake .. -DCMAKE_BUILD_TYPE=Release
+cmake --build .
+ctest
+
+# Package the project
+cpack
+</pre>
+    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-light py-3 mt-5">
+        <div class="container">
+            <p class="text-center mb-0">&copy; 2024 CMake Project Generator</p>
+        </div>
+    </footer>
+   <script src="static/scripts/search.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+</body>
+</html>

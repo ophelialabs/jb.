@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Periodic Table of Elements</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@google/model-viewer/dist/model-viewer.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Interactive Periodic Table of Elements</h1>
+            <p class="subtitle">Click on any element to view detailed information and 3D models</p>
+        </header>
+
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color alkali"></div>
+                <span>Alkali Metals</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color alkaline"></div>
+                <span>Alkaline Earth</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color transition"></div>
+                <span>Transition Metals</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color lanthanide"></div>
+                <span>Lanthanides</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color actinide"></div>
+                <span>Actinides</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color metal"></div>
+                <span>Post-transition Metals</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color semimetal"></div>
+                <span>Semimetals</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color nonmetal"></div>
+                <span>Nonmetals</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color halogen"></div>
+                <span>Halogens</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color noble"></div>
+                <span>Noble Gases</span>
+            </div>
+        </div>
+
+        <div class="periodic-table" id="periodicTable"></div>
+    </div>
+
+    <!-- Modal for Element Details -->
+    <div class="modal" id="elementModal">
+        <div class="modal-content">
+            <button class="close-btn" id="closeModal">&times;</button>
+            
+            <div class="modal-header">
+                <div class="element-header">
+                    <div class="element-number" id="elementNumber"></div>
+                    <h2 id="elementName"></h2>
+                    <p class="element-symbol" id="elementSymbol"></p>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <div class="visualization-section">
+                    <div class="tabs">
+                        <button class="tab-btn active" data-tab="bohr">Bohr Model 3D</button>
+                        <button class="tab-btn" data-tab="image">Element Image</button>
+                        <button class="tab-btn" data-tab="spectral">Spectral Bands</button>
+                    </div>
+
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="bohr-tab">
+                            <div class="model-viewer-container">
+                                <model-viewer id="bohrModel" 
+                                    ar
+                                    ar-modes="scene-viewer quick-look"
+                                    camera-controls
+                                    touch-action="pan-y"
+                                    auto-rotate
+                                    auto-rotate-delay="0">
+                                </model-viewer>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="image-tab">
+                            <div class="element-image-container">
+                                <img id="elementImage" src="" alt="Element image">
+                                <p id="imageAttribution" class="attribution"></p>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="spectral-tab">
+                            <div class="spectral-container">
+                                <img id="spectralImage" src="" alt="Spectral bands">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <span class="label">Category:</span>
+                            <span class="value" id="elementCategory"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Atomic Mass:</span>
+                            <span class="value" id="elementAtomicMass"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Period:</span>
+                            <span class="value" id="elementPeriod"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Group:</span>
+                            <span class="value" id="elementGroup"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Phase:</span>
+                            <span class="value" id="elementPhase"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Density:</span>
+                            <span class="value" id="elementDensity"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Melting Point:</span>
+                            <span class="value" id="elementMelt"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Boiling Point:</span>
+                            <span class="value" id="elementBoil"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Electron Configuration:</span>
+                            <span class="value" id="elementElectronConfig"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Electronegativity:</span>
+                            <span class="value" id="elementElectronegativity"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Discovered by:</span>
+                            <span class="value" id="elementDiscoveredBy"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Appearance:</span>
+                            <span class="value" id="elementAppearance"></span>
+                        </div>
+                    </div>
+
+                    <div class="summary-section">
+                        <h3>Summary</h3>
+                        <p id="elementSummary"></p>
+                    </div>
+
+                    <div class="sources-section">
+                        <a id="sourceLink" href="" target="_blank" class="source-link">View Source</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

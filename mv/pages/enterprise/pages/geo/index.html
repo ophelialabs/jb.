@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Geofencing Implementation Guide</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/moon.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/monokai.min.css">
+    <style>
+        .reveal pre {
+            box-shadow: none;
+            margin: 15px 0;
+        }
+        .reveal pre code {
+            max-height: 400px;
+            padding: 10px;
+            font-size: 0.8em;
+        }
+        .reveal section {
+            height: 100%;
+        }
+        .reveal h1 {
+            font-size: 2.5em;
+        }
+        .reveal h2 {
+            font-size: 1.8em;
+        }
+        .reveal h3 {
+            font-size: 1.4em;
+        }
+        .reveal ul {
+            font-size: 0.9em;
+        }
+        .reveal .slides {
+            text-align: left;
+        }
+        .reveal .slide-number {
+            font-size: 0.5em;
+        }
+        .two-columns {
+            display: flex;
+            justify-content: space-between;
+        }
+        .column {
+            flex: 0 0 48%;
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <!-- Title Slide -->
+            <section>
+                <h1>Enterprise Geofencing Implementation Guide</h1>
+                <h3>A Comprehensive Guide to Building Scalable Geofencing Solutions</h3>
+                <p>Updated: October 14, 2025</p>
+            </section>
+
+            <!-- Introduction -->
+            <section>
+                <section>
+                    <h2>Introduction to Geofencing</h2>
+                    <p>Location-based service triggers for geographical boundaries</p>
+                </section>
+
+                <section>
+                    <h3>Enterprise Use Cases</h3>
+                    <ul>
+                        <li>Asset tracking and management</li>
+                        <li>Fleet management and logistics</li>
+                        <li>Security and access control</li>
+                        <li>Location-based marketing</li>
+                        <li>Compliance and regulatory requirements</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Key Concepts</h3>
+                    <div class="two-columns">
+                        <div class="column">
+                            <ul>
+                                <li>Geofence Perimeters</li>
+                                <li>Shape Types</li>
+                                <li>Event Triggers</li>
+                            </ul>
+                        </div>
+                        <div class="column">
+                            <ul>
+                                <li>Device Tracking</li>
+                                <li>GPS Precision</li>
+                                <li>Real-time Processing</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+            <!-- Architecture -->
+            <section>
+                <section>
+                    <h2>Enterprise Architecture</h2>
+                    <p>Building blocks of a scalable geofencing system</p>
+                </section>
+
+                <section>
+                    <h3>Core Components</h3>
+                    <ul>
+                        <li>Location Services Engine</li>
+                        <li>Real-time Event Processing</li>
+                        <li>Geofence Management System</li>
+                        <li>Data Storage & Analytics</li>
+                        <li>API Gateway</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>High Availability Setup</h3>
+                    <div class="two-columns">
+                        <div class="column">
+                            <h4>Infrastructure</h4>
+                            <ul>
+                                <li>Load Balancers</li>
+                                <li>Geographic Distribution</li>
+                                <li>Redundant Systems</li>
+                            </ul>
+                        </div>
+                        <div class="column">
+                            <h4>Monitoring</h4>
+                            <ul>
+                                <li>Real-time Metrics</li>
+                                <li>Automated Alerts</li>
+                                <li>Performance Tracking</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+            <!-- Implementation -->
+            <section>
+                <section>
+                    <h2>Implementation Details</h2>
+                    <p>Core components and practical examples</p>
+                </section>
+
+                <section>
+                    <h3>Geofence Core</h3>
+                    <pre><code class="javascript">class Geofence {
+    constructor(id, shape, coordinates, options = {}) {
+        this.id = id;
+        this.shape = shape;
+        this.coordinates = coordinates;
+        this.active = true;
+    }
+
+    isPointInside(point) {
+        switch (this.shape) {
+            case GeofenceShape.CIRCLE:
+                return this._isPointInCircle(point);
+            case GeofenceShape.POLYGON:
+                return this._isPointInPolygon(point);
+        }
+    }
+}</code></pre>
+                </section>
+
+                <section>
+                    <h3>Event Processing</h3>
+                    <pre><code class="javascript">class GeofenceManager {
+    async processLocationUpdate(deviceId, location) {
+        const events = [];
+        for (const fence of this.activeGeofences) {
+            const isInside = fence.isPointInside(location);
+            if (isInside !== this.deviceStates[deviceId]) {
+                events.push({
+                    type: isInside ? 'enter' : 'exit',
+                    deviceId,
+                    geofenceId: fence.id
+                });
+            }
+        }
+        return events;
+    }
+}</code></pre>
+                </section>
+            </section>
+
+            <!-- Deployment -->
+            <section>
+                <section>
+                    <h2>Deployment Strategy</h2>
+                    <p>Container-based deployment with Kubernetes</p>
+                </section>
+
+                <section>
+                    <h3>Container Configuration</h3>
+                    <pre><code class="dockerfile"># Dockerfile
+FROM node:18-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --only=production
+COPY . .
+ENV NODE_ENV=production
+EXPOSE 3000
+CMD ["node", "src/server.js"]</code></pre>
+                </section>
+
+                <section>
+                    <h3>Kubernetes Setup</h3>
+                    <pre><code class="yaml">apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: geofencing-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: geofencing
+  template:
+    metadata:
+      labels:
+        app: geofencing
+    spec:
+      containers:
+      - name: geofencing
+        image: geofencing:latest
+        ports:
+        - containerPort: 3000</code></pre>
+                </section>
+            </section>
+
+            <!-- Scaling -->
+            <section>
+                <section>
+                    <h2>Scaling Strategies</h2>
+                    <p>Handling growth and performance</p>
+                </section>
+
+                <section>
+                    <h3>Database Scaling</h3>
+                    <ul>
+                        <li>Sharding for large datasets</li>
+                        <li>Read replicas for performance</li>
+                        <li>Time-series optimization</li>
+                        <li>Caching strategies</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Application Scaling</h3>
+                    <div class="two-columns">
+                        <div class="column">
+                            <h4>Horizontal Scaling</h4>
+                            <ul>
+                                <li>Load balancing</li>
+                                <li>Session management</li>
+                                <li>Cache synchronization</li>
+                            </ul>
+                        </div>
+                        <div class="column">
+                            <h4>Vertical Scaling</h4>
+                            <ul>
+                                <li>Resource optimization</li>
+                                <li>Memory management</li>
+                                <li>CPU utilization</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+            <!-- Monitoring -->
+            <section>
+                <section>
+                    <h2>Monitoring & Maintenance</h2>
+                    <p>Keeping the system healthy and efficient</p>
+                </section>
+
+                <section>
+                    <h3>Monitoring Stack</h3>
+                    <pre><code class="javascript">const metrics = {
+    activeGeofences: new prometheus.Gauge({
+        name: 'geofencing_active_geofences',
+        help: 'Number of active geofences'
+    }),
+    deviceCount: new prometheus.Gauge({
+        name: 'geofencing_tracked_devices',
+        help: 'Number of tracked devices'
+    }),
+    eventLatency: new prometheus.Histogram({
+        name: 'geofencing_event_latency',
+        help: 'Event processing latency'
+    })
+};</code></pre>
+                </section>
+
+                <section>
+                    <h3>Health Checks</h3>
+                    <pre><code class="javascript">app.get('/health', async (req, res) => {
+    try {
+        await mongoose.connection.db.admin().ping();
+        await redis.ping();
+        await kafka.admin().listTopics();
+        res.status(200).json({ status: 'healthy' });
+    } catch (error) {
+        res.status(503).json({ 
+            status: 'unhealthy',
+            error: error.message 
+        });
+    }
+});</code></pre>
+                </section>
+            </section>
+
+            <!-- Best Practices -->
+            <section>
+                <section>
+                    <h2>Best Practices</h2>
+                    <p>Guidelines for successful implementation</p>
+                </section>
+
+                <section>
+                    <h3>Security Best Practices</h3>
+                    <ul>
+                        <li>JWT authentication</li>
+                        <li>Rate limiting</li>
+                        <li>Input validation</li>
+                        <li>Data encryption</li>
+                        <li>Access control</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Performance Best Practices</h3>
+                    <ul>
+                        <li>Batch processing</li>
+                        <li>Caching strategies</li>
+                        <li>Asynchronous operations</li>
+                        <li>Query optimization</li>
+                        <li>Resource pooling</li>
+                    </ul>
+                </section>
+            </section>
+
+            <!-- Q&A -->
+            <section>
+                <h2>Questions?</h2>
+                <p>Thank you for your attention</p>
+            </section>
+        </div>
+    </div>
+
+
+
+        <section id="architecture">
+            <h2>Enterprise Architecture Components</h2>
+            
+            <h3>1. Core Infrastructure</h3>
+            <div class="component-details">
+                <h4>Location Services Engine</h4>
+                <ul>
+                    <li>GPS data processing and validation</li>
+                    <li>Coordinate system transformations</li>
+                    <li>Location accuracy optimization</li>
+                    <li>Batch location updates handling</li>
+                </ul>
+
+                <h4>Real-time Event Processing System</h4>
+                <ul>
+                    <li>Event stream processing</li>
+                    <li>Apache Kafka/RabbitMQ integration</li>
+                    <li>Event correlation and filtering</li>
+                    <li>Webhook notification system</li>
+                </ul>
+
+                <h4>Geofence Management System</h4>
+                <ul>
+                    <li>Geofence CRUD operations</li>
+                    <li>Spatial indexing and querying</li>
+                    <li>Multi-shape support (circles, polygons, rectangles)</li>
+                    <li>Batch operations support</li>
+                </ul>
+
+                <h4>Data Storage and Analytics</h4>
+                <ul>
+                    <li>MongoDB for geofence and device data</li>
+                    <li>Time-series database for historical data</li>
+                    <li>Analytics engine for insights</li>
+                    <li>Data archival and cleanup</li>
+                </ul>
+
+                <h4>API Gateway</h4>
+                <ul>
+                    <li>RESTful API endpoints</li>
+                    <li>Authentication and authorization</li>
+                    <li>Rate limiting and throttling</li>
+                    <li>API versioning</li>
+                </ul>
+            </div>
+
+            <h3>2. High Availability Setup</h3>
+            <div class="ha-setup">
+                <h4>Load Balancing</h4>
+                <ul>
+                    <li>Layer 7 load balancers</li>
+                    <li>Session persistence</li>
+                    <li>Health checks and monitoring</li>
+                    <li>SSL/TLS termination</li>
+                </ul>
+
+                <h4>Geographic Distribution</h4>
+                <ul>
+                    <li>Multi-region deployment</li>
+                    <li>Data replication strategies</li>
+                    <li>CDN integration</li>
+                    <li>Latency-based routing</li>
+                </ul>
+
+                <h4>Redundancy</h4>
+                <ul>
+                    <li>Active-active configuration</li>
+                    <li>Database clustering</li>
+                    <li>Message queue clustering</li>
+                    <li>Backup and recovery systems</li>
+                </ul>
+
+                <h4>Monitoring and Alerting</h4>
+                <ul>
+                    <li>Real-time system monitoring</li>
+                    <li>Performance metrics tracking</li>
+                    <li>Error detection and alerting</li>
+                    <li>Automated recovery procedures</li>
+                </ul>
+            </div>
+
+            <h3>3. Technology Stack</h3>
+            <div class="tech-stack">
+                <h4>Backend Services</h4>
+                <ul>
+                    <li>Node.js for API and services</li>
+                    <li>MongoDB for data storage</li>
+                    <li>Redis for caching</li>
+                    <li>Kafka for event streaming</li>
+                </ul>
+
+                <h4>Infrastructure</h4>
+                <ul>
+                    <li>Docker containers</li>
+                    <li>Kubernetes orchestration</li>
+                    <li>Nginx load balancers</li>
+                    <li>Prometheus monitoring</li>
+                </ul>
+
+                <h4>Security</h4>
+                <ul>
+                    <li>JWT authentication</li>
+                    <li>OAuth2 authorization</li>
+                    <li>SSL/TLS encryption</li>
+                    <li>WAF protection</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="implementation">
+            <h2>Implementation Guide</h2>
+            <p>Our enterprise geofencing solution is implemented using a modular architecture with several key components. Complete implementation examples can be found in the <code>examples/</code> directory.</p>
+
+            <h3>1. Core Components</h3>
+            <div class="component-docs">
+                <h4>GeofenceCore.js</h4>
+                <p>Implements the fundamental geofencing logic including:</p>
+                <ul>
+                    <li>Point class for coordinate handling</li>
+                    <li>GeofenceShape enum for different fence types</li>
+                    <li>Geofence class with multiple shape support</li>
+                    <li>Distance calculations using Haversine formula</li>
+                </ul>
+                <p>Example usage:</p>
+                <pre><code class="javascript">
+const { Point, GeofenceShape, Geofence } = require('./GeofenceCore');
+
+// Create a circular geofence
+const center = new Point(37.7749, -122.4194);
+const radius = 1000; // meters
+const geofence = new Geofence('sf-downtown', GeofenceShape.CIRCLE, [center, radius], {
+    name: 'Downtown SF',
+    description: 'San Francisco downtown area',
+    tags: ['san-francisco', 'downtown']
+});
+
+// Create a rectangular geofence
+const sw = new Point(37.7749, -122.4194);
+const ne = new Point(37.7849, -122.4094);
+const rectangle = new Geofence('financial-district', GeofenceShape.RECTANGLE, [sw, ne], {
+    name: 'Financial District',
+    tags: ['san-francisco', 'business']
+});</code></pre>
+
+                <h4>GeofenceManager.js</h4>
+                <p>Manages multiple geofences and handles device tracking:</p>
+                <ul>
+                    <li>Geofence lifecycle management</li>
+                    <li>Device location tracking</li>
+                    <li>Real-time event processing</li>
+                    <li>Batch operations support</li>
+                </ul>
+                <p>Example usage:</p>
+                <pre><code class="javascript">
+const GeofenceManager = require('./GeofenceManager');
+
+const manager = new GeofenceManager({
+    maxGeofences: 10000,
+    maxDevices: 100000,
+    cleanupInterval: 3600000,  // 1 hour
+    locationTTL: 86400000      // 24 hours
+});
+
+// Add event listeners
+manager.on('geofenceEvent', event => {
+    console.log(`Device ${event.deviceId} ${event.type}ed geofence ${event.geofenceId}`);
+});
+
+// Update device location
+manager.updateDeviceLocation('device-123', new Point(37.7749, -122.4194));
+
+// Batch update locations
+manager.batchUpdateLocations([
+    { deviceId: 'device-1', location: new Point(37.7749, -122.4194) },
+    { deviceId: 'device-2', location: new Point(37.7849, -122.4094) }
+]);</code></pre>
+
+                <h4>GeofenceAPI.js</h4>
+                <p>RESTful API implementation with:</p>
+                <ul>
+                    <li>JWT authentication</li>
+                    <li>Rate limiting</li>
+                    <li>CRUD operations</li>
+                    <li>Batch operations</li>
+                </ul>
+                <p>Example API endpoints:</p>
+                <pre><code class="bash">
+# Create a new geofence
+POST /geofences
+{
+    "id": "downtown-sf",
+    "shape": "circle",
+    "coordinates": [
+        {"lat": 37.7749, "lng": -122.4194},
+        1000
+    ],
+    "options": {
+        "name": "Downtown SF",
+        "description": "San Francisco downtown area",
+        "tags": ["san-francisco", "downtown"]
+    }
+}
+
+# Update device location
+POST /devices/location
+{
+    "deviceId": "device-123",
+    "location": {"lat": 37.7749, "lng": -122.4194},
+    "timestamp": "2025-10-14T12:00:00Z"
+}
+
+# Get devices in geofence
+GET /geofences/downtown-sf/devices</code></pre>
+
+                <h4>GeofencePersistence.js</h4>
+                <p>Data persistence layer with MongoDB:</p>
+                <ul>
+                    <li>Geofence storage</li>
+                    <li>Device location tracking</li>
+                    <li>Event history</li>
+                    <li>Analytics queries</li>
+                </ul>
+                <p>Example usage:</p>
+                <pre><code class="javascript">
+const GeofencePersistence = require('./GeofencePersistence');
+
+const storage = new GeofencePersistence({
+    url: 'mongodb://localhost:27017',
+    dbName: 'geofencing'
+});
+
+await storage.connect();
+
+// Save geofence
+await storage.saveGeofence(geofence);
+
+// Query events
+const events = await storage.queryEvents({
+    geofenceId: 'downtown-sf',
+    startTime: '2025-10-13T00:00:00Z',
+    endTime: '2025-10-14T00:00:00Z'
+});</code></pre>
+            </div>
+        </section>
+
+        <section id="deployment">
+            <h2>Enterprise Deployment Guidelines</h2>
+            
+            <h3>1. Infrastructure Setup</h3>
+            <div class="deployment-guide">
+                <h4>Container Configuration</h4>
+                <pre><code class="dockerfile">
+# Dockerfile
+FROM node:18-alpine
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm ci --only=production
+
+COPY . .
+
+ENV NODE_ENV=production
+ENV PORT=3000
+
+EXPOSE 3000
+CMD ["node", "src/server.js"]</code></pre>
+
+                <h4>Kubernetes Deployment</h4>
+                <pre><code class="yaml">
+# deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: geofencing-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: geofencing
+  template:
+    metadata:
+      labels:
+        app: geofencing
+    spec:
+      containers:
+      - name: geofencing
+        image: geofencing:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: MONGODB_URI
+          valueFrom:
+            secretKeyRef:
+              name: mongodb-secret
+              key: uri
+        resources:
+          limits:
+            cpu: "1"
+            memory: "1Gi"
+          requests:
+            cpu: "500m"
+            memory: "512Mi"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 3000
+          initialDelaySeconds: 30
+          periodSeconds: 10</code></pre>
+
+                <h4>Monitoring Setup</h4>
+                <pre><code class="yaml">
+# prometheus-config.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-config
+data:
+  prometheus.yml: |
+    global:
+      scrape_interval: 15s
+    scrape_configs:
+      - job_name: 'geofencing'
+        kubernetes_sd_configs:
+          - role: pod
+        relabel_configs:
+          - source_labels: [__meta_kubernetes_pod_label_app]
+            regex: geofencing
+            action: keep</code></pre>
+            </div>
+
+            <h3>2. Performance Optimization</h3>
+            <div class="optimization-guide">
+                <h4>Redis Caching</h4>
+                <pre><code class="javascript">
+const Redis = require('ioredis');
+const redis = new Redis({
+    host: process.env.REDIS_HOST,
+    port: process.env.REDIS_PORT,
+    maxRetriesPerRequest: 3
+});
+
+class GeofenceCache {
+    async getGeofence(id) {
+        const cached = await redis.get(`geofence:${id}`);
+        if (cached) {
+            return JSON.parse(cached);
+        }
+        return null;
+    }
+
+    async setGeofence(id, geofence) {
+        await redis.set(
+            `geofence:${id}`,
+            JSON.stringify(geofence),
+            'EX',
+            3600 // 1 hour TTL
+        );
+    }
+}</code></pre>
+
+                <h4>MongoDB Indexing</h4>
+                <pre><code class="javascript">
+// Create spatial indexes
+db.devices.createIndex({
+    "location": "2dsphere"
+});
+
+// Create compound indexes
+db.geofences.createIndex({
+    "active": 1,
+    "tags": 1
+});</code></pre>
+            </div>
+
+            <h3>3. Security Implementation</h3>
+            <div class="security-guide">
+                <h4>JWT Authentication</h4>
+                <pre><code class="javascript">
+const jwt = require('jsonwebtoken');
+
+function generateToken(user) {
+    return jwt.sign(
+        { id: user.id, role: user.role },
+        process.env.JWT_SECRET,
+        { expiresIn: '24h' }
+    );
+}
+
+function verifyToken(req, res, next) {
+    const token = req.headers.authorization?.split(' ')[1];
+    if (!token) {
+        return res.status(401).json({ error: 'No token provided' });
+    }
+
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        req.user = decoded;
+        next();
+    } catch (err) {
+        res.status(401).json({ error: 'Invalid token' });
+    }
+}</code></pre>
+
+                <h4>Rate Limiting</h4>
+                <pre><code class="javascript">
+const rateLimit = require('express-rate-limit');
+
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100, // limit each IP to 100 requests per windowMs
+    message: 'Too many requests from this IP',
+    standardHeaders: true,
+    legacyHeaders: false
+});</code></pre>
+            </div>
+        </section>
+
+        <section id="scaling">
+            <h2>Scaling Considerations</h2>
+            
+            <h3>Database Scaling</h3>
+            <div class="database-scaling">
+                <h4>MongoDB Sharding Configuration</h4>
+                <pre><code class="javascript">
+// Enable sharding for database
+sh.enableSharding("geofencing")
+
+// Shard collection by location
+sh.shardCollection(
+    "geofencing.devices",
+    { "location": "2dsphere" }
+)
+
+// Create zone-based sharding
+sh.addShardToZone("shard0", "us-west")
+sh.addShardToZone("shard1", "us-east")
+sh.addShardToZone("shard2", "eu-west")</code></pre>
+
+                <h4>Time-Series Data Management</h4>
+                <pre><code class="javascript">
+// Create time-series collection
+db.createCollection("deviceHistory", {
+    timeseries: {
+        timeField: "timestamp",
+        metaField: "deviceId",
+        granularity: "minutes"
+    }
+});</code></pre>
+            </div>
+
+            <h3>Application Scaling</h3>
+            <div class="app-scaling">
+                <h4>Message Queue Integration</h4>
+                <pre><code class="javascript">
+const { Kafka } = require('kafkajs');
+
+const kafka = new Kafka({
+    clientId: 'geofencing-service',
+    brokers: [process.env.KAFKA_BROKER]
+});
+
+const producer = kafka.producer();
+const consumer = kafka.consumer({ groupId: 'geofencing-group' });
+
+// Produce location updates
+await producer.send({
+    topic: 'location-updates',
+    messages: [{
+        key: deviceId,
+        value: JSON.stringify(location)
+    }]
+});
+
+// Consume location updates
+await consumer.subscribe({ topic: 'location-updates' });
+await consumer.run({
+    eachMessage: async ({ topic, partition, message }) => {
+        const location = JSON.parse(message.value);
+        await processLocationUpdate(location);
+    },
+});</code></pre>
+
+                <h4>Load Balancing</h4>
+                <pre><code class="nginx">
+# nginx.conf
+upstream geofencing {
+    least_conn; # Least connections algorithm
+    server geofencing-1:3000;
+    server geofencing-2:3000;
+    server geofencing-3:3000;
+}
+
+server {
+    listen 80;
+    location / {
+        proxy_pass http://geofencing;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+}</code></pre>
+            </div>
+        </section>
+
+        <section id="monitoring">
+            <h2>Monitoring and Maintenance</h2>
+            <div class="monitoring-guide">
+                <h4>Logging Configuration</h4>
+                <pre><code class="javascript">
+const winston = require('winston');
+
+const logger = winston.createLogger({
+    level: 'info',
+    format: winston.format.combine(
+        winston.format.timestamp(),
+        winston.format.json()
+    ),
+    transports: [
+        new winston.transports.Console(),
+        new winston.transports.File({ filename: 'error.log', level: 'error' }),
+        new winston.transports.File({ filename: 'combined.log' })
+    ]
+});</code></pre>
+
+                <h4>Metrics Collection</h4>
+                <pre><code class="javascript">
+const prometheus = require('prom-client');
+
+// Create metrics
+const geofenceCount = new prometheus.Gauge({
+    name: 'geofencing_active_geofences',
+    help: 'Number of active geofences'
+});
+
+const deviceCount = new prometheus.Gauge({
+    name: 'geofencing_tracked_devices',
+    help: 'Number of devices being tracked'
+});
+
+const eventCounter = new prometheus.Counter({
+    name: 'geofencing_events_total',
+    help: 'Total number of geofence events',
+    labelNames: ['type']
+});</code></pre>
+
+                <h4>Health Checks</h4>
+                <pre><code class="javascript">
+app.get('/health', async (req, res) => {
+    try {
+        // Check MongoDB connection
+        await mongoose.connection.db.admin().ping();
+        
+        // Check Redis connection
+        await redis.ping();
+        
+        // Check Kafka connection
+        const admin = kafka.admin();
+        await admin.listTopics();
+        
+        res.status(200).json({ status: 'healthy' });
+    } catch (error) {
+        res.status(503).json({ 
+            status: 'unhealthy',
+            error: error.message 
+        });
+    }
+});</code></pre>
+            </div>
+        </section>
+
+        <section id="best-practices">
+            <h2>Best Practices</h2>
+            <div class="best-practices">
+                <h4>Error Handling</h4>
+                <pre><code class="javascript">
+class GeofenceError extends Error {
+    constructor(message, code, details = {}) {
+        super(message);
+        this.name = 'GeofenceError';
+        this.code = code;
+        this.details = details;
+    }
+}
+
+function errorHandler(err, req, res, next) {
+    logger.error('Error:', {
+        error: err.message,
+        code: err.code,
+        stack: err.stack,
+        details: err.details
+    });
+
+    if (err instanceof GeofenceError) {
+        res.status(400).json({
+            error: err.message,
+            code: err.code,
+            details: err.details
+        });
+    } else {
+        res.status(500).json({
+            error: 'Internal server error',
+            code: 'INTERNAL_ERROR'
+        });
+    }
+}</code></pre>
+
+                <h4>Batch Processing</h4>
+                <pre><code class="javascript">
+async function batchProcessLocations(locations, batchSize = 1000) {
+    const batches = [];
+    for (let i = 0; i < locations.length; i += batchSize) {
+        batches.push(locations.slice(i, i + batchSize));
+    }
+
+    const results = [];
+    for (const batch of batches) {
+        const batchResults = await Promise.all(
+            batch.map(loc => processLocation(loc))
+        );
+        results.push(...batchResults);
+    }
+    return results;
+}</code></pre>
+
+                <h4>Configuration Management</h4>
+                <pre><code class="javascript">
+const config = {
+    app: {
+        port: process.env.PORT || 3000,
+        env: process.env.NODE_ENV || 'development'
+    },
+    geofencing: {
+        maxGeofences: parseInt(process.env.MAX_GEOFENCES) || 10000,
+        maxDevices: parseInt(process.env.MAX_DEVICES) || 100000,
+        cleanupInterval: parseInt(process.env.CLEANUP_INTERVAL) || 3600000,
+        locationTTL: parseInt(process.env.LOCATION_TTL) || 86400000
+    },
+    mongodb: {
+        uri: process.env.MONGODB_URI,
+        options: {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        }
+    },
+    redis: {
+        host: process.env.REDIS_HOST,
+        port: process.env.REDIS_PORT,
+        password: process.env.REDIS_PASSWORD
+    },
+    kafka: {
+        brokers: process.env.KAFKA_BROKERS.split(','),
+        clientId: process.env.KAFKA_CLIENT_ID
+    }
+};</code></pre>
+            </div>
+        </section>
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        // Initialize Reveal.js
+        Reveal.initialize({
+            hash: true,
+            slideNumber: true,
+            transition: 'slide',
+            controls: true,
+            progress: true,
+            center: false,
+            plugins: []  // Remove RevealHighlight as it's not needed with highlight.js
+        });
+
+        // Initialize highlight.js
+        document.addEventListener('DOMContentLoaded', (event) => {
+            document.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightBlock(block);
+            });
+        });
+
+        // Re-run highlighting after each slide change
+        Reveal.addEventListener('slidechanged', function(event) {
+            document.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightBlock(block);
+            });
+        });
+    </script>
+</body>
+</html>

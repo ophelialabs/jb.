@@ -1,0 +1,239 @@
+:root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+        }
+        .navbar { background-color: var(--primary-color); }
+        .nav-link, .navbar-brand { color: white !important; }
+        .tech-card {
+            transition: transform 0.18s, box-shadow 0.18s;
+            border-radius: 16px;
+            background: #fff;
+        }
+        .tech-card:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 8px 32px rgba(44,62,80,0.13);
+        }
+        .category-header {
+            font-size: 2.1rem;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+            color: #2564cf;
+            border-bottom: 2px solid #e3e6ea;
+            padding-bottom: 8px;
+            margin-bottom: 2.5rem;
+        }
+        .tech-icon {
+            width: 32px;
+            height: 32px;
+            margin: 5px;
+            transition: transform 0.2s;
+        }
+        .tech-icon:hover {
+            transform: scale(1.1);
+        }
+        .search-bar {
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 5px 15px;
+        }
+        .search-bar input {
+            background: transparent;
+            border: none;
+            color: white;
+            width: 300px;
+        }
+        .search-bar input::placeholder {
+            color: rgba(255,255,255,0.7);
+        }
+
+.custom-modal-size {
+    max-width: 900px;
+    width: 90vw;
+    min-height: 60vh;
+}
+.custom-modal-size .modal-content {
+    min-height: 60vh;
+}
+
+
+
+/* --- Pipeline Section Styling --- */
+#pipeline-placeholder,
+section.pipeline-section,
+.tab-container {
+    background: #f4f8fc;
+    border-radius: 18px;
+    box-shadow: 0 2px 16px rgba(44,62,80,0.06);
+    padding: 32px 24px;
+    margin-bottom: 32px;
+}
+
+.category-header {
+    font-size: 2.1rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    color: #2564cf;
+    border-bottom: 2px solid #e3e6ea;
+    padding-bottom: 8px;
+    margin-bottom: 2.5rem;
+}
+
+.nav-tabs {
+    border-bottom: 2px solid #e3e6ea;
+    margin-bottom: 2rem;
+}
+
+.nav-tabs .nav-link {
+    border: none;
+    border-radius: 10px 10px 0 0;
+    font-weight: 600;
+    color: #495057;
+    background: #eaf1fb;
+    margin-right: 6px;
+    transition: background 0.2s, color 0.2s;
+    min-width: 130px;
+    text-align: center;
+    padding: 1rem 2rem;
+    font-size: 1.08rem;
+    letter-spacing: 0.01em;
+}
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-link:focus,
+.nav-tabs .nav-link:hover {
+    background: linear-gradient(90deg, #2564cf 60%, #43b581 100%);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(44,62,80,0.10);
+    outline: none;
+}
+
+.tab-content {
+    padding: 0;
+}
+
+.tab-pane .bg-white {
+    border-radius: 14px;
+    box-shadow: 0 1px 12px rgba(44,62,80,0.08);
+    border: 1px solid #e3e6ea;
+    padding: 2rem 1.5rem;
+    background: #fff;
+}
+
+.tab-pane iframe {
+    border-radius: 10px;
+    border: none;
+    background: #f8fafc;
+    min-height: 600px;
+    width: 100%;
+}
+
+@media (max-width: 991.98px) {
+    #pipeline-placeholder,
+    section.pipeline-section,
+    .tab-container {
+        padding: 18px 8px 12px 8px;
+    }
+    .nav-tabs .nav-link {
+        min-width: 90px;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.98rem;
+    }
+    .tab-pane iframe {
+        min-height: 400px;
+    }
+}
+
+/* Responsive search bar and suggestion box */
+@media (max-width: 600px) {
+    .search-bar input {
+        width: 100% !important;
+        min-width: 0;
+    }
+    .list-group.position-absolute {
+        left: 0 !important;
+        right: 0 !important;
+        width: 100vw !important;
+        min-width: 0;
+        max-width: 100vw;
+    }
+    .search-bar {
+        padding: 5px 5px;
+    }
+}
+
+/* Make .professional-landing and cards more mobile-friendly */
+@media (max-width: 600px) {
+    .professional-landing {
+        padding: 18px 4px 12px 4px;
+        margin-top: 16px;
+    }
+    .tech-card {
+        margin-bottom: 16px;
+    }
+}
+
+/* Wiki-style navigation and main content */
+.wiki-nav {
+    min-width: 220px;
+    max-width: 260px;
+    border-right: 1px solid #e3e6ea;
+    background: #f8fafc;
+    height: 100%;
+    position: sticky;
+    top: 80px; /* Adjust as needed for fixed navbar height */
+}
+.wiki-nav .nav-link {
+    padding: 0.75rem 1.5rem;
+    color: #34495e;
+}
+.wiki-nav .nav-link.active {
+    background: #e3e6ea;
+    font-weight: bold;
+    color: #2564cf;
+}
+.wiki-main {
+    padding-left: 0;
+}
+@media (max-width: 991.98px) {
+    .wiki-nav {
+        max-width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #e3e6ea;
+        position: static;
+    }
+    .wiki-main {
+        padding-left: 0;
+    }
+}
+/* Optional: Subtle divider for clarity */
+.tab-content > .tab-pane:not(:last-child) {
+    border-bottom: 1px solid #e3e6ea;
+}
+
+/* Optional: Add a subtle hover effect for tabs */
+.nav-tabs .nav-link:not(.active):hover {
+    background: #dbeafe;
+    color: #2564cf;
+}
+
+/* Professional landing page enhancements */
+.professional-landing {
+    background: #f7fafd;
+    border-radius: 18px;
+    box-shadow: 0 4px 32px rgba(44,62,80,0.07);
+    padding: 48px 32px 32px 32px;
+    margin-top: 40px;
+}
+
+.icon-circle {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 2rem;
+    margin: 0 auto 12px auto;
+    box-shadow: 0 2px 8px rgba(44,62,80,0.10);
+}

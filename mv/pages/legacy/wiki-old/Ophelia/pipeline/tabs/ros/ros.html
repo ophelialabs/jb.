@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ros Project Generator Script</title>
+    <!-- Bootstrap 5.3 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- PrismJS for code highlighting -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css" rel="stylesheet">
+    <!-- Fluent UI Bootstrap theme (Bootswatch 'Flatly' as a Fluent-like example) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.3/dist/flatly/bootstrap.min.css" rel="stylesheet">
+    <link href="static/pipeline.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fluent-navbar bg-primary mb-4">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="../../../index.html">
+                <svg width="32" height="32" fill="#fff" class="me-2" viewBox="0 0 16 16"><rect width="16" height="16" rx="4"/></svg>
+                <span style="font-weight:600;letter-spacing:0.03em;">Ophelia</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <div class="navbar-nav ms-auto">
+                    <a class="nav-link fluent-btn" href="ros.html">Generator</a>
+                    <a class="nav-link fluent-btn" href="generator.sh">Download</a>
+                    <a class="nav-link fluent-btn" href="#" target="_blank" rel="noopener noreferrer">Docs</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+   <div class="container body-content" style="margin-top: 80px;">
+        <div class="jumbotron">
+                <div class="col-md-4 bg-white p-3 rounded shadow-sm mb-3">
+                    <p class="fw-bold">Ubuntu/ROS/Kilted</p>
+                    <button class="btn btn-default w-100 mb-2" onclick="copyCurlCommand('curl -fsSL https://_setup.sh -o el9_setup.sh\nsudo bash el9_setup.sh')">Copy curl command</button>
+                    <p><a class="btn btn-primary w-100" href="" target="_blank">Raw</a></p>
+                </div>
+                <div class="col-md-4 bg-white p-3 rounded shadow-sm mb-3">
+                    <a href="https://cyberbotics.com/doc/guide/installation-procedure#from-the-installation-file"><p class="fw-bold">Webots</a></p>
+                    <button class="btn btn-default w-100 mb-2" onclick="copyCurlCommand('curl -fsSL https://_setup.sh -o el9_setup.sh\nsudo bash el9_setup.sh')">Copy curl command</button>
+                    <p><a class="btn btn-primary w-100" href="" target="_blank">Raw</a></p>
+                </div>
+        </div>    
+<ul>
+    <li>
+        <strong>Operating System &amp; ROS2:</strong> Use Ubuntu as the base OS for your robotics development environment. Install ROS2 (Robot Operating System 2) and Kilted, depending on your project requirements.
+    </li>
+    <li>
+        <strong>Simulation Platforms:</strong> Choose a simulator that best fits your needs:
+        <ul>
+            <li><strong>Nvidia Isaac Sim</strong> (preferred for advanced GPU features)</li>
+            <li><strong>Webots</strong></li>
+            <li><strong>Gazebo</strong> (QT version recommended for GUI support)</li>
+        </ul>
+    </li>
+    <li>
+        <strong>GPU Acceleration:</strong> Ensure your system or virtual machine supports GPU acceleration. For cloud-based development, consider using an Azure VM with a minimum GPU specification. Example: Azure VM (name: <code>class</code>) costs approximately $500/month. Alternatively, use a local machine that meets the minimal GPU requirements for your chosen simulator.
+        <ul>
+            <li>Note: Applications will run without a GPU, but some features may be disabled or perform suboptimally.</li>
+            <li>Update your documentation with the minimum GPU requirements for each simulator.</li>
+        </ul>
+    </li>
+    <li>
+        <strong>Project Selection:</strong> Select an existing project that closely matches your desired end result. If no suitable project exists, create a new one tailored to your requirements.
+    </li>
+    <li>
+        <strong>Environment Import:</strong> Import relevant simulation environments or assets into your chosen simulator to accelerate development.
+    </li>
+    <li>
+        <strong>Development Tools:</strong> Install Visual Studio Code and the Quantum Development Kit (QDK) extension for enhanced coding and debugging capabilities.
+    </li>
+    <li>
+        <strong>Project Initialization:</strong> Start by initializing your project using the <code>createproj</code> command, a simulator-specific template, or manual setup. For full-stack development, consider using the ros Full Stack template with a .NET backend, or alternatives such as Node.js, Django, or ros for web services.
+        <ul>
+            <li>Supported languages: C#, C++, Python, Q#, JavaScript, TypeScript, Go, Rust</li>
+            <li>Alternative templates: ROS2 workspace, Gazebo plugin starter, Webots Python controller, Nvidia Isaac Sim sample projects</li>
+            <li>Version control: Initialize a Git repository and set up remote hosting (GitHub, Azure DevOps, GitLab)</li>
+            <li>Configure CI/CD pipelines for automated builds and tests (GitHub Actions, Azure Pipelines, GitLab CI)</li>
+        </ul>
+        </li>
+        <li>
+        <strong>VS Code Extensions:</strong> In Visual Studio Code, search for and install the Quantum Development Kit (QDK) extension from Microsoft. Also consider installing:
+        <ul>
+            <li>ROS extension for ROS2 development</li>
+            <li>Python, C++, and C# language support</li>
+            <li>Docker and Kubernetes extensions for container orchestration</li>
+            <li>Remote Development extension for cloud or VM-based coding</li>
+            <li>GitLens for enhanced Git integration</li>
+        </ul>
+        </li>
+        <li>
+        <strong>Admin Portal Setup:</strong> Create an admin portal to manage users, projects, and resources. This portal can be reused for future projects.
+        <ul style="list-style-type: circle; padding-left: 20px; line-height: 1.5;">
+            <li><a href="https://docs.oracle.com/en/learn/ol-nginx/#introduction" target="_blank">NGINX Docs</a> for web server setup</li>
+            <li><a href="https://kubernetes.io/docs/home/" target="_blank">Kubernetes Docs</a> for container orchestration</li>
+            <li>Kubernetes <a href="https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/" target="_blank">Dashboard</a> for cluster management</li>
+            <li><a href="https://grafana.com/docs/grafana/latest/setup-grafana/installation/kubernetes/" target="_blank">Grafana</a> for monitoring and visualization</li>
+            <li>
+            <a href="https://github.com/bitnami/charts?tab=readme-ov-file" target="_blank">Bitnami Helm Charts (Github)</a>,
+            <a href="https://bitnami.com/enterprise" target="_blank">Bitnami Helm Charts (Enterprise)</a>,
+            <a href="https://www.openpolicyagent.org/" target="_blank">OPA (Gatekeeper Policies)</a> 
+            <a href="https://ubuntu.com/robotics/ros-esm">
+            <a href="https://canonical-robotics.readthedocs-hosted.com/en/latest/explanations/security/hardening-your-robot/">Ros Harderning</a>
+            <a href="https://documentation.ubuntu.com/core/tutorials/build-your-first-image/build-the-image/index.html#write-the-image">Ros build img</a>
+            <a href="https://github.com/robolaunch/robot-operator?tab=readme-ov-file">Robolaunch</a>
+            <a href="https://github.com/ika-rwth-aachen/robotkube">Robotkube</a>
+            <a href="https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.youtube.com/watch%3Fv%3DAmxsy5A2NWE&ved=2ahUKEwix98eA6_aOAxV7nWoFHdmTCxAQkPEHegQIQxAF&usg=AOvVaw1N6KK_sG43omDU-KxX6Kmp">Video Ref</a>
+            <a href="https://canonical-robotics.readthedocs-hosted.com/en/latest/tutorials/observability/deploy-cos-for-robotics-server-in-the-cloud/">COS cloud</a>
+            </li>
+            <li>Alternative options: Use Docker Compose for simpler setups, or managed Kubernetes services (AKS, EKS, GKE)</li>
+            <li>Set up authentication (OAuth, LDAP, SSO) and role-based access control</li>
+        </ul>
+        </li>
+        <li>
+        <strong>Reference Projects:</strong> Review and link to existing projects for inspiration or reuse.
+        <ul style="list-style-type: circle; padding-left: 20px; line-height: 1.5;">
+            <li><a href="https://raw.githubusercontent.com/jlabclouds/jlabclouds.github.io/refs/heads/main/jlabclouds/Spot.c" target="_blank">Spot Project</a></li>
+            <li>Assess project objectives: Sometimes a full robot is not required; plan accordingly to optimize resources and avoid overspending.</li>
+            <li>Budgeting and billing: Track costs for hardware, cloud resources, and software licenses.</li>
+            <li>Alternative: Explore open-source robotics projects on GitHub, ROS2 demos, or Nvidia Isaac Sim samples.</li>
+        </ul>
+        </li>
+        <li>
+        <strong>Sensor Integration:</strong> Plan for integration of sensors such as Lidar, Sonar, Radar, and cameras.
+        <ul>
+            <li>Document the location and mounting of sensory units</li>
+            <li>Evaluate sensor compatibility with your simulator and hardware</li>
+            <li>Consider alternative sensors (IMU, GPS, depth cameras)</li>
+        </ul>
+        </li>
+        <li>
+        <strong>Hardware Placement:</strong> Design the chassis and plan hardware placement for bolt-on installation once the chassis is built.
+        <ul>
+            <li>Use CAD tools (Fusion 360, SolidWorks, FreeCAD) for design</li>
+            <li>Prototype with 3D printing or laser cutting</li>
+            <li>Document mounting points and cable routing</li>
+        </ul>
+        </li>
+        <li>
+        <strong>Optics & AI Integration:</strong> Integrate optics (cameras, depth sensors) with AI for object detection and scene understanding.
+        <ul>
+            <li>Use frameworks like OpenCV, TensorFlow, PyTorch, or Nvidia DeepStream</li>
+            <li>Test AI models in simulation before deploying to hardware</li>
+            <li>Alternative: Use pre-trained models or cloud-based AI services</li>
+        </ul>
+        </li>
+        <li>
+        <strong>Controller Connectivity:</strong> Connect and configure controllers (joysticks, gamepads, custom interfaces).
+        <ul>
+            <li>Test controller input in simulation</li>
+            <li>Configure ROS2 or simulator plugins for controller support</li>
+            <li>Alternative: Use web-based or mobile control interfaces</li>
+        </ul>
+        </li>
+        <li>
+        <strong>Testing & Validation:</strong> Develop unit, integration, and system tests for your robotics application.
+        <ul>
+            <li>Automate testing with CI/CD pipelines</li>
+            <li>Use simulation for early validation before hardware deployment</li>
+            <li>Document test cases and expected outcomes</li>
+        </ul>
+        </li>
+        <li>
+        <strong>Documentation & Collaboration:</strong> Maintain comprehensive documentation and collaborate using tools like GitHub, Azure DevOps, or Confluence.
+        <ul>
+            <li>Document setup instructions, architecture, and troubleshooting steps</li>
+            <li>Use markdown, wikis, or static site generators (MkDocs, Docusaurus)</li>
+            <li>Alternative: Record video walkthroughs or interactive tutorials</li>
+        </ul>
+        </li>
+     <hr />
+        <footer>
+            <p>&copy; <span id="year"></span>Ophelia</p>
+        </footer>
+    </div>
+    <script>
+        // Curl command copy logic
+        function copyCurlCommand(command) {
+            navigator.clipboard.writeText(command)
+                .then(() => alert('Curl command copied to clipboard!'));
+        }
+            // Set year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+    <script src="static/scripts/search.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+</body>
+</html>
+

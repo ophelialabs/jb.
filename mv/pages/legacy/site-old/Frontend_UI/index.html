@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frontend & UI | Ophelia Labs</title>
+    <!-- Bootstrap 5.3 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- PrismJS for code highlighting -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-okaidia.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .card-title {
+            font-weight: 600;
+        }
+        .section-title {
+            border-bottom: 2px solid #dee2e6;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        pre[class*="language-"] {
+            border-radius: 0.5rem;
+            border: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+
+    <main class="container-fluid">
+        <div class="card border-0 shadow-sm">
+                <p class="lead text-muted">An advanced retail storefront UI built with Next.js, designed for a modern microservices architecture.</p>
+
+                <hr class="my-4">
+
+                <section id="overview" class="mb-4">
+                    <h2 class="section-title h4">Overview & Tech Stack</h2>
+                    <p>This project is a sophisticated e-commerce storefront designed to be the user-facing entry point for a suite of backend microservices. It is built to be scalable, performant, and easily integrated with operational tools.</p>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Framework:</strong> <a href="https://nextjs.org/">Next.js</a> (with App Router)</li>
+                        <li class="list-group-item"><strong>Language:</strong> <a href="https://www.typescriptlang.org/">TypeScript</a></li>
+                        <li class="list-group-item"><strong>Styling:</strong> <a href="https://tailwindcss.com/">Tailwind CSS</a></li>
+                        <li class="list-group-item"><strong>Architecture:</strong> Standalone frontend, ready for Kubernetes-based microservice integration (e.g., Cart, Catalog, Auth services).</li>
+                        <li class="list-group-item"><strong>Advanced Features:</strong>
+                            <ul class="mt-2">
+                                <li><strong>AI Agent Integration:</strong> A built-in chat component for conversational commerce and support.</li>
+                                <li><strong>Observability Hooks:</strong> Guidance for integrating monitoring and analytics agents.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+
+                <section id="getting-started" class="mb-4">
+                    <h2 class="section-title h4">Getting Started</h2>
+                    <p>Follow these steps to run the retail UI application locally.</p>
+                    <ol class="list-group list-group-numbered">
+                        <li class="list-group-item border-0">
+                            <strong>Navigate to the project directory:</strong>
+                            <pre><code class="language-bash">cd Frontend_UI/retail-ui</code></pre>
+                        </li>
+                        <li class="list-group-item border-0">
+                            <strong>Install dependencies:</strong>
+                            <p class="mb-1 mt-2">This command installs all the necessary packages defined in <code>package.json</code>.</p>
+                            <pre><code class="language-bash">npm install</code></pre>
+                        </li>
+                        <li class="list-group-item border-0">
+                            <strong>Run the development server:</strong>
+                            <p class="mb-1 mt-2">This starts the Next.js application in development mode.</p>
+                            <pre><code class="language-bash">npm start</code></pre>
+                        </li>
+                        <li class="list-group-item border-0">
+                            <strong>Open the application:</strong>
+                            <p class="mb-1 mt-2">Visit <a href="http://localhost:3000">http://localhost:3000</a> in your browser to see the running application. You can browse the homepage, click on products, and interact with the AI chat agent.</p>
+                        </li>
+                    </ol>
+                </section>
+
+                <section id="agent-integration">
+                    <h2 class="section-title h4">Integrating Agents</h2>
+                    <p>This application is designed to be enhanced with various types of "agents" for AI-driven functionality and operational monitoring.</p>
+
+                    <div class="accordion" id="agentAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingAiAgent">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAiAgent">
+                                    <strong>1. AI Conversational Agent</strong>
+                                </button>
+                            </h2>
+                            <div id="collapseAiAgent" class="accordion-collapse collapse show" data-bs-parent="#agentAccordion">
+                                <div class="accordion-body">
+                                    <p>The UI includes a chat widget that connects to a mock API endpoint (<code>/api/chat</code>). To connect this to a real AI, you would modify this backend route.</p>
+                                    <p><strong>File to Edit:</strong> <code>app/api/chat/route.ts</code></p>
+                                    <h6>Instructions:</h6>
+                                    <ol>
+                                        <li><strong>Choose an AI Provider:</strong> Select a service like OpenAI, Google Gemini, Anthropic, or a self-hosted model.</li>
+                                        <li><strong>Install the Provider's SDK:</strong> For example, <code>npm install openai</code>.</li>
+                                        <li><strong>Update the API Route:</strong> Modify the <code>POST</code> function to call the real AI service. Securely store your API key as an environment variable.</li>
+                                    </ol>
+                                    <h6>Example with OpenAI:</h6>
+<pre><code class="language-typescript">
+// app/api/chat/route.ts
+import { NextRequest, NextResponse } from 'next/server';
+import OpenAI from 'openai';
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY, // Use environment variables
+});
+
+export async function POST(req: NextRequest) {
+  const { message } = await req.json();
+
+  const completion = await openai.chat.completions.create({
+    model: "gpt-3.5-turbo",
+    messages: [{ role: "user", content: message }],
+  });
+
+  const reply = completion.choices[0].message.content;
+  return NextResponse.json({ reply });
+}
+</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingMonitoringAgent">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMonitoringAgent">
+                                    <strong>2. Observability & Monitoring Agents</strong>
+                                </button>
+                            </h2>
+                            <div id="collapseMonitoringAgent" class="accordion-collapse collapse" data-bs-parent="#agentAccordion">
+                                <div class="accordion-body">
+                                    <p>To monitor frontend performance, user behavior, and errors, you can integrate a Real User Monitoring (RUM) agent.</p>
+                                    <p><strong>File to Edit:</strong> <code>app/layout.tsx</code></p>
+                                    <h6>Instructions:</h6>
+                                    <ol>
+                                        <li><strong>Choose a Monitoring Service:</strong> Options include Vercel Analytics (native), Datadog, New Relic, Sentry, etc.</li>
+                                        <li><strong>Follow Integration Docs:</strong> Each service provides a small code snippet or component to be added to your application's root layout.</li>
+                                    </ol>
+                                    <h6>Example with Datadog RUM:</h6>
+                                    <p>First, install the Datadog package: <code>npm install @datadog/browser-rum</code></p>
+                                    <p>Then, initialize it in a client-side component and include it in your layout.</p>
+<pre><code class="language-tsx">
+// app/components/DatadogInit.tsx
+'use client';
+import { datadogRum } from '@datadog/browser-rum';
+import { useLayoutEffect } from 'react';
+
+export const DatadogInit = () => {
+  useLayoutEffect(() => {
+    datadogRum.init({
+      applicationId: 'YOUR_APPLICATION_ID',
+      clientToken: 'YOUR_CLIENT_TOKEN',
+      site: 'datadoghq.com',
+      service: 'retail-ui',
+      env: process.env.NODE_ENV,
+      version: '1.0.0',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 20,
+      trackUserInteractions: true,
+      trackResources: true,
+      trackLongTasks: true,
+      defaultPrivacyLevel: 'mask-user-input',
+    });
+    return () => {
+      datadogRum.stopSession();
+    }
+  }, []);
+  return null;
+};
+</code></pre>
+                                    <p>Finally, add <code>&lt;DatadogInit /&gt;</code> to your <code>RootLayout</code> in <code>app/layout.tsx</code>.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Bootstrap & PrismJS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>

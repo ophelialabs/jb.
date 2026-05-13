@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aspire Project Generator Script</title>
+    <!-- Bootstrap 5.3 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- PrismJS for code highlighting -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css" rel="stylesheet">
+    <!-- Fluent UI Bootstrap theme (Bootswatch 'Flatly' as a Fluent-like example) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.3/dist/flatly/bootstrap.min.css" rel="stylesheet">
+    <link href="static/pipeline.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fluent-navbar bg-primary mb-4">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="../../../index.html">
+                <svg width="32" height="32" fill="#fff" class="me-2" viewBox="0 0 16 16"><rect width="16" height="16" rx="4"/></svg>
+                <span style="font-weight:600;letter-spacing:0.03em;">Ophelia</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <div class="navbar-nav ms-auto">
+                    <a class="nav-link fluent-btn" href="aspire.html">Generator</a>
+                    <a class="nav-link fluent-btn" href="generator.sh">Download</a>
+                    <a class="nav-link fluent-btn" href="#" target="_blank" rel="noopener noreferrer">Docs</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card fluent-card shadow-sm">
+                    <div class="card-body">
+                        <h1 class="card-title fluent-section-title mb-4">Aspire Project Generator Script</h1>
+                        <div class="alert fluent-alert">
+                            <h5>Description</h5>
+                            <p>This shell script automatically generates an advanced .NET Aspire project structure with the following features:</p>
+                            <ul>
+                                <li>Creates a standardized solution and project layout</li>
+                                <li>Sets up authentication and authorization modules</li>
+                                <li>Configures database integration (SQL Server, PostgreSQL)</li>
+                                <li>Includes deployment and containerization options</li>
+                                <li>Generates necessary configuration files and environment settings</li>
+                                <li>Prepares sample microservices and web frontend</li>
+                            </ul>
+                        </div>
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <h5 class="mt-3 fluent-section-title">Option 1: Advanced Script Structure</h5>
+                                <div style="max-height: 300px; overflow-y: auto;">
+                                    <pre class="mb-0"><code>aspire-sln/
+├── src/
+│   ├── WebApp/
+│   │   ├── Program.cs
+│   │   ├── Startup.cs
+│   │   ├── appsettings.json
+│   │   ├── Controllers/
+│   │   ├── Views/
+│   │   └── wwwroot/
+│   ├── AuthService/
+│   │   ├── Program.cs
+│   │   ├── Startup.cs
+│   │   ├── appsettings.json
+│   │   ├── Controllers/
+│   │   ├── Models/
+│   │   └── Services/
+│   ├── AccountService/
+│   │   ├── Program.cs
+│   │   ├── Startup.cs
+│   │   ├── appsettings.json
+│   │   ├── Controllers/
+│   │   ├── Models/
+│   │   └── Services/
+│   ├── ApiService/
+│   │   ├── Program.cs
+│   │   ├── Startup.cs
+│   │   ├── appsettings.json
+│   │   ├── Controllers/
+│   │   ├── Models/
+│   │   └── Services/
+│   ├── DataService/
+│   │   ├── Program.cs
+│   │   ├── Startup.cs
+│   │   ├── appsettings.json
+│   │   ├── Models/
+│   │   ├── Repositories/
+│   │   └── Migrations/
+│   ├── Database/
+│   │   ├── DbContext.cs
+│   │   ├── appsettings.json
+│   │   └── Migrations/
+│   └── Shared/
+│       ├── Models/
+│       ├── DTOs/
+│       └── Extensions/
+├── tests/
+│   ├── WebApp.Tests/
+│   │   ├── UnitTest1.cs
+│   ├── AuthService.Tests/
+│   │   ├── UnitTest1.cs
+│   ├── AccountService.Tests/
+│   │   ├── UnitTest1.cs
+│   ├── ApiService.Tests/
+│   │   ├── UnitTest1.cs
+│   ├── DataService.Tests/
+│   │   ├── UnitTest1.cs
+├── docker/
+│   ├── docker-compose.yml
+│   ├── Dockerfile.webapp
+│   ├── Dockerfile.authservice
+│   ├── Dockerfile.accountservice
+│   ├── Dockerfile.apiservice
+│   ├── Dockerfile.dataservice
+│   └── Dockerfile.database
+├── .env
+├── .gitignore
+├── README.md
+├── Aspire.sln
+└── deployment/
+    └── azure-pipelines.yml</code></pre>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 class="mt-3 fluent-section-title">Option 2: <code>Dotnet</code> starter Structure</h5>
+                                <div style="max-height: 300px; overflow-y: auto;">
+                                    <pre class="mb-0"><code>MyProject/
+├── MyProject.sln
+├── src/
+│   ├── MyProject.AppHost/
+│   │   ├── Program.cs
+│   │   ├── appsettings.json
+│   │   ├── Controllers/
+│   │   ├── Views/
+│   │   └── wwwroot/
+│   ├── MyProject.Web/
+│   │   ├── Program.cs
+│   │   ├── appsettings.json
+│   │   ├── Controllers/
+│   │   ├── Views/
+│   │   └── wwwroot/
+│   ├── MyProject.Service/
+│   │   ├── Program.cs
+│   │   ├── appsettings.json
+│   │   ├── Controllers/
+│   │   ├── Models/
+│   │   └── Services/
+│   ├── MyProject.Auth/
+│   │   ├── Program.cs
+│   │   ├── appsettings.json
+│   │   ├── Controllers/
+│   │   ├── Models/
+│   │   └── Services/
+│   ├── MyProject.Account/
+│   │   ├── Program.cs
+│   │   ├── appsettings.json
+│   │   ├── Controllers/
+│   │   ├── Models/
+│   │   └── Services/
+│   ├── MyProject.Database/
+│   │   ├── DbContext.cs
+│   │   ├── appsettings.json
+│   │   └── Migrations/
+│   └── MyProject.Shared/
+│       ├── Models/
+│       ├── DTOs/
+│       └── Extensions/
+├── tests/
+│   ├── MyProject.Tests/
+│   │   ├── UnitTest1.cs
+│   ├── MyProject.Auth.Tests/
+│   │   ├── UnitTest1.cs
+│   ├── MyProject.Account.Tests/
+│   │   ├── UnitTest1.cs
+│   ├── MyProject.Service.Tests/
+│   │   ├── UnitTest1.cs
+│   ├── MyProject.Database.Tests/
+│   │   ├── UnitTest1.cs
+├── .gitignore
+├── README.md
+└── docker/
+    ├── docker-compose.yml
+    ├── Dockerfile.apphost
+    ├── Dockerfile.web
+    ├── Dockerfile.service
+    ├── Dockerfile.auth
+    ├── Dockerfile.account
+    ├── Dockerfile.database
+</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        <h5 class="mt-4 fluent-section-title">Script Source Code</h5>
+                        <div style="max-height: 300px; overflow-y: auto;">
+                            <pre><code class="language-bash">#!/bin/bash
+
+# Ask for solution name
+read -p "Enter your Aspire solution name: " solution_name
+
+if [ -z "$solution_name" ]; then
+    echo "Solution name cannot be empty."
+    exit 1
+fi
+
+# Create solution directory
+mkdir "$solution_name"
+cd "$solution_name"
+
+# Create solution
+dotnet new sln -n "$solution_name"
+
+# Create src projects
+dotnet new mvc -n WebApp -o src/WebApp
+dotnet new webapi -n AuthService -o src/AuthService
+dotnet new webapi -n AccountService -o src/AccountService
+dotnet new webapi -n ApiService -o src/ApiService
+dotnet new classlib -n DataService -o src/DataService
+dotnet new classlib -n Database -o src/Database
+dotnet new classlib -n Shared -o src/Shared
+</code></pre>
+                        </div>
+                        <div style="max-height: 300px; overflow-y: auto;">
+                            <pre><code class="language-bash"># Add projects to solution
+dotnet sln add src/WebApp/WebApp.csproj
+dotnet sln add src/AuthService/AuthService.csproj
+dotnet sln add src/AccountService/AccountService.csproj
+dotnet sln add src/ApiService/ApiService.csproj
+dotnet sln add src/DataService/DataService.csproj
+dotnet sln add src/Database/Database.csproj
+dotnet sln add src/Shared/Shared.csproj
+
+# Create test projects
+dotnet new xunit -n WebApp.Tests -o tests/WebApp.Tests
+dotnet new xunit -n AuthService.Tests -o tests/AuthService.Tests
+dotnet new xunit -n AccountService.Tests -o tests/AccountService.Tests
+dotnet new xunit -n ApiService.Tests -o tests/ApiService.Tests
+dotnet new xunit -n DataService.Tests -o tests/DataService.Tests
+
+dotnet sln add tests/WebApp.Tests/WebApp.Tests.csproj
+dotnet sln add tests/AuthService.Tests/AuthService.Tests.csproj
+dotnet sln add tests/AccountService.Tests/AccountService.Tests.csproj
+dotnet sln add tests/ApiService.Tests/ApiService.Tests.csproj
+dotnet sln add tests/DataService.Tests/DataService.Tests.csproj
+
+# Add references
+dotnet add src/WebApp/WebApp.csproj reference src/Shared/Shared.csproj
+dotnet add src/AuthService/AuthService.csproj reference src/Shared/Shared.csproj
+dotnet add src/AccountService/AccountService.csproj reference src/Shared/Shared.csproj
+dotnet add src/ApiService/ApiService.csproj reference src/Shared/Shared.csproj
+dotnet add src/DataService/DataService.csproj reference src/Shared/Shared.csproj
+dotnet add src/Database/Database.csproj reference src/Shared/Shared.csproj
+
+# Create docker files
+mkdir docker
+cat > docker/docker-compose.yml << EOF
+version: '3.8'
+services:
+  webapp:
+    build:
+      context: ../src/WebApp
+      dockerfile: Dockerfile.webapp
+    ports:
+      - "5000:80"
+  authservice:
+    build:
+      context: ../src/AuthService
+      dockerfile: Dockerfile.authservice
+    ports:
+      - "5001:80"
+  accountservice:
+    build:
+      context: ../src/AccountService
+      dockerfile: Dockerfile.accountservice
+    ports:
+      - "5003:80"
+  apiservice:
+    build:
+      context: ../src/ApiService
+      dockerfile: Dockerfile.apiservice
+    ports:
+      - "5002:80"
+  dataservice:
+    build:
+      context: ../src/DataService
+      dockerfile: Dockerfile.dataservice
+    ports:
+      - "5004:80"
+  database:
+    build:
+      context: ../src/Database
+      dockerfile: Dockerfile.database
+    ports:
+      - "5432:5432"
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      SA_PASSWORD: "Your_password123"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+EOF
+
+# Create Dockerfiles for each service
+touch docker/Dockerfile.webapp
+touch docker/Dockerfile.authservice
+touch docker/Dockerfile.accountservice
+touch docker/Dockerfile.apiservice
+touch docker/Dockerfile.dataservice
+touch docker/Dockerfile.database
+
+# Create .env
+cat > .env << EOF
+ASPIRE_ENV=Development
+DB_CONNECTION=Server=localhost;Database=aspire_db;User Id=sa;Password=Your_password123;
+EOF
+
+# Create .gitignore
+cat > .gitignore << EOF
+bin/
+obj/
+.vs/
+.env
+docker/*.log
+EOF
+
+# Create README.md
+cat > README.md << EOF
+# $solution_name
+
+Advanced .NET Aspire project generated by script.
+
+## Structure
+
+- WebApp: Main frontend
+- AuthService: Authentication/Authorization
+- AccountService: Account management
+- ApiService: API endpoints
+- DataService: Data access
+- Database: Database context and migrations
+- Shared: Shared models
+- Tests: Unit and integration tests
+- Docker: Containerization
+- Deployment: CI/CD pipelines
+
+## Usage
+
+1. Install .NET 8 SDK and Docker
+2. Run \`docker-compose -f docker/docker-compose.yml up\`
+3. Run \`dotnet build\` and \`dotnet run --project src/WebApp\`
+EOF
+
+# Create deployment pipeline
+mkdir deployment
+cat > deployment/azure-pipelines.yml << EOF
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '8.x'
+- script: dotnet build Aspire.sln
+- script: dotnet test Aspire.sln
+EOF
+
+echo "Aspire solution '$solution_name' created successfully!"
+echo "Run 'dotnet build' to compile the solution"
+</code></pre>
+                        </div>
+                        <div class="mt-4">
+                            <h5 class="fluent-section-title">Usage</h5>
+                            <ol>
+                                <li>Save the script to a file (e.g., <code>create_aspire_project.sh</code>)</li>
+                                <li>Make it executable: <code>chmod +x create_aspire_project.sh</code></li>
+                                <li>Run: <code>./create_aspire_project.sh</code></li>
+                                <li>Follow the prompts to set up your Aspire solution</li>
+                            </ol>
+                        </div>
+                        <div class="mt-5">
+                            <h4 class="fluent-section-title">Option 2: Customizable Aspire Starter Script</h4>
+                            <p>
+                                This script lets you create a flexible Aspire project structure using <code>dotnet new aspire-starter</code> and guides you through each step. You can choose your project types (Web, API, gRPC, Auth, etc.), and database integration. Follow the instructions below:
+                            </p>
+                            <ol>
+                                <li>
+                                    <strong>Set Project Name</strong><br>
+                                    The script will prompt you for your project name. This will be used for your solution and all subprojects.<br>
+                                    <code>read -p "Enter your project name: " project_name</code>
+                                </li>
+                                <li>
+                                    <strong>Choose Project Types</strong><br>
+                                    You can select which types of projects to include:<br>
+                                    <ul>
+                                        <li><strong>Web App</strong> (MVC or Razor Pages)</li>
+                                        <li><strong>API</strong> (RESTful endpoints)</li>
+                                        <li><strong>gRPC Service</strong> (high-performance RPC)</li>
+                                        <li><strong>Auth Service</strong> (authentication/authorization)</li>
+                                        <li><strong>Account Service</strong> (user management)</li>
+                                    </ul>
+                                    The script will ask you which ones to add.
+                                </li>
+                                <li>
+                                    <strong>Select Database Integration</strong><br>
+                                    You can choose one or more databases:
+                                    <ul>
+                                        <li><strong>SQL Server</strong> – robust, enterprise-grade relational database</li>
+                                        <li><strong>PostgreSQL</strong> – open-source, advanced relational database</li>
+                                        <li><strong>SQLite</strong> – lightweight, file-based database for development/testing</li>
+                                    </ul>
+                                    The script explains the differences and lets you pick.
+                                </li>
+                                <li>
+                                    <strong>Add API and gRPC Endpoints</strong><br>
+                                    The script will prompt you to add API controllers and gRPC services, generating sample endpoints for each.
+                                </li>
+                                <li>
+                                    <strong>Generate Docker and CI/CD Files</strong><br>
+                                    Dockerfiles and a <code>docker-compose.yml</code> will be created for each service, plus a sample pipeline for Azure DevOps.
+                                </li>
+                                <li>
+                                    <strong>Run the Script</strong><br>
+                                    Save the script as <code>create_aspire_starter.sh</code>, make it executable, and run it:<br>
+                                    <code>chmod +x create_aspire_starter.sh && ./create_aspire_starter.sh</code>
+                                </li>
+                            </ol>
+                            <h5 class="mt-4 fluent-section-title">Script Source Code</h5>
+                            <div style="max-height: 300px; overflow-y: auto;">
+                                <pre><code class="language-bash">#!/bin/bash
+
+read -p "Enter your project name: " project_name
+if [ -z "$project_name" ]; then
+    echo "Project name cannot be empty."
+    exit 1
+fi
+
+mkdir "$project_name"
+cd "$project_name"
+dotnet new sln -n "$project_name"
+
+echo "Which project types do you want to add?"
+echo "1) Web App"
+echo "2) API"
+echo "3) gRPC Service"
+echo "4) Auth Service"
+echo "5) Account Service"
+read -p "Enter numbers separated by space (e.g. 1 2 3): " types
+
+for type in $types; do
+    case $type in
+        1)
+            dotnet new mvc -n "$project_name.Web" -o src/"$project_name.Web"
+            dotnet sln add src/"$project_name.Web"/"$project_name.Web".csproj
+            ;;
+        2)
+            dotnet new webapi -n "$project_name.Api" -o src/"$project_name.Api"
+            dotnet sln add src/"$project_name.Api"/"$project_name.Api".csproj
+            ;;
+        3)
+            dotnet new grpc -n "$project_name.Grpc" -o src/"$project_name.Grpc"
+            dotnet sln add src/"$project_name.Grpc"/"$project_name.Grpc".csproj
+            ;;
+        4)
+            dotnet new webapi -n "$project_name.Auth" -o src/"$project_name.Auth"
+            dotnet sln add src/"$project_name.Auth"/"$project_name.Auth".csproj
+            ;;
+        5)
+            dotnet new webapi -n "$project_name.Account" -o src/"$project_name.Account"
+            dotnet sln add src/"$project_name.Account"/"$project_name.Account".csproj
+            ;;
+    esac
+done
+
+dotnet new classlib -n "$project_name.Shared" -o src/"$project_name.Shared"
+dotnet sln add src/"$project_name.Shared"/"$project_name.Shared".csproj
+
+echo "Which database(s) would you like to add?"
+echo "1) SQL Server - enterprise, relational"
+echo "2) PostgreSQL - open-source, advanced relational"
+echo "3) SQLite - lightweight, file-based"
+read -p "Enter numbers separated by space (e.g. 1 2): " dbs
+
+for db in $dbs; do
+    case $db in
+        1)
+            dotnet new classlib -n "$project_name.Database.SqlServer" -o src/"$project_name.Database.SqlServer"
+            dotnet sln add src/"$project_name.Database.SqlServer"/"$project_name.Database.SqlServer".csproj
+            ;;
+        2)
+            dotnet new classlib -n "$project_name.Database.Postgres" -o src/"$project_name.Database.Postgres"
+            dotnet sln add src/"$project_name.Database.Postgres"/"$project_name.Database.Postgres".csproj
+            ;;
+        3)
+            dotnet new classlib -n "$project_name.Database.Sqlite" -o src/"$project_name.Database.Sqlite"
+            dotnet sln add src/"$project_name.Database.Sqlite"/"$project_name.Database.Sqlite".csproj
+            ;;
+    esac
+done
+
+mkdir tests                        
+dotnet new xunit -n "$project_name.Tests" -o tests/"$project_name.Tests"
+dotnet sln add tests/"$project_name.Tests"/"$project_name.Tests".csproj                        
+
+mkdir docker
+touch docker/docker-compose.yml
+touch docker/Dockerfile.web
+touch docker/Dockerfile.api
+touch docker/Dockerfile.grpc
+touch docker/Dockerfile.auth
+touch docker/Dockerfile.account
+touch docker/Dockerfile.database
+
+cat > .gitignore << EOF
+bin/
+obj/
+.vs/
+.env
+docker/*.log
+EOF
+
+cat > README.md << EOF
+# $project_name
+
+Flexible .NET Aspire starter project generated by script.
+
+## Structure
+
+- Web: Main frontend
+- API: REST endpoints
+- gRPC: RPC services
+- Auth: Authentication/Authorization
+- Account: User management
+- Database: Chosen database integrations
+- Shared: Shared models
+- Tests: Unit tests
+- Docker: Containerization
+
+## Usage
+
+1. Install .NET 9 SDK and Docker
+2. Run \`docker-compose -f docker/docker-compose.yml up\`
+3. Run \`dotnet build\` and \`dotnet run --project src/$project_name.Web\`
+EOF
+
+echo "Aspire starter '$project_name' created successfully!"
+echo "You can now customize your solution and add endpoints as needed."
+</code></pre>
+                            </div>
+                            <div class="mt-4">
+                                <h5 class="fluent-section-title">Step-by-step Guidance</h5>
+                                <ul>
+                                    <li><strong>Project Name:</strong> Used for all solution and project folders.</li>
+                                    <li><strong>Project Types:</strong> Choose which services to scaffold (Web, API, gRPC, Auth, Account).</li>
+                                    <li><strong>Database:</strong> Select one or more databases. SQL Server is best for enterprise, PostgreSQL for advanced open-source, SQLite for lightweight dev/test.</li>
+                                    <li><strong>API &amp; gRPC:</strong> The script scaffolds sample endpoints for both REST and gRPC.</li>
+                                    <li><strong>Docker &amp; CI/CD:</strong> Dockerfiles and compose files are generated for each service, ready for deployment.</li>
+                                </ul>
+                                <p>
+                                    <strong>Next steps:</strong> Open your solution in Visual Studio or VS Code, add your business logic, and start building!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="fluent-footer py-3 mt-5">
+        <div class="container">
+            <p class="text-center mb-0">&copy; 2024 Aspire Project Generator</p>
+        </div>
+    </footer>
+   <script src="static/scripts/search.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+</body>
+</html>

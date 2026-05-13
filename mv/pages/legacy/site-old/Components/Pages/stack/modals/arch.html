@@ -1,0 +1,57 @@
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+    .link-card {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
+    .link-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    }
+    .link-card .card-body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: start;
+        text-align: center;
+    }
+    .link-card img {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+    }
+    .link-card .card-title {
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+    .link-card .card-text {
+        font-size: 0.75rem;
+    }
+</style>
+
+<div class="container-fluid p-4">
+    <div class="pb-3 mb-4 border-bottom">
+        <h3 class="fw-light">Architecture & Platforms</h3>
+        <p class="text-muted mb-0">Core operating systems, development environments, and platforms.</p>
+    </div>
+
+    <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-4">
+        <!-- Card Items -->
+        <div class="col"><a href="https://yum.oracle.com/oracle-linux-isos.html" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://www.kernel.org/theme/images/logos/favicon.png" class="mb-3" alt="Linux Distros logo" /><h6 class="card-title">Oracle Linux ISOs</h6><p class="card-text small">Official Oracle Linux ISO downloads for enterprise deployments.</p></div></a></div>
+        <div class="col"><a href="https://docs.oracle.com/en/operating-systems/oracle-linux/9/" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://docs.oracle.com/sp_common/site-template/ohc-common/img/o-icon/favicon.ico" class="mb-3" alt="Oracle Linux logo" /><h6 class="card-title">Oracle Linux Docs</h6><p class="card-text small">Documentation for Oracle Linux 9, including installation and administration guides.</p></div></a></div>
+        <div class="col"><a href="https://alpinelinux.org/downloads/" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://alpinelinux.org/alpine-logo.ico" class="mb-3" alt="Alpine logo" /><h6 class="card-title">Alpine Linux</h6><p class="card-text small">Minimalist Linux distribution for containers and security-focused deployments.</p></div></a></div>
+        <div class="col"><a href="https://www.centos.org/" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://www.centos.org/assets/icons/apple-touch-icon.png" class="mb-3" alt="CentOS logo" /><h6 class="card-title">CentOS</h6><p class="card-text small">Community-driven free software effort focused on delivering a robust open source ecosystem.</p></div></a></div>
+        <div class="col"><a href="https://www.debian.org/" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://www.debian.org/favicon.ico" class="mb-3" alt="Debian logo" /><h6 class="card-title">Debian</h6><p class="card-text small">Universal operating system known for stability and a vast package repository.</p></div></a></div>
+        <div class="col"><a href="https://www.ubuntu.com/" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://assets.ubuntu.com/v1/f38b9c7e-COF%20apple-touch-icon.png" class="mb-3" alt="Ubuntu logo" /><h6 class="card-title">Ubuntu</h6><p class="card-text small">Popular Linux distribution for desktops, servers, and cloud, with ROS2 and Gazebo support.</p></div></a></div>
+        <div class="col"><a href="https://www.suse.com/" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://www.suse.com/favicon.ico" class="mb-3" alt="SUSE logo" /><h6 class="card-title">SUSE</h6><p class="card-text small">Enterprise Linux distribution for mission-critical workloads and cloud infrastructure.</p></div></a></div>
+        <div class="col"><a href="https://www.kali.org/tools/" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Kali-dragon-icon.svg" class="mb-3" alt="Kali Linux logo" /><h6 class="card-title">Kali Linux</h6><p class="card-text small">Penetration testing and security auditing Linux distribution with hundreds of tools.</p></div></a></div>
+        <div class="col"><a href="https://www.freebsd.org/" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://docs.freebsd.org/favicon.ico" class="mb-3" alt="FreeBSD logo" /><h6 class="card-title">FreeBSD</h6><p class="card-text small">Advanced open source Unix-like operating system for servers, desktops, and embedded platforms.</p></div></a></div>
+        <div class="col"><a href="https://www.microsoft.com/en-us/software-download/" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://www.microsoft.com/favicon.ico?v2" class="mb-3" alt="Windows logo" /><h6 class="card-title">Windows ISOs</h6><p class="card-text small">Official Microsoft Windows ISO downloads for installation and recovery.</p></div></a></div>
+        <div class="col"><a href="https://www.microsoft.com/en-us/evalcenter" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://www.microsoft.com/favicon.ico?v2" class="mb-3" alt="Windows Server logo" /><h6 class="card-title">Windows Server ISOs</h6><p class="card-text small">Evaluation and trial ISOs for Microsoft Windows Server editions.</p></div></a></div>
+        <div class="col"><a href="https://systemd.io/" target="_blank" rel="noopener noreferrer" class="card h-100 link-card shadow-sm"><div class="card-body"><img src="https://systemd.io/images/systemd-logo.png" class="mb-3" alt="systemd logo" /><h6 class="card-title">systemd</h6><p class="card-text small">A suite of basic building blocks for a Linux system.</p></div></a></div>
+    </div>
+</div>

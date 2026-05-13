@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO & Best Practices | Ophelia Labs</title>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="SEO best practices, search logic, and federated search implementation for Ophelia Labs.">
+    <meta name="keywords" content="SEO, best practices, search, federated search, Ophelia Labs, site-index, accessibility, meta tags">
+    <meta name="author" content="Ophelia Labs">
+    <link rel="canonical" href="https://ophelialabs.github.io/nav/resources/best-practices.html">
+    <!-- Open Graph -->
+    <meta property="og:title" content="SEO & Best Practices | Ophelia Labs">
+    <meta property="og:description" content="SEO best practices, search logic, and federated search implementation for Ophelia Labs.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://ophelialabs.github.io/nav/resources/best-practices.html">
+    <meta property="og:site_name" content="Ophelia Labs">
+    <!-- Bootstrap & Site CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/static/content/site.css" />
+</head>
+
+<body>
+    <div id="header-include"></div>
+    <main class="container body-content" style="margin-top: 80px;">
+        <pre style="white-space: pre-wrap; word-break: break-word; background: #f8f9fa; padding: 1.5rem; border-radius: 8px;">
+1. SEO Best Practices
+a. Meta Tags in &lt;head&gt;
+
+&lt;!-- ...existing code... --&gt;
+&lt;meta name="description" content="Professional software engineering portfolio and technical resource hub"&gt;
+&lt;meta name="keywords" content="software engineering, cloud, security, architecture, portfolio, ophelialabs, devops, kubernetes, flask, rust, react, go, linux"&gt;
+&lt;meta name="author" content="Ophelia Labs"&gt;
+&lt;meta property="og:title" content="Ophelia Labs Portfolio"&gt;
+&lt;meta property="og:description" content="Professional software engineering portfolio and technical resource hub"&gt;
+&lt;meta property="og:type" content="website"&gt;
+&lt;meta property="og:url" content="https://ophelialabs.github.io/"&gt;
+&lt;meta property="og:image" content="https://ophelialabs.github.io/static/content/og-image.png"&gt;
+&lt;link rel="canonical" href="https://ophelialabs.github.io/"&gt;
+&lt;!-- ...existing code... --&gt;
+
+b. Use semantic HTML
+Use &lt;main&gt;, &lt;nav&gt;, &lt;section&gt;, &lt;article&gt;, &lt;footer&gt;, etc., for structure.
+
+c. Descriptive Titles and Headings
+Each page should have a unique &lt;title&gt; and &lt;h1&gt;.
+
+d. Sitemap and robots.txt
+Add /sitemap.xml and /robots.txt at your site root for search engines.
+
+2. Search Logic Implementation
+a. Search Bar Event
+Update your search bar to redirect to a results page with the query as a parameter:
+// ...existing code...
+document.getElementById('searchInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+        const query = encodeURIComponent(this.value.trim());
+        if (query) {
+            window.location.href = `/search.html?q=${query}`;
+        }
+    }
+});
+// ...existing code...
+
+b. Create a Search Results Landing Page
+Create search.html in your root directory:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Search Results | Ophelia Labs</title>
+    <meta name="robots" content="noindex, follow">
+    <link rel="stylesheet" href="static/content/site.css" />
+</head>
+<body>
+    <div id="header-placeholder"></div>
+    <main class="container mt-5 pt-5">
+        <h1>Search Results</h1>
+        <div id="search-results"></div>
+    </main>
+    <div id="footer-placeholder"></div>
+    <script src="static/scripts/site.js"></script>
+    <script src="static/scripts/search.js"></script>
+</body>
+</html>
+
+c. Implement Search Logic (static/scripts/search.js)
+document.addEventListener('DOMContentLoaded', function() {
+    const params = new URLSearchParams(window.location.search);
+    const query = params.get('q');
+    const resultsDiv = document.getElementById('search-results');
+    if (!query) {
+        resultsDiv.innerHTML = '<p>No search query provided.</p>';
+        return;
+    }
+    resultsDiv.innerHTML = `<p>Searching for "<strong>${query}</strong>"...</p>`;
+
+    // Example: Search local site index (could be a JSON file generated at build time)
+    fetch('/static/content/site-index.json')
+        .then(res => res.json())
+        .then(pages => {
+            // Simple search: title or content includes query
+            const results = pages.filter(page =>
+                page.title.toLowerCase().includes(query.toLowerCase()) ||
+                page.content.toLowerCase().includes(query.toLowerCase())
+            );
+            if (results.length === 0) {
+                resultsDiv.innerHTML = '<p>No results found on this site.</p>';
+            } else {
+                resultsDiv.innerHTML = results.map(r =>
+                    `<div class="search-result">
+                        <a href="${r.url}"><h3>${r.title}</h3></a>
+                        <p>${r.snippet}</p>
+                    </div>`
+                ).join('');
+            }
+        });
+
+    // Optionally: Search external/linked sites using their APIs or a custom federated search
+    // Example: Google Custom Search API, or fetch from other known endpoints
+});
+Note:
+
+You need to generate a site-index.json file with {title, url, content, snippet} for each page.
+For external sites, use their APIs (if available) or Google Programmable Search Engine.
+3. Federated Search (Local + Linked Sites)
+For your own site: Use a static JSON index or a backend search endpoint.
+For linked sites: Use their public APIs, or Google Programmable Search Engine (CSE) for federated results.
+4. Accessibility & Usability
+Ensure the search bar is accessible (aria-label, keyboard navigation).
+Use clear headings and result summaries.
+Summary:
+
+Add SEO meta tags and semantic HTML.
+On search, redirect to /search.html?q=....
+On search.html, use JS to fetch and display results from your own index and optionally from linked sites.
+For federated search, use APIs or Google CSE.
+
+1. Sample site-index.json
+Place this file at /static/content/site-index.json.
+Each entry should represent a page or resource on your site.
+[
+  {
+    "title": "Home",
+    "url": "/index.html",
+    "content": "Welcome to Ophelia Labs. Professional software engineering portfolio and technical resource hub.",
+    "snippet": "Welcome to Ophelia Labs – your resource for cloud, security, and architecture expertise."
+  },
+  {
+    "title": "About",
+    "url": "/about.html",
+    "content": "Learn more about Ophelia Labs, our mission, and our team.",
+    "snippet": "Discover the mission and team behind Ophelia Labs."
+  },
+  {
+    "title": "Cloud Solutions",
+    "url": "/cloud.html",
+    "content": "Multi-cloud architecture, implementation, and best practices.",
+    "snippet": "Explore our expertise in multi-cloud architecture and solutions."
+  },
+  {
+    "title": "Security",
+    "url": "/security.html",
+    "content": "Enterprise security architecture, compliance, and risk management.",
+    "snippet": "Enterprise security and compliance services from Ophelia Labs."
+  },
+  {
+    "title": "Portfolio",
+    "url": "/portfolio.html",
+    "content": "A showcase of projects, case studies, and technical achievements.",
+    "snippet": "Browse our portfolio of projects and technical case studies."
+  }
+]
+
+2. Federated Search: Details
+Federated search means searching both your own site and external/linked sites, then combining the results.
+
+a. Your Own Site
+Use the above site-index.json and your existing JS logic.
+b. Linked/External Sites
+Option 1: Google Programmable Search Engine (CSE)
+
+Create a CSE and configure it to search your site and any linked domains.
+Use the CSE JSON API to fetch results.
+Example JS snippet:
+// Replace YOUR_API_KEY and YOUR_CX with your CSE credentials
+// Replace YOUR_API_KEY and YOUR_CX with your CSE credentials
+fetch(`https://www.googleapis.com/customsearch/v1?key=YOUR_API_KEY&cx=YOUR_CX&q=${encodeURIComponent(query)}`)
+  .then(res => res.json())
+  .then(data => {
+    // data.items is an array of results
+    // Merge or display these results with your local results
+  });
+
+Note: The API is rate-limited and may require billing.
+Option 2: Public APIs
+
+If linked sites have their own search APIs, you can fetch from them and merge results.
+Option 3: RSS/Atom Feeds
+
+For blogs or news, fetch and parse RSS feeds, then search entries client-side.
+c. Displaying Results
+Combine your local results and external results.
+Clearly label which results are from your site and which are external.
+Example:
+<h2>Results from Ophelia Labs</h2>
+<!-- local results here -->
+<h2>Results from Linked Sites</h2>
+<!-- federated results here -->
+
+3. Security & Privacy
+Only use public APIs or data you have permission to access.
+Respect CORS and API usage policies.
+Summary:
+
+Use a JSON index for your own site.
+Use Google CSE or public APIs for federated search.
+Merge and display results on your search landing page, clearly indicating their source.
+
+
+Inspect the Network Tab
+
+Use browser DevTools to perform a search on the site and see if it calls an API endpoint (look for /api/search, /search.json, etc.).
+If you see a fetch/XHR request returning JSON, you may be able to use it (check CORS and terms of use).
+
+Example: Using a Public Search API
+Suppose you want to federate search with Stack Overflow.
+
+Sample fetch:
+
+fetch(`https://api.stackexchange.com/2.3/search/advanced?order=desc&sort=relevance&q=${encodeURIComponent(query)}&site=stackoverflow`)
+  .then(res => res.json())
+  .then(data => {
+    // data.items is an array of results
+    // Merge or display these results
+  });
+
+  Another Example: GitHub Repo Search
+  fetch(`https://api.github.com/search/repositories?q=${encodeURIComponent(query)}`)
+  .then(res => res.json())
+  .then(data => {
+    // data.items is an array of repositories
+  });
+
+  Merging Results
+Fetch from your local index and from each public API.
+Combine the results in your UI, clearly labeling their source.
+<h2>Results from Ophelia Labs</h2>
+<!-- local results here -->
+<h2>Results from Linked Sites</h2>
+<!-- federated results here -->
+
+CORS and Rate Limits
+Many APIs require an API key or registration.
+Some APIs have CORS restrictions and may not work directly from the browser (you may need a backend proxy).
+Always check the API’s terms of service and rate limits.
+
+Example Combined Search (Pseudo-code)
+Promise.all([
+  fetch('/static/content/site-index.json').then(r => r.json()),
+  fetch(`https://api.stackexchange.com/2.3/search/advanced?order=desc&sort=relevance&q=${encodeURIComponent(query)}&site=stackoverflow`).then(r => r.json())
+]).then(([localResults, soResults]) => {
+  // Render localResults
+  // Render soResults.items
+});
+
+Summary
+Find APIs: Docs, Google, DevTools, forums.
+Check: CORS, authentication, rate limits, terms.
+Fetch: Use fetch() or your preferred HTTP client.
+Merge: Combine and display results, label sources.
+</pre>
+    </main>
+    <div id="footer-include"></div>
+    <script>
+    // Dynamic header/footer includes
+    fetch('/main/header.html').then(r => r.text()).then(t => {
+        document.getElementById('header-include').innerHTML = t;
+    });
+    fetch('/main/footer.html').then(r => r.text()).then(t => {
+        document.getElementById('footer-include').innerHTML = t;
+    });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

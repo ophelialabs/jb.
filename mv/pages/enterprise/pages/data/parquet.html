@@ -1,0 +1,73 @@
+<h1>Apache Parquet</h1>
+    <p>Apache Parquet is an open-source, columnar file format that is highly optimized for storing and processing large datasets in analytical systems. Unlike traditional row-based formats such as CSV, Parquet organizes data by columns, which offers significant advantages for big data applications.</p>
+
+    <h2>Key features and benefits</h2>
+    <ul>
+        <li><strong>Columnar storage:</strong> Data is stored vertically by column rather than horizontally by row. This is ideal for analytical queries that often only need to access a small subset of columns from a large table. The system can efficiently read only the required columns, minimizing I/O and increasing performance.</li>
+        <li><strong>Efficient compression:</strong> By grouping similar data types together in columns, Parquet achieves higher and more efficient data compression. This reduces storage space and costs, as well as the amount of data that needs to be transferred over a network. Parquet supports multiple compression algorithms, such as Snappy, Gzip, and Zstandard.</li>
+        <li><strong>Performance optimization:</strong>
+            <ul>
+                <li><strong>Predicate pushdown:</strong> This technique allows the query engine to filter data at the storage level before it's even read into memory. Parquet's metadata, which includes statistics like minimum and maximum values for columns, enables the system to skip over entire chunks of data that don't match the filter criteria, dramatically speeding up queries.</li>
+                <li><strong>Vectorized reads:</strong> Parquet is optimized for processing data in batches (vectors) instead of row by row, making efficient use of modern CPU architectures for faster processing.</li>
+            </ul>
+        </li>
+        <li><strong>Self-describing:</strong> Each Parquet file contains metadata that includes the schema and other structural information. This means tools can interpret the data without an external schema definition, improving data integrity and making processing easier.</li>
+        <li><strong>Support for complex data types:</strong> Parquet natively handles nested data structures like arrays, maps, and structs, which are not supported by simpler formats like CSV.</li>
+        <li><strong>Ecosystem support:</strong> Parquet is a common interchange format in the big data world and is supported by a wide range of processing frameworks and services, including:
+            <ul>
+                <li><strong>Processing engines:</strong> Apache Spark, Apache Hadoop, Apache Hive, and Presto.</li>
+                <li><strong>Cloud storage:</strong> Amazon S3, Google Cloud Storage, and Azure Data Lake Storage.</li>
+                <li><strong>Data lakehouse architectures:</strong> Used as the base storage layer for formats like Delta Lake and Apache Iceberg.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h2>How Parquet differs from CSV</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Feature</th>
+                <th>Parquet</th>
+                <th>CSV</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Storage Model</strong></td>
+                <td>Column-oriented</td>
+                <td>Row-oriented</td>
+            </tr>
+            <tr>
+                <td><strong>File Structure</strong></td>
+                <td>Binary format, not human-readable</td>
+                <td>Plain text, human-readable</td>
+            </tr>
+            <tr>
+                <td><strong>Storage Efficiency</strong></td>
+                <td>Highly efficient due to columnar compression</td>
+                <td>Inefficient; stores all data as text, leading to larger file sizes</td>
+            </tr>
+            <tr>
+                <td><strong>Query Performance</strong></td>
+                <td>Much faster for analytical queries; reads only necessary columns and uses predicate pushdown</td>
+                <td>Slow; must read all data in every row, regardless of query</td>
+            </tr>
+            <tr>
+                <td><strong>Schema</strong></td>
+                <td>Includes embedded metadata for schema</td>
+                <td>Does not include schema; often requires an external file or manual definition</td>
+            </tr>
+            <tr>
+                <td><strong>Data Types</strong></td>
+                <td>Supports complex and nested data types</td>
+                <td>Flat structure; cannot handle nested data</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Common use cases</h2>
+    <ul>
+        <li><strong>Data lakes:</strong> Parquet is the de facto standard for storing data in modern data lake and lakehouse architectures, providing a high-performance, cost-effective storage layer.</li>
+        <li><strong>Analytical workloads:</strong> It is the ideal format for Online Analytical Processing (OLAP) systems and business intelligence workloads that involve running complex, ad hoc queries on large datasets.</li>
+        <li><strong>Batch processing:</strong> Parquet is widely used in batch processing jobs with frameworks like Apache Spark and Hadoop, where data is ingested, processed, and then stored.</li>
+    </ul>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="https://docs.langchain.com/use-these-docs" target="_blank" rel="noopener noreferrer">Use These Docs</a>
+    <h1>Mapping User Paths (histogram) in LangChain Infrastructure</h1>
+
+    To set up a map that visualizes a user's path (or agent's workflow) through an Enterprise organizations infrastructure using LangChain, you'll need to leverage observability and tracing platforms like LangSmith or third-party monitoring tools such as Datadog, Dynatrace, or Langfuse. 
+These tools provide the tracing and visualization capabilities to map out complex, non-deterministic execution flows that are common in LLM applications built with LangChain and LangGraph. LangChain itself is a framework, not a dedicated monitoring or visualization platform. 
+
+Key Steps to Set Up User Path Tracing
+Select an Observability Platform:
+LangSmith: The dedicated platform by LangChain for agent engineering, providing detailed tracing, monitoring, and evaluation.
+Third-Party APM Tools: Integrations with existing Application Performance Monitoring (APM) tools like Datadog, Dynatrace, or IBM Instana allow you to integrate LLM application metrics into your existing infrastructure dashboards.
+Instrument Your Code:
+Install the necessary libraries (e.g., langsmith, ddtrace, langfuse depending on your choice) in your Python or JavaScript/TypeScript environment.
+For LangSmith, setting the LANGSMITH_TRACING and LANGSMITH_API_KEY environment variables often provides automatic instrumentation of all LangChain runs.
+For other tools, you may need to prefix your application command (e.g., ddtrace-run python <your-app>.py for Datadog) or use their specific SDKs for manual tracing if needed.
+Identify Users and Sessions:
+To effectively map a user's path, you need to associate runs with a specific user_id or session_id within the application's runtime configuration. This is crucial for filtering and analyzing individual user journeys within the observability platform's dashboards.
+Visualize the Path:
+Once data is being collected, the observability platform's UI will present the execution flow visually. You can see each step of the agent's run, including:
+Initial user input
+Model interactions (LLM calls)
+Tool usage (e.g., calling external APIs, searching databases)
+Decision points (e.g., in LangGraph workflows)
+Final output 
+This visualization helps in debugging complex agent behavior, understanding performance bottlenecks (e.g., identifying slow chains), and analyzing usage patterns. 
+
+To set up a map that tracks a user's path, follow these steps:
+1. Define the Infrastructure Map (StateGraph) 
+Instead of a linear chain, use a StateGraph to define your nodes (infrastructure components) and edges (the paths between them). 
+Nodes: Functions representing specific infrastructure tasks, such as database lookups, API calls, or LLM reasoning.
+Edges: Defined routes that dictate how a user moves from one node to another based on logic or LLM decisions. 
+2. Implement User Persistence
+To track a specific user's path across multiple sessions or threads, integrate a Checkpointer. 
+Thread ID: Use a thread_id to namespace the user's current session.
+Store: Utilize the in_memory_store or a persistent database to save "memories" and historical paths tied to a specific user_id. 
+3. Visualize the Path
+You can visualize the conceptual map and the actual user execution path through several methods:
+Built-in Visualization: Use the get_graph().draw_mermaid_png() method to generate a flow diagram of your infrastructure directly in your development environment.
+LangSmith: Set the LANGCHAIN_TRACING_V2=true environment variable to automatically send execution data to the LangSmith platform. This provides a real-time trace of the user's path through every node and transition.
+Langfuse: For a production-grade "mental model" view, Langfuse automatically infers agentic graphs from trace timings, allowing support teams to see exactly which path a user took and why. 
+4. Infrastructure Monitoring
+For deep infrastructure visibility, you can prefix your LangChain application with Datadog APM using ddtrace-run. This maps the user's journey against traditional infrastructure metrics like latency and resource usage. 
+
+Prerequisites
+Install langchain, langgraph, and the relevant model integration package (e.g., langchain-openai):
+pip install langchain langgraph langchain-openai
+Set your API key as an environment variable (e.g., OPENAI_API_KEY). 
+Step-by-Step Implementation
+Define the Graph State using a TypedDict to hold conversation history and a list for tracking the user's path.
+Initialize an InMemoryStore for persistence across sessions, noting that a database is better for production.
+Define nodes (steps) where each function accesses the InMemoryStore via get_store() to log actions with a user_id and namespace.
+Build the graph using StateGraph, add the nodes, connect them with edges, and compile it, injecting the InMemoryStore. A MemorySaver can be used for short-term memory.
+Run the compiled graph, providing a unique user_id in the config's configurable section. 
+Retrieving and Visualizing the Path
+After running, query the InMemoryStore with the user_id to retrieve logged actions and reconstruct the path. This data can be used for visualization, potentially with tools like LangSmith. 
+
+tracking a user's path (long-term context) in LangChain infrastructure is primarily achieved using InMemoryStore within the LangGraph framework. This setup namespaces memories by user_id to ensure isolation and persistence across different interaction threads. 
+1. Initialize the Infrastructure 
+To start, you must instantiate the InMemoryStore and a checkpointer. The checkpointer manages short-term thread state, while the store manages long-term user data.
+
+```
+from langgraph.store.memory import InMemoryStore
+from langgraph.checkpoint.memory import MemorySaver
+
+# The Store holds cross-thread user data
+store = InMemoryStore()
+
+# The Checkpointer holds single-thread state
+checkpointer = MemorySaver()
+```
+
+2. Define the User Path (Namespacing)
+You can map a user's "path" by organizing data into hierarchical namespaces. A common pattern is ("users", user_id, "history"). 
+Namespace: A tuple used to group related data (e.g., ("users", "user_123")).
+Key: A unique identifier within that namespace (e.g., "current_step"). 
+3. Record and Update the User Path 
+In your graph nodes, you can update the user's progress or path using the store.put() method. 
+
+```
+def update_user_path(state, config, store):
+    user_id = config["configurable"].get("user_id")
+    namespace = ("users", user_id, "path")
+    
+    # Store the user's current step or "path" metadata
+    store.put(namespace, "latest_node", {"node": "onboarding_step_2"})
+    return "User path updated."
+```
+
+4. Retrieve the User Path
+To show or act upon the user's path in subsequent sessions, use store.get() or store.search().
+
+```
+def get_user_path(state, config, store):
+    user_id = config["configurable"].get("user_id")
+    namespace = ("users", user_id, "path")
+    
+    # Retrieve the user's path data
+    path_data = store.get(namespace, "latest_node")
+    return path_data
+```
+or visualize the current context based on the stored path:
+```
+def get_current_context(state, config, store):
+    user_id = config["configurable"].get("user_id")
+    # Retrieve the user's stored path from the in-memory store
+    user_path = store.get(("users", user_id, "path"), "latest_node")
+    
+    if user_path:
+        print(f"User is currently at: {user_path.value['node']}")
+```
+
+5. Compile the Graph 
+The graph must be compiled with both the checkpointer and the store to enable these features.
+```
+# Compile the workflow including the store
+app = workflow.compile(checkpointer=checkpointer, store=store)
+
+# Invoke with specific user_id in the config
+config = {"configurable": {"thread_id": "thread_abc", "user_id": "user_123"}}
+app.invoke({"messages": [...]}, config=config)
+```
+
+Key Considerations:
+Ephemeral Nature: InMemoryStore is non-persistent and will be cleared if the server process restarts. For production environments, LangChain recommends replacing it with a database-backed store like Redis or Postgres.
+<a href="https://docs.langchain.com/oss/python/langgraph/add-memory" target="_blank" rel="noopener noreferrer">Semantic</a> Search: You can enable semantic search on your InMemoryStore by providing an embedding function, allowing you to retrieve path steps based on meaning rather than just exact keys. 
+
+</body>
+</html>

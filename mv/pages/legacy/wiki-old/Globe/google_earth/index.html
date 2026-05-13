@@ -1,0 +1,783 @@
+<html>
+  <head>
+    <title>Simple Map</title>
+<style>
+/* * Always set the map height explicitly to define the size of the div element
+ * that contains the map. 
+ */
+gmp-map-3d {
+  height: 100%;
+}
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+.toggleButton {
+    background: rgb(235, 235, 235);
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    position: fixed;
+    top: 10px;
+    left: 5%;
+    transform: translateX(-50%);
+    z-index: 1000;
+}
+.toggleButton:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+/** Terra Draw **/
+#mode-ui {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+}
+#mode-ui button {
+    margin: 5px 0;
+    cursor: pointer;
+}
+
+.mode-button {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ccc;
+    background-color: white;
+    padding: 2px;
+    box-sizing: border-box;
+}
+
+.mode-button img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    user-select: none;
+}
+
+/* Active state for shape modes */
+.mode-button.active {
+    background-color: #e0e0e0; /* light grey */
+}
+
+/* Special buttons default state */
+#select-mode,
+#clear-mode,
+#delete-selected-button,
+#undo-button,
+#redo-button,
+#export-button,
+#upload-button,
+#resize-button {
+    background-color: #000000;
+}
+
+/* Special buttons icon default state */
+#select-mode img,
+#clear-mode img,
+#delete-selected-button img,
+#undo-button img,
+#redo-button img,
+#export-button img,
+#upload-button img,
+#resize-button img {
+    filter: brightness(0) invert(1);
+}
+
+/* Special buttons active/click states */
+#select-mode.active {
+    background-color: #A9A9A9; /* dark grey */
+}
+
+#clear-mode:active,
+#delete-selected-button:active,
+#undo-button:active,
+#redo-button:active,
+#export-button:active,
+#upload-button:active,
+#resize-button.active {
+    background-color: #A9A9A9; /* dark grey */
+}
+</style>
+  </head>
+  <body>
+  
+  <div id="gmp-map-3d"></div>
+
+    <button class="toggleButton" id="toggleButton">Labels</button>
+    
+ 
+    <!-- Terradraw 
+    <div id="mode-ui">
+        <button id="point-mode" class="mode-button" title="Point"><img src="./img/point.svg" alt="Point" draggable="false"></button>
+        <button id="linestring-mode" class="mode-button" title="Linestring"><img src="./img/polyline.svg" alt="Linestring" draggable="false"></button>
+        <button id="polygon-mode" class="mode-button active" title="Polygon"><img src="./img/polygon.png" alt="Polygon" draggable="false"></button>
+        <button id="rectangle-mode" class="mode-button" title="Rectangle"><img src="./img/rectangle.svg" alt="Rectangle" draggable="false"></button>
+        <button id="circle-mode" class="mode-button" title="Circle"><img src="./img/circle.svg" alt="Circle" draggable="false"></button>
+        <button id="freehand-mode" class="mode-button" title="Freehand"><img src="./img/freehand.svg" alt="Freehand" draggable="false"></button>
+        <button id="select-mode" class="mode-button" title="Select"><img src="./img/select.svg" alt="Select" draggable="false"></button>
+        <button id="resize-button" class="mode-button" title="Resize"><img src="./img/resize.svg" alt="Resize" draggable="false"></button>
+        <button id="clear-mode" class="mode-button" title="Clear"><img src="./img/delete.svg" alt="Clear" draggable="false"></button>
+        <button id="delete-selected-button" class="mode-button" title="Clear last or Selected"><img src="./img/delete-selected.svg" alt="Delete Selected" draggable="false"></button>
+        <button id="undo-button" class="mode-button" title="Undo"><img src="./img/undo.svg" alt="Undo" draggable="false"></button>
+        <button id="redo-button" class="mode-button" title="Redo"><img src="./img/redo.svg" alt="Redo" draggable="false"></button>
+        <button id="export-button" class="mode-button" title="Export"><img src="./img/download.svg" alt="Export" draggable="false"></button>
+        <button id="upload-button" class="mode-button" title="Upload"><img src="./img/upload.svg" alt="Upload" draggable="false"></button>
+        <input type="file" id="upload-input" style="display: none;" accept=".geojson,.json">
+    </div>
+-->    
+    
+    <!-- Google Maps 3d Globe Service -->
+<script>
+(g => {
+var h, a, k, p = "The Google Maps JavaScript API", c = "google", l = "importLibrary", q = "__ib__", m = document, b = window;
+b = b[c] || (b[c] = {});
+var d = b.maps || (b.maps = {}), r = new Set, e = new URLSearchParams, u = () => h || (h = new Promise(async (f, n) => {
+await (a = m.createElement("script"));
+e.set("libraries", [...r] + "");
+for (k in g) e.set(k.replace(/[A-Z]/g, t => "_" + t[0].toLowerCase()), g[k]);
+e.set("callback", c + ".maps." + q);
+a.src = `https://maps.${c}apis.com/maps/api/js?` + e;
+d[q] = f;
+a.onerror = () => h = n(Error(p + " could not load."));
+a.nonce = m.querySelector("script[nonce]")?.nonce || "";
+m.head.append(a)
+}));
+d[l] ? console.warn(p + " only loads once. Ignoring:", g) : d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n))
+})({
+key: "AIzaSyA6myHzS10YXdcazAFalmXvDkrYCp5cLc8",
+v: "beta"
+});
+</script>
+
+<!-- Initialize 3d Globe -->
+<script>
+async function initMap() {
+    const { Map3DElement } = await google.maps.importLibrary("maps3d");
+    const map = new Map3DElement({
+        mode: 'HYBRID'
+    });
+    document.body.append(map);
+}
+initMap();
+</script>
+
+
+	<!-- Labels Toggle 
+<script>
+let map;
+async function init() {
+    const { Map3DElement, MapMode } = await google.maps.importLibrary("maps3d");
+    map = new Map3DElement({ center: { lat: 37.79810773998413, lng: -122.41784275049939, altitude: 89.08476932205978 }, range: 6062.016931506805, tilt: 81.17100663963272, heading: -56.047035719765596, });
+    map.mode = MapMode.SATELLITE;
+    document.body.append(map);
+    // Get the button element by its ID
+    const toggleButton = document.getElementById('toggleButton');
+    toggleButton.addEventListener('click', function () {
+        // Toggle the labels.
+        if (map.mode == MapMode.SATELLITE) {
+            // Setting the map mode to HYBRID turns the labels on.
+            map.mode = MapMode.HYBRID;
+            document.getElementById('toggleButton').innerText = "Labels are on. (HYBRID)";
+        }
+        else {
+            // Setting the map mode to SATELLITE turns the labels on.
+            map.mode = MapMode.SATELLITE;
+            document.getElementById('toggleButton').innerText = "Labels are off. (SATELLITE)";
+        }
+    });
+}
+init();
+</script>
+-->
+
+	<!-- Make Polylines Clickable 
+<script>
+let map;
+async function init() {
+    const { Map3DElement, MapMode, AltitudeMode, Polyline3DInteractiveElement } = await google.maps.importLibrary("maps3d");
+    map = new Map3DElement({
+        center: { lat: 37.7927, lng: -122.4020, altitude: 65.93 }, range: 3362.87, tilt: 64.01, heading: 25.00,
+        mode: MapMode.SATELLITE,
+    });
+    document.body.append(map);
+    const polyline = new Polyline3DInteractiveElement({
+        coordinates: [
+            { lat: 37.80515638571346, lng: -122.4032569467164 },
+            { lat: 37.80337073509504, lng: -122.4012878349353 },
+            { lat: 37.79925208843463, lng: -122.3976697250461 },
+            { lat: 37.7989102378512, lng: -122.3983408725656 },
+            { lat: 37.79887832784348, lng: -122.3987094864192 },
+            { lat: 37.79786443410338, lng: -122.4066878788802 },
+            { lat: 37.79549248916587, lng: -122.4032992702785 },
+            { lat: 37.78861484290265, lng: -122.4019489189814 },
+            { lat: 37.78618687561075, lng: -122.398969592545 },
+            { lat: 37.7892310309145, lng: -122.3951458683092 },
+            { lat: 37.7916358762409, lng: -122.3981969390652 }
+        ],
+        strokeColor: 'blue',
+        outerColor: 'white',
+        strokeWidth: 10,
+        outerWidth: 0.4,
+        altitudeMode: AltitudeMode.RELATIVE_TO_GROUND, // Place it on the ground (as it has no altitude it will just be at ground height).
+        drawsOccludedSegments: true, // Show the line through the buildings or anything else that might get in the way.
+    });
+    polyline.addEventListener('gmp-click', (event) => {
+        // Toggle whether the line draws occluded segments.
+        event.target.drawsOccludedSegments = !event.target.drawsOccludedSegments;
+    });
+    map.append(polyline);
+}
+init();
+</script>
+-->
+
+<!-- Make models clickable
+<script>
+async function init() {
+    // Import the needed libraries.
+    const { Map3DElement, Model3DInteractiveElement } = await google.maps.importLibrary("maps3d");
+    const map = new Map3DElement({
+        center: { lat: 39.1178, lng: -106.4452, altitude: 4395.4952 }, range: 1500, tilt: 74, heading: 0,
+        mode: "HYBRID",
+    });
+    const model = new Model3DInteractiveElement({
+        src: 'https://maps-docs-team.web.app/assets/windmill.glb',
+        position: { lat: 39.1178, lng: -106.4452, altitude: 4495.4952 },
+        orientation: { heading: 0, tilt: 270, roll: 90 },
+        scale: .15,
+        altitudeMode: "CLAMP_TO_GROUND",
+    });
+    model.addEventListener('gmp-click', (event) => {
+        const clickedModel = event.target;
+        clickedModel.scale = Math.random() * (0.5 - 0.1) + 0.1;
+    });
+    document.body.append(map);
+    map.append(model);
+}
+init();
+</script>
+-->
+
+<!-- Search Autocomplete element (To be placed in SaturnX so search is not pinned inside of model 
+<script>
+async function initAutocomplete() {
+    const { PlaceAutocompleteElement } = await google.maps.importLibrary("places");
+    const placeAutocomplete = new google.maps.places.PlaceAutocompleteElement();
+    placeAutocomplete.id = 'place-autocomplete-input';
+    const card = document.getElementById('pac-container');
+    card.appendChild(placeAutocomplete);
+    placeAutocomplete.addEventListener('gmp-select', async ({ placePrediction }) => {
+        const place = placePrediction.toPlace();
+        await place.fetchFields({ fields: ['displayName', 'location', 'id'] });
+        // If the place has a geometry, then present it on a map.
+        if (!place.location) {
+            window.alert("No viewport for input: " + place.displayName);
+            return;
+        }
+        flyToPlace(place);
+    });
+}
+const flyToPlace = async (place) => {
+    const { AltitudeMode, Polyline3DElement, Polygon3DElement, Marker3DElement } = await google.maps.importLibrary("maps3d");
+    const location = place.location;
+    // We need to find the elevation for the point so we place the marker at 50m above the elevation.
+    const elevation = await getElevationforPoint(location);
+    const marker = new Marker3DElement({
+        position: { lat: location.lat(), lng: location.lng(), altitude: elevation + 50 },
+        altitudeMode: AltitudeMode.ABSOLUTE,
+        extruded: true,
+        label: place.displayName,
+    });
+    // Add the marker.
+    map.append(marker);
+    // Fly to the marker.
+    map.flyCameraTo({
+        endCamera: {
+            center: { lat: location.lat(), lng: location.lng(), altitude: elevation + 50 },
+            tilt: 65,
+            heading: 0,
+            range: 1000
+        },
+        durationMillis: 10000,
+    });
+};
+async function getElevationforPoint(location) {
+    const { ElevationService } = await google.maps.importLibrary("elevation");
+    // Get place elevation using the ElevationService.
+    const elevatorService = new google.maps.ElevationService();
+    const elevationResponse = await elevatorService.getElevationForLocations({
+        locations: [location],
+    });
+    if (!(elevationResponse.results && elevationResponse.results.length)) {
+        window.alert(`Insufficient elevation data for place: ${place.name}`);
+        return;
+    }
+    const elevation = elevationResponse.results[0].elevation || 10;
+    return elevation;
+}
+init();
+</script>
+-->
+
+	<!-- Terradraw 
+<script>
+import { Loader } from '@googlemaps/js-api-loader';
+import { TerraDraw, TerraDrawSelectMode, TerraDrawPointMode, TerraDrawLineStringMode, TerraDrawPolygonMode, TerraDrawRectangleMode, TerraDrawCircleMode, TerraDrawFreehandMode } from 'terra-draw';
+import { TerraDrawGoogleMapsAdapter } from 'terra-draw-google-maps-adapter';
+const colorPalette = [
+    "#E74C3C",
+    "#FF0066",
+    "#9B59B6",
+    "#673AB7",
+    "#3F51B5",
+    "#3498DB",
+    "#03A9F4",
+    "#00BCD4",
+    "#009688",
+    "#27AE60",
+    "#8BC34A",
+    "#CDDC39",
+    "#F1C40F",
+    "#FFC107",
+    "#F39C12",
+    "#FF5722",
+    "#795548"
+];
+const getRandomColor = () => colorPalette[Math.floor(Math.random() * colorPalette.length)];
+function processSnapshotForUndo(snapshot) {
+    // console.log("Processing snapshot for undo:", snapshot);
+    return snapshot.map(feature => {
+        const newFeature = JSON.parse(JSON.stringify(feature));
+        if (newFeature.properties.mode === 'rectangle') {
+            // console.log("Processing rectangle for undo:", newFeature);
+            newFeature.geometry.type = 'Polygon';
+            newFeature.properties.mode = 'polygon';
+        }
+        else if (newFeature.properties.mode === 'circle') {
+            // console.log("Processing circle for undo:", newFeature);
+            newFeature.geometry.type = 'Polygon';
+            // The radius is already in properties, so we just need to ensure the mode is correct for re-creation
+            newFeature.properties.mode = 'circle';
+        }
+        return newFeature;
+    });
+}
+function setupModeButtons() {
+    const modeUI = document.getElementById('mode-ui');
+    if (!modeUI) {
+        return;
+    }
+    const modeButtons = {
+        'select-mode': 'select',
+        'point-mode': 'point',
+        'linestring-mode': 'linestring',
+        'polygon-mode': 'polygon',
+        'rectangle-mode': 'rectangle',
+        'circle-mode': 'circle',
+        'freehand-mode': 'freehand',
+        'clear-mode': 'static'
+    };
+    for (const buttonId in modeButtons) {
+        const button = document.getElementById(buttonId);
+        if (button) {
+            button.onclick = () => {
+                setActiveButton(buttonId);
+                const modeName = modeButtons[buttonId];
+                if (!draw) {
+                    return;
+                }
+                if (modeName === 'static') {
+                    draw.clear();
+                    draw.setMode('static');
+                }
+                else if (modeName) {
+                    draw.setMode(modeName);
+                }
+            };
+        }
+    }
+}
+function setActiveButton(buttonId) {
+    const buttons = document.querySelectorAll('.mode-button');
+    const resizeButton = document.getElementById('resize-button');
+    const isResizeActive = resizeButton?.classList.contains('active');
+    buttons.forEach(button => {
+        if (button.id !== 'resize-button') {
+            button.classList.remove('active');
+        }
+    });
+    const activeButton = document.getElementById(buttonId);
+    if (activeButton) {
+        activeButton.classList.add('active');
+    }
+    if (isResizeActive) {
+        resizeButton?.classList.add('active');
+    }
+}
+function initUI() {
+    setActiveButton('point-mode');
+}
+let map;
+let draw;
+let currentMode = 'static';
+let history = [];
+let redoHistory = [];
+let selectedFeatureId = null;
+let isRestoring = false;
+let resizingEnabled = false;
+let debounceTimeout;
+const loader = new Loader({
+    apiKey: "AIzaSyA6myHzS10YXdcazAFalmXvDkrYCp5cLc8",
+    version: "weekly",
+    libraries: ["maps", "drawing", "marker"]
+});
+loader.load().then(async () => {
+    try {
+        const { Map } = await google.maps.importLibrary("maps");
+        const { LatLngBounds } = await google.maps.importLibrary("core");
+        const { Data } = await google.maps.importLibrary("maps");
+        const mapOptions = {
+            center: { lat: 48.862, lng: 2.342 },
+            zoom: 12,
+            mapId: 'c306b3c6dd3ed8d9', // raster '6a17c323f461e521',
+            mapTypeId: 'roadmap',
+            zoomControl: false,
+            tilt: 45,
+            mapTypeControl: true,
+            clickableIcons: false,
+            streetViewControl: false,
+            fullscreenControl: false,
+        };
+        const mapDiv = document.getElementById("map");
+        map = new Map(mapDiv, mapOptions);
+        map.addListener("click", () => {
+            if (draw) {
+                console.log("Current draw mode on map click:", draw.getMode());
+            }
+        });
+        map.addListener("projection_changed", () => {
+            draw = new TerraDraw({
+                adapter: new TerraDrawGoogleMapsAdapter({ map, lib: google.maps, coordinatePrecision: 9 }),
+                modes: [
+                    new TerraDrawSelectMode({
+                        flags: {
+                            polygon: {
+                                feature: {
+                                    draggable: true,
+                                    rotateable: true,
+                                    coordinates: {
+                                        midpoints: true,
+                                        draggable: true,
+                                        deletable: true,
+                                    },
+                                },
+                            },
+                            linestring: {
+                                feature: {
+                                    draggable: true,
+                                    rotateable: true,
+                                    coordinates: {
+                                        midpoints: true,
+                                        draggable: true,
+                                        deletable: true,
+                                    },
+                                },
+                            },
+                            point: {
+                                feature: {
+                                    draggable: true,
+                                    rotateable: true,
+                                },
+                            },
+                            rectangle: {
+                                feature: {
+                                    draggable: true,
+                                    rotateable: true,
+                                    coordinates: {
+                                        midpoints: true,
+                                        draggable: true,
+                                        deletable: true,
+                                    },
+                                },
+                            },
+                            circle: {
+                                feature: {
+                                    draggable: true,
+                                    rotateable: true,
+                                    coordinates: {
+                                        midpoints: true,
+                                        draggable: true,
+                                        deletable: true,
+                                    },
+                                },
+                            },
+                            freehand: {
+                                feature: {
+                                    draggable: true,
+                                    rotateable: true,
+                                    coordinates: {
+                                        midpoints: true,
+                                        draggable: true,
+                                        deletable: true,
+                                    },
+                                },
+                            },
+                        },
+                    }),
+                    new TerraDrawPointMode({
+                        editable: true,
+                        styles: { pointColor: getRandomColor() },
+                    }),
+                    new TerraDrawLineStringMode({
+                        editable: true,
+                        styles: { lineStringColor: getRandomColor() },
+                    }),
+                    new TerraDrawPolygonMode({
+                        editable: true,
+                        styles: (() => {
+                            const color = getRandomColor();
+                            return {
+                                fillColor: color,
+                                outlineColor: color,
+                            };
+                        })(),
+                    }),
+                    new TerraDrawRectangleMode({
+                        styles: (() => {
+                            const color = getRandomColor();
+                            return {
+                                fillColor: color,
+                                outlineColor: color,
+                            };
+                        })(),
+                    }),
+                    new TerraDrawCircleMode({
+                        styles: (() => {
+                            const color = getRandomColor();
+                            return {
+                                fillColor: color,
+                                outlineColor: color,
+                            };
+                        })(),
+                    }),
+                    new TerraDrawFreehandMode({
+                        styles: (() => {
+                            const color = getRandomColor();
+                            return {
+                                fillColor: color,
+                                outlineColor: color,
+                            };
+                        })(),
+                    }),
+                ],
+            });
+            draw.start();
+            draw.on('ready', () => {
+                console.log("TerraDraw is ready!");
+                initUI();
+                setupModeButtons();
+                draw.setMode('point');
+                currentMode = 'point';
+                setActiveButton('point-mode');
+                draw.on("select", (id) => {
+                    // console.log(`Feature selected: ${id}`);
+                    if (selectedFeatureId && selectedFeatureId !== id) {
+                        draw.deselectFeature(selectedFeatureId);
+                    }
+                    selectedFeatureId = id;
+                });
+                draw.on("deselect", () => {
+                    // console.log("Feature deselected");
+                    selectedFeatureId = null;
+                });
+                history.push(processSnapshotForUndo(draw.getSnapshot())); // Push initial empty state
+                draw.on("change", (ids, type) => {
+                    if (isRestoring) {
+                        return;
+                    }
+                    if (debounceTimeout) {
+                        clearTimeout(debounceTimeout);
+                    }
+                    debounceTimeout = window.setTimeout(() => {
+                        const snapshot = draw.getSnapshot();
+                        const processedSnapshot = processSnapshotForUndo(snapshot);
+                        const filteredSnapshot = processedSnapshot.filter((f) => !f.properties.midPoint && !f.properties.selectionPoint);
+                        history.push(filteredSnapshot);
+                        redoHistory = [];
+                    }, 200);
+                });
+                const exportButton = document.getElementById('export-button');
+                if (exportButton) {
+                    exportButton.onclick = () => {
+                        const features = draw.getSnapshot();
+                        const geojson = {
+                            type: "FeatureCollection",
+                            features: features,
+                        };
+                        const data = JSON.stringify(geojson, null, 2);
+                        const blob = new Blob([data], { type: "text/plain" });
+                        const url = URL.createObjectURL(blob);
+                        const link = document.createElement("a");
+                        link.href = url;
+                        link.download = "drawing.geojson";
+                        link.click();
+                        URL.revokeObjectURL(url);
+                    };
+                }
+                const uploadButton = document.getElementById('upload-button');
+                const uploadInput = document.getElementById('upload-input');
+                if (uploadButton && uploadInput) {
+                    uploadButton.onclick = () => {
+                        uploadInput.click();
+                    };
+                    uploadInput.onchange = (event) => {
+                        const file = event.target.files?.[0];
+                        if (file) {
+                            const reader = new FileReader();
+                            reader.onload = (e) => {
+                                try {
+                                    const geojson = JSON.parse(e.target?.result);
+                                    if (geojson.type === "FeatureCollection") {
+                                        draw.addFeatures(geojson.features);
+                                    }
+                                    else {
+                                        alert("Invalid GeoJSON file: must be a FeatureCollection.");
+                                    }
+                                }
+                                catch (error) {
+                                    alert("Error parsing GeoJSON file.");
+                                }
+                            };
+                            reader.readAsText(file);
+                        }
+                    };
+                }
+                const resizeButton = document.getElementById('resize-button');
+                if (resizeButton) {
+                    resizeButton.onclick = () => {
+                        resizingEnabled = !resizingEnabled;
+                        resizeButton.classList.toggle('active', resizingEnabled);
+                        const flags = {
+                            polygon: { feature: { draggable: true, coordinates: { resizable: resizingEnabled ? 'center' : undefined, draggable: !resizingEnabled } } },
+                            linestring: { feature: { draggable: true, coordinates: { resizable: resizingEnabled ? 'center' : undefined, draggable: !resizingEnabled } } },
+                            rectangle: { feature: { draggable: true, coordinates: { resizable: resizingEnabled ? 'center' : undefined, draggable: !resizingEnabled } } },
+                            circle: { feature: { draggable: true, coordinates: { resizable: resizingEnabled ? 'center' : undefined, draggable: !resizingEnabled } } },
+                            freehand: { feature: { draggable: true, coordinates: { resizable: resizingEnabled ? 'center' : undefined, draggable: !resizingEnabled } } },
+                        };
+                        console.log("Updating flags:", flags);
+                        draw.updateModeOptions('select', { flags });
+                    };
+                }
+                const deleteSelectedButton = document.getElementById('delete-selected-button');
+                if (deleteSelectedButton) {
+                    deleteSelectedButton.onclick = () => {
+                        if (selectedFeatureId) {
+                            draw.removeFeatures([selectedFeatureId]);
+                        }
+                        else {
+                            const features = draw.getSnapshot();
+                            if (features.length > 0) {
+                                const lastFeature = features[features.length - 1];
+                                if (lastFeature.id) {
+                                    draw.removeFeatures([lastFeature.id]);
+                                }
+                            }
+                        }
+                    };
+                }
+                const undoButton = document.getElementById('undo-button');
+                if (undoButton) {
+                    undoButton.onclick = () => {
+                        if (history.length > 1) {
+                            redoHistory.push(history.pop());
+                            const snapshotToRestore = history[history.length - 1];
+                            console.log("Restoring snapshot (undo):", snapshotToRestore);
+                            isRestoring = true;
+                            draw.clear();
+                            draw.addFeatures(snapshotToRestore);
+                            setTimeout(() => { isRestoring = false; }, 0);
+                        }
+                    };
+                }
+                const redoButton = document.getElementById('redo-button');
+                if (redoButton) {
+                    redoButton.onclick = () => {
+                        if (redoHistory.length > 0) {
+                            const snapshot = redoHistory.pop();
+                            console.log("Restoring snapshot (redo):", snapshot);
+                            history.push(snapshot);
+                            isRestoring = true;
+                            draw.clear();
+                            draw.addFeatures(snapshot);
+                            setTimeout(() => { isRestoring = false; }, 0);
+                        }
+                    };
+                }
+            });
+            function rotateFeature(feature, angle) {
+                const newFeature = JSON.parse(JSON.stringify(feature));
+                const coordinates = newFeature.geometry.coordinates;
+                const center = getCenter(coordinates);
+                const rotatedCoordinates = coordinates.map(ring => {
+                    return ring.map(point => {
+                        const x = point[0] - center[0];
+                        const y = point[1] - center[1];
+                        const newX = x * Math.cos(angle * Math.PI / 180) - y * Math.sin(angle * Math.PI / 180);
+                        const newY = x * Math.sin(angle * Math.PI / 180) + y * Math.cos(angle * Math.PI / 180);
+                        return [newX + center[0], newY + center[1]];
+                    });
+                });
+                newFeature.geometry.coordinates = rotatedCoordinates;
+                return newFeature;
+            }
+            function getCenter(coordinates) {
+                let x = 0;
+                let y = 0;
+                let count = 0;
+                coordinates.forEach(ring => {
+                    ring.forEach(point => {
+                        x += point[0];
+                        y += point[1];
+                        count++;
+                    });
+                });
+                return [x / count, y / count];
+            }
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'r' && selectedFeatureId) {
+                    const features = draw.getSnapshot();
+                    const selectedFeature = features.find(f => f.id === selectedFeatureId);
+                    if (selectedFeature) {
+                        const newFeature = rotateFeature(selectedFeature, 15);
+                        draw.addFeatures([newFeature]);
+                    }
+                }
+            });
+        });
+    }
+    catch (e) {
+        console.error("Error loading Google Maps API:", e);
+    }
+}).catch(e => {
+    console.error("Error loading Google Maps API:", e);
+});
+</script>
+-->
+  </body>
+</html>

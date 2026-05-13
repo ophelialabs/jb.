@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>react Project Generator Script</title>
+    <!-- Bootstrap 5.3 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- PrismJS for code highlighting -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css" rel="stylesheet">
+    <!-- Fluent UI Bootstrap theme (Bootswatch 'Flatly' as a Fluent-like example) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.3/dist/flatly/bootstrap.min.css" rel="stylesheet">
+    <link href="static/pipeline.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fluent-navbar bg-primary mb-4">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="../../../index.html">
+                <svg width="32" height="32" fill="#fff" class="me-2" viewBox="0 0 16 16"><rect width="16" height="16" rx="4"/></svg>
+                <span style="font-weight:600;letter-spacing:0.03em;">Ophelia</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <div class="navbar-nav ms-auto">
+                    <a class="nav-link fluent-btn" href="react.html">Generator</a>
+                    <a class="nav-link fluent-btn" href="generator.sh">Download</a>
+                    <a class="nav-link fluent-btn" href="#" target="_blank" rel="noopener noreferrer">Docs</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+<body>
+    <div class="container">
+        <h1>React ASP.NET Core TypeScript with Linux Container Support</h1>
+        <p>
+            This project is a starter framework that combines <strong>React</strong> (frontend), <strong>ASP.NET Core</strong> (backend), and <strong>TypeScript</strong> for building modern web applications. It is pre-configured to run seamlessly in Linux containers, making it ideal for cloud-native deployments and development workflows.
+        </p>
+
+        <h2>Best Use Cases</h2>
+        <ul>
+            <li><strong>Full-stack web applications:</strong> Build robust solutions that require a powerful backend (ASP.NET Core) and a dynamic, responsive frontend (React). Perfect for dashboards, portals, and interactive web platforms.</li>
+            <li><strong>Microservices and APIs:</strong> Easily containerize your backend services for deployment on Kubernetes, Docker Swarm, or other orchestrators. The project structure supports scalable, maintainable API development.</li>
+            <li><strong>Cross-platform development:</strong> Develop and test in Linux-based containers to ensure consistency between local, staging, and production environments. This approach minimizes "works on my machine" issues and streamlines CI/CD pipelines.</li>
+            <li><strong>Enterprise-grade applications:</strong> Leverage TypeScript for enhanced type safety, maintainability, and developer productivity. The stack is well-suited for large teams and long-term projects where code quality and reliability are critical.</li>
+            <li><strong>Cloud-native deployments:</strong> Take advantage of seamless integration with cloud platforms and container registries, enabling rapid deployment and scaling in cloud environments such as Azure, AWS, or Google Cloud.</li>
+            <li><strong>Rapid prototyping:</strong> Quickly scaffold new projects with a ready-to-use setup, reducing initial configuration time and allowing teams to focus on feature development.</li>
+        </ul>
+        <p>
+            Whether you're building a new SaaS product, internal business tools, or public-facing web services, this template provides a solid foundation for modern, scalable, and maintainable applications.
+        </p>
+
+        <h3>Example Use Cases and Related Technologies</h3>
+        <ul>
+            <li><strong>SaaS Products:</strong> Quickly launch subscription-based platforms such as CRM systems (e.g., similar to HubSpot or Salesforce), project management tools (like Asana or Trello), or analytics dashboards. The stack supports multi-tenancy, secure authentication (integrate with Azure AD, Auth0, or Okta), and scalable APIs.</li>
+            <li><strong>Internal Business Tools:</strong> Develop custom admin panels, inventory management systems, HR portals, or workflow automation tools. Integrate with databases like PostgreSQL, SQL Server, or MongoDB, and connect to enterprise services (e.g., Microsoft Graph, SAP, or ServiceNow).</li>
+            <li><strong>Public-Facing Web Services:</strong> Build customer portals, e-commerce storefronts (similar to Shopify or WooCommerce), or booking systems. Easily add payment processing (Stripe, PayPal), email notifications (SendGrid, Mailgun), and third-party APIs (Google Maps, Twilio).</li>
+            <li><strong>Microservices Architectures:</strong> Containerize backend services for deployment on Kubernetes (AKS, EKS, GKE), Docker Swarm, or Azure Container Apps. Use API gateways (e.g., Azure API Management, Kong) and service meshes (Istio, Linkerd) for advanced routing and security.</li>
+            <li><strong>Cloud-Native Integrations:</strong> Seamlessly deploy to cloud platforms like Azure App Service, AWS Elastic Beanstalk, or Google Cloud Run. Automate CI/CD with GitHub Actions, Azure DevOps, or GitLab CI, and manage secrets with Azure Key Vault or AWS Secrets Manager.</li>
+            <li><strong>Rapid Prototyping:</strong> Scaffold MVPs for startups, hackathons, or client demos. Leverage component libraries (Material-UI, Ant Design), state management (Redux, Zustand), and testing frameworks (Jest, xUnit) to accelerate development.</li>
+        </ul>
+        <p>
+            This template is designed to be extensible and production-ready, enabling integration with modern DevOps workflows, monitoring tools (Application Insights, Prometheus, Grafana), and observability platforms (Datadog, New Relic) for end-to-end visibility and reliability.
+        </p>
+
+        <h2>Getting Started</h2>
+        <h3>Prerequisites</h3>
+        <ul>
+            <li><a href="https://dotnet.microsoft.com/download" target="_blank">.NET 7 SDK or later</a></li>
+            <li><a href="https://nodejs.org/" target="_blank">Node.js (LTS)</a></li>
+            <li><a href="https://www.docker.com/get-started" target="_blank">Docker</a> (for container support)</li>
+        </ul>
+
+        <h3>Running Locally</h3>
+        <ol>
+            <li>
+                <strong>Clone the repository:</strong>
+                <pre><code>git clone &lt;repository-url&gt;
+cd React-ASP-TS-CS</code></pre>
+            </li>
+            <li>
+                <strong>Install frontend dependencies:</strong>
+                <pre><code>cd ClientApp
+npm install
+cd ..</code></pre>
+            </li>
+            <li>
+                <strong>Run the application:</strong>
+                <pre><code>dotnet run</code></pre>
+                <p>The backend will start, and the React frontend will be served via ASP.NET Core.</p>
+            </li>
+        </ol>
+
+        <h3>Running in a Linux Container</h3>
+        <ol>
+            <li>
+                <strong>Build the Docker image:</strong>
+                <pre><code>docker build -t react-asp-ts-cs .</code></pre>
+            </li>
+            <li>
+                <strong>Run the container:</strong>
+                <pre><code>docker run -p 5000:80 react-asp-ts-cs</code></pre>
+                <p>The app will be available at <a href="http://localhost:5000" target="_blank">http://localhost:5000</a>.</p>
+            </li>
+        </ol>
+
+        <h2>Project Structure</h2>
+        <div class="project-structure">
+            <ul>
+                <li><code>ClientApp/</code> — React + TypeScript frontend</li>
+                <li><code>Controllers/</code> — ASP.NET Core API controllers</li>
+                <li><code>Dockerfile</code> — Container configuration</li>
+                <li><code>Startup.cs</code> / <code>Program.cs</code> — ASP.NET Core setup</li>
+            </ul>
+        </div>
+
+        <div class="license">
+            <strong>License:</strong> This project is licensed under the MIT License.
+        </div>
+    </div>
+    <script src="static/scripts/search.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+</body>
+</html>

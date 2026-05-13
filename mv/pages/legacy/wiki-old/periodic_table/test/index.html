@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Periodic Table of Elements{% endblock %}</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Model Viewer for 3D models -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+
+<style>
+    :root {
+        --primary-color: #0d47a1;
+        --secondary-color: #42a5f5;
+        --danger-color: #e53935;
+        --warning-color: #fb8c00;
+        --success-color: #43a047;
+        --info-color: #00acc1;
+    }
+        
+    * {
+        font-family: 'Poppins', sans-serif;
+    }
+        
+    body {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+    }
+        
+    .container-main {
+        background: white;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+        
+    h1 {
+        color: var(--primary-color);
+        font-weight: 700;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .periodic-table {
+        display: grid;
+        grid-template-columns: repeat(18, 60px);
+        grid-auto-rows: 60px;
+        gap: 2px;
+        padding: 20px;
+        background: #f5f5f5;
+        border-radius: 10px;
+        margin-bottom: 30px;
+    }
+    
+    .element-box {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: 2px solid #333;
+        border-radius: 5px;
+        padding: 5px;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        font-weight: 600;
+        color: white;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .element-box:hover {
+        transform: scale(1.1);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+    
+    .element-number {
+        font-size: 9px;
+        opacity: 0.9;
+    }
+    
+    .element-symbol {
+        font-size: 16px;
+        font-weight: 700;
+    }
+    
+    /* Category colors */
+    .alkali-metal { background: linear-gradient(135deg, #ff6b6b 0%, #ff5252 100%); }
+    .alkaline-earth-metal { background: linear-gradient(135deg, #ffd93d 0%, #ffb300 100%); }
+    .transition-metal { background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); }
+    .post-transition-metal { background: linear-gradient(135deg, #9d84b7 0%, #a8dadc 100%); }
+    .nonmetal { background: linear-gradient(135deg, #52b788 0%, #40916c 100%); }
+    .halogen { background: linear-gradient(135deg, #ff006e 0%, #c1121f 100%); }
+    .noble-gas { background: linear-gradient(135deg, #06ffa5 0%, #00d084 100%); }
+    .lanthanide { background: linear-gradient(135deg, #f77f88 0%, #fcbad3 100%); }
+    .actinide { background: linear-gradient(135deg, #c77dff 0%, #b5a7d6 100%); }
+    .metalloid { background: linear-gradient(135deg, #e0aaff 0%, #d5b7e8 100%); }
+    
+    .element-details {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 15px;
+        margin-top: 20px;
+    }
+    
+    .detail-card {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 8px;
+        border-left: 4px solid var(--primary-color);
+    }
+    
+    .detail-label {
+        font-weight: 600;
+        color: var(--primary-color);
+        font-size: 12px;
+        text-transform: uppercase;
+    }
+    
+    .detail-value {
+        font-size: 16px;
+        color: #333;
+        margin-top: 5px;
+    }
+    
+    .model-viewer-container {
+        background: #f0f0f0;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 20px 0;
+    }
+    
+    model-viewer {
+        width: 100%;
+        height: 500px;
+        border-radius: 8px;
+    }
+    
+    .models-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin: 20px 0;
+    }
+    
+    .model-card {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        overflow: hidden;
+    }
+    
+    .model-title {
+        background: var(--primary-color);
+        color: white;
+        padding: 10px;
+        font-weight: 600;
+    }
+    
+    .spectral-image {
+        width: 100%;
+        max-height: 300px;
+        object-fit: cover;
+    }
+    
+    .element-image {
+        width: 100%;
+        max-height: 400px;
+        object-fit: cover;
+        border-radius: 10px;
+        margin: 20px 0;
+    }
+</style>
+
+<body>
+    <div class="container-main">
+<h1>⚛️ Interactive Periodic Table of Elements</h1>
+
+<div class="mb-3">
+    <input type="text" id="searchInput" class="form-control" placeholder="Search elements by name, symbol, or atomic number...">
+</div>
+
+<div class="periodic-table" id="periodicTable"></div>
+
+<!-- Element Details Modal -->
+<div class="modal fade" id="elementModal" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header" style="background: var(--primary-color); color: white;">
+                <h5 class="modal-title" id="elementName">Element</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" style="max-height: 80vh; overflow-y: auto;">
+                <!-- Element Image -->
+                <div id="elementImageContainer" class="text-center"></div>
+                
+                <!-- Basic Details -->
+                <div class="element-details" id="basicDetails"></div>
+                
+                <!-- 3D Models Section -->
+                <h3 class="mt-5 mb-3">🧬 3D Visualizations</h3>
+                <div class="models-grid" id="modelsContainer"></div>
+                
+                <!-- Spectral Bands -->
+                <div id="spectralContainer" class="mt-5"></div>
+                
+                <!-- Additional Info -->
+                <div class="mt-5" id="additionalInfo"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    let allElements = [];
+    const modal = new bootstrap.Modal(document.getElementById('elementModal'));
+    
+    // Fetch elements on page load
+    async function loadElements() {
+        try {
+            const response = await fetch('/api/elements');
+            const data = await response.json();
+            allElements = data.elements || [];
+            renderPeriodicTable(allElements);
+        } catch (error) {
+            console.error('Error loading elements:', error);
+        }
+    }
+    
+    // Category mapping
+    const categoryColors = {
+        'diatomic nonmetal': 'nonmetal',
+        'polyatomic nonmetal': 'nonmetal',
+        'halogen': 'halogen',
+        'noble gas': 'noble-gas',
+        'alkali metal': 'alkali-metal',
+        'alkaline earth metal': 'alkaline-earth-metal',
+        'transition metal': 'transition-metal',
+        'lanthanide': 'lanthanide',
+        'actinide': 'actinide',
+        'metalloid': 'metalloid',
+        'post-transition metal': 'post-transition-metal'
+    };
+    
+    function getColorClass(category) {
+        return categoryColors[category] || 'transition-metal';
+    }
+    
+    function renderPeriodicTable(elements) {
+        const table = document.getElementById('periodicTable');
+        table.innerHTML = '';
+        
+        elements.forEach(element => {
+            const box = document.createElement('div');
+            box.className = `element-box ${getColorClass(element.category)}`;
+            box.style.gridColumn = element.xpos;
+            box.style.gridRow = element.ypos;
+            
+            box.innerHTML = `
+                <div class="element-number">${element.number}</div>
+                <div class="element-symbol">${element.symbol}</div>
+            `;
+            
+            box.addEventListener('click', () => showElementDetails(element));
+            table.appendChild(box);
+        });
+    }
+    
+    function showElementDetails(element) {
+        document.getElementById('elementName').textContent = 
+            `${element.name} (${element.symbol})`;
+        
+        // Element Image
+        const imageContainer = document.getElementById('elementImageContainer');
+        if (element.image && element.image.url) {
+            imageContainer.innerHTML = `
+                <img src="${element.image.url}" alt="${element.name}" 
+                     class="element-image" 
+                     title="${element.image.attribution}">
+                <small class="text-muted">${element.image.title}</small>
+            `;
+        } else {
+            imageContainer.innerHTML = '<p class="text-muted">No image available</p>';
+        }
+        
+        // Basic Details
+        const basicDetails = document.getElementById('basicDetails');
+        basicDetails.innerHTML = `
+            <div class="detail-card">
+                <div class="detail-label">Atomic Number</div>
+                <div class="detail-value">${element.number}</div>
+            </div>
+            <div class="detail-card">
+                <div class="detail-label">Atomic Mass</div>
+                <div class="detail-value">${element.atomic_mass} u</div>
+            </div>
+            <div class="detail-card">
+                <div class="detail-label">Category</div>
+                <div class="detail-value">${element.category}</div>
+            </div>
+            <div class="detail-card">
+                <div class="detail-label">Electron Configuration</div>
+                <div class="detail-value">${element.electron_configuration}</div>
+            </div>
+            <div class="detail-card">
+                <div class="detail-label">Electronegativity (Pauling)</div>
+                <div class="detail-value">${element.electronegativity_pauling || 'N/A'}</div>
+            </div>
+            <div class="detail-card">
+                <div class="detail-label">Discovered By</div>
+                <div class="detail-value">${element.discovered_by || 'Unknown'}</div>
+            </div>
+            ${element.phase ? `
+            <div class="detail-card">
+                <div class="detail-label">Phase at Room Temperature</div>
+                <div class="detail-value">${element.phase}</div>
+            </div>
+            ` : ''}
+            ${element.density ? `
+            <div class="detail-card">
+                <div class="detail-label">Density</div>
+                <div class="detail-value">${element.density} ${element.phase === 'Gas' ? 'g/L' : 'g/cm³'}</div>
+            </div>
+            ` : ''}
+        `;
+        
+        // 3D Models
+        const modelsContainer = document.getElementById('modelsContainer');
+        modelsContainer.innerHTML = '';
+        
+        // Bohr Model
+        if (element.bohr_model_image) {
+            modelsContainer.innerHTML += `
+                <div class="model-card">
+                    <div class="model-title">Bohr Model (2D)</div>
+                    <div style="padding: 15px; background: white;">
+                        <img src="${element.bohr_model_image}" alt="Bohr Model" 
+                             style="width: 100%; max-height: 300px; object-fit: contain;">
+                    </div>
+                </div>
+            `;
+        }
+        
+        // 3D Bohr Model
+        if (element.bohr_model_3d) {
+            modelsContainer.innerHTML += `
+                <div class="model-card">
+                    <div class="model-title">Bohr Model (3D)</div>
+                    <div style="padding: 15px; background: white;">
+                        <model-viewer 
+                            src="${element.bohr_model_3d}"
+                            alt="${element.name} 3D Model"
+                            auto-rotate
+                            camera-controls
+                            style="width: 100%; height: 300px; border-radius: 8px;">
+                        </model-viewer>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // De Broglie Model (visualization placeholder)
+        modelsContainer.innerHTML += `
+            <div class="model-card">
+                <div class="model-title">De Broglie Wave Model</div>
+                <div style="padding: 15px; background: white; height: 300px; display: flex; align-items: center; justify-content: center;">
+                    <div style="text-align: center;">
+                        <p style="margin: 0;">Wavelength Visualization</p>
+                        <canvas id="deBroglieCanvas" style="width: 100%; max-width: 200px; margin-top: 10px;"></canvas>
+                        ${element.electron_affinity ? `<small>Electron Affinity: ${element.electron_affinity} kJ/mol</small>` : ''}
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        // Schrödinger Visualization (electron probability density)
+        modelsContainer.innerHTML += `
+            <div class="model-card">
+                <div class="model-title">Schrödinger Wave Function</div>
+                <div style="padding: 15px; background: white; height: 300px; display: flex; align-items: center; justify-content: center;">
+                    <div style="text-align: center;">
+                        <p style="margin: 0;">Electron Probability Density</p>
+                        <canvas id="schrodingerCanvas" style="width: 100%; max-width: 200px; margin-top: 10px;"></canvas>
+                        ${element.ionization_energies && element.ionization_energies[0] ? `<small>1st Ionization: ${element.ionization_energies[0]} kJ/mol</small>` : ''}
+                    </div>
+                </div>
+            `;
+        
+        // Draw visualizations
+        setTimeout(() => {
+            drawDeBroglieVisualization(element);
+            drawSchrodingerVisualization(element);
+        }, 100);
+        
+        // Spectral Bands
+        const spectralContainer = document.getElementById('spectralContainer');
+        if (element.spectral_img) {
+            spectralContainer.innerHTML = `
+                <h3>📊 Spectral Bands</h3>
+                <img src="${element.spectral_img}" alt="Spectral Bands" 
+                     class="spectral-image">
+            `;
+        } else {
+            spectralContainer.innerHTML = '';
+        }
+        
+        // Additional Information
+        const additionalInfo = document.getElementById('additionalInfo');
+        let additionalHtml = `
+            <h3>ℹ️ Additional Information</h3>
+            <p><strong>Summary:</strong></p>
+            <p>${element.summary}</p>
+        `;
+        
+        if (element.source) {
+            additionalHtml += `
+                <p><strong>Source:</strong> 
+                <a href="${element.source}" target="_blank" class="btn btn-sm btn-info">
+                    View on Wikipedia ↗
+                </a></p>
+            `;
+        }
+        
+        additionalInfo.innerHTML = additionalHtml;
+        
+        modal.show();
+    }
+    
+    function drawDeBroglieVisualization(element) {
+        const canvas = document.getElementById('deBroglieCanvas');
+        if (!canvas) return;
+        
+        const ctx = canvas.getContext('2d');
+        const width = canvas.width;
+        const height = canvas.height;
+        
+        ctx.fillStyle = '#f0f0f0';
+        ctx.fillRect(0, 0, width, height);
+        
+        // Draw sine wave
+        ctx.strokeStyle = '#667eea';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        
+        const frequency = 2 + (element.number % 5);
+        const amplitude = height / 4;
+        
+        for (let x = 0; x < width; x++) {
+            const y = height / 2 - amplitude * Math.sin((x / width) * frequency * Math.PI * 2);
+            if (x === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+    }
+    
+    function drawSchrodingerVisualization(element) {
+        const canvas = document.getElementById('schrodingerCanvas');
+        if (!canvas) return;
+        
+        const ctx = canvas.getContext('2d');
+        const width = canvas.width;
+        const height = canvas.height;
+        
+        ctx.fillStyle = '#f0f0f0';
+        ctx.fillRect(0, 0, width, height);
+        
+        // Draw probability density cloud
+        const centerX = width / 2;
+        const centerY = height / 2;
+        const shells = element.shells || [1];
+        
+        ctx.fillStyle = 'rgba(102, 126, 234, 0.3)';
+        shells.forEach((electrons, index) => {
+            const radius = 20 + (index * 15);
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+            ctx.fill();
+        });
+        
+        // Draw nucleus
+        ctx.fillStyle = '#e53935';
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, 4, 0, Math.PI * 2);
+        ctx.fill();
+    }
+    
+    // Search functionality
+    document.getElementById('searchInput').addEventListener('keyup', (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        const filtered = allElements.filter(el => 
+            el.name.toLowerCase().includes(searchTerm) ||
+            el.symbol.toLowerCase().includes(searchTerm) ||
+            el.number.toString().includes(searchTerm)
+        );
+        renderPeriodicTable(filtered.length > 0 ? filtered : allElements);
+    });
+    
+    // Initialize
+    loadElements();
+</script>
+</body>
+</html>

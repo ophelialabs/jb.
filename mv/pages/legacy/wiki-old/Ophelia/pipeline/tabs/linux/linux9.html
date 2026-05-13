@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>enterpriselinux Project Generator Script</title>
+    <!-- Bootstrap 5.3 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- PrismJS for code highlighting -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css" rel="stylesheet">
+    <!-- Fluent UI Bootstrap theme (Bootswatch 'Flatly' as a Fluent-like example) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.3/dist/flatly/bootstrap.min.css" rel="stylesheet">
+    <link href="static/pipeline.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fluent-navbar bg-primary mb-4">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="../../../index.html">
+                <svg width="32" height="32" fill="#fff" class="me-2" viewBox="0 0 16 16"><rect width="16" height="16" rx="4"/></svg>
+                <span style="font-weight:600;letter-spacing:0.03em;">Ophelia</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <div class="navbar-nav ms-auto">
+                    <a class="nav-link fluent-btn" href="linux9.html">Generator</a>
+                    <a class="nav-link fluent-btn" href="generator.sh">Download</a>
+                    <a class="nav-link fluent-btn" href="#" target="_blank" rel="noopener noreferrer">Docs</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-5">
+        <div class="row">
+            <div class="col-12">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h1 class="card-title">Enterprise Linux</h1>
+                        
+                        <div class="alert alert-info mt-3">
+                            <h5>Description</h5>
+                            <p>This shell script automatically generates an advanced .NET enterpriselinux project structure with the following features:</p>
+                            <ul>
+                                <li>Creates a standardized solution and project layout</li>
+                                <li>Sets up authentication and authorization modules</li>
+                                <li>Configures database integration (SQL Server, PostgreSQL)</li>
+                                <li>Includes deployment and containerization options</li>
+                                <li>Generates necessary configuration files and environment settings</li>
+                                <li>Prepares sample microservices and web frontend</li>
+                            </ul>
+                        </div>
+
+                        <h2>Important Directories</h2>
+                        <ul>
+                            <li><code>/</code>, <code>/home</code>, <code>/tmp</code>, <code>/var</code>, <code>/var/tmp</code>, <code>/var/log</code>, <code>/var/log/audit</code>, <code>/boot</code></li>
+                            <li>Always shred or clean drives and motherboards upon disposal to prevent credential harvesting.</li>
+                            <li><span class="small">Using Yum repository for backwards compatibility</span></li>
+                        </ul>
+
+                        <hr>
+
+                        <h2>Network and Development Tools</h2>
+                        <ul>
+                            <li>java, javac, node.js, php, lynx</li>
+                        </ul>
+
+                        <hr>
+
+                        <h2><a href="https://developer.hashicorp.com/terraform/install">Terraform</a></h2>
+                        <pre><code>sudo yum install -y yum-utils
+sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
+sudo yum -y install terraform
+</code></pre>
+
+                        <hr>
+
+                        <h2><a href="https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html-single/managing_systems_using_the_rhel_9_web_console/index">Cockpit</a></h2>
+                        <p>Cockpit supports Ubuntu Focal (20.04), ROS-Noetic, and Gazebo (Gazebo not supported on RHEL9).</p>
+                        <pre><code>systemctl enable --now cockpit.socket
+sudo dnf install -y cockpit-machines
+</code></pre>
+
+                        <hr>
+
+                        <h2><a href="https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_and_managing_networking/configuring-a-vpn-connection_configuring-and-managing-networking">VPN Config Guide</a></h2>
+                        <ul>
+                            <li>Cockpit supports WireGuard VPN (requires FIPS disabled). For production, use Libreswan (Openswan IPsec fork).</li>
+                        </ul>
+
+                        <hr>
+
+                        <h2><a href="https://docs.oracle.com/en/operating-systems/oracle-linux/kvm-user/kvm-InstallingVirtualizationPackages.html">Virtualization Setup</a></h2>
+                        <p>Install virtualization packages:</p>
+                        <pre><code>sudo dnf group install "Virtualization Host"
+sudo dnf install qemu-kvm libvirt virt-install virt-viewer
+for drv in qemu network nodedev nwfilter secret storage interface; do systemctl start virt${drv}d{,-ro,-admin}.socket; done
+virt-host-validate
+sudo dnf update -y
+sudo dnf install -y pip
+</code></pre>
+
+                        <hr>
+
+                        <h2><a href="https://go.dev/doc/install">Install Go</a></h2>
+                        <pre><code>sudo dnf install -y go
+</code></pre>
+                        <strong>AMD/INTEL</strong>
+                        <pre><code>curl -LO https://go.dev/dl/go1.24.2.linux-amd64.tar.gz
+rm -rf /usr/local/go && tar -C /usr/local -xzf go1.24.2.linux-amd64.tar.gz
+export PATH=$PATH:/usr/local/go/bin
+</code></pre>
+                        <strong>ARM</strong>
+                        <pre><code>curl https://go.dev/dl/go1.24.2.linux-arm64.tar.gz
+rm -rf /usr/local/go && tar -C /usr/local -xzf go1.24.2.linux-arm64.tar.gz
+export PATH=$PATH:/usr/local/go/bin
+</code></pre>
+
+                        <hr>
+
+                        <h2><a href="https://code.visualstudio.com/insiders/">VS Code - Insiders</a></h2>
+                        <pre><code>sudo dnf install -y code-insiders
+</code></pre>
+                        <p>or</p>
+                        <pre><code>cd Downloads && ls
+sudo dnf install (code-insiders).rpm && sudo rm (code-insiders).rpm
+</code></pre>
+                        <h3>Github-SSH</h3>
+                        <pre><code>ssh-keygen -t rsa -C "comment-here"
+ssh-add ~/.ssh/id_rsa
+cat ~/.ssh/id_rsa.pub
+</code></pre>
+                        <p>
+                            <strong>Copy key &gt; Github &gt; Settings &gt; Add SSH key &gt; Paste key</strong><br>
+                            <strong>Title = Machine Name</strong>
+                        </p>
+
+                        <hr>
+
+                        <h2><a href="https://podman-desktop.io/docs/installation">Podman Desktop</a></h2>
+                        <pre><code>flatpak remote-add --if-not-exists --user flathub https://flathub.org/repo/flathub.flatpakrepo
+flatpak install --user flathub io.podman_desktop.PodmanDesktop
+flatpak update --user io.podman_desktop.PodmanDesktop
+flatpak run io.podman_desktop.PodmanDesktop
+</code></pre>
+
+                        <hr>
+
+                        <h2><a href="https://kubernetes.io/docs/tasks/tools/">Kubernetes (K8s)</a></h2>
+                        <p>Install Kubernetes tools:</p>
+                        <pre><code>cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://pkgs.k8s.io/core:/stable:/v1.32/rpm/
+enabled=1
+gpgcheck=1
+gpgkey=https://pkgs.k8s.io/core:/stable:/v1.32/rpm/repodata/repomd.xml.key
+exclude=kubelet kubeadm kubectl cri-tools kubernetes-cni
+EOF
+sudo yum install -y kubelet kubeadm kubectl cri-tools kubernetes-cni --disableexcludes=kubernetes
+systemctl enable --now kubelet
+go install sigs.k8s.io/kind@v0.27.0
+sudo mv ~/go/bin/kind /bin
+sudo rm -r ~/go
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-latest.x86_64.rpm
+sudo rpm -Uvh minikube-latest.x86_64.rpm
+</code></pre>
+
+                        <hr>
+
+                        <h2>CLIs</h2>
+                        <strong>Azure Cloud (AZ)</strong>
+                        <pre><code>
+</code></pre>
+                        <strong>Google Cloud Platform (GCP)</strong>
+                        <pre><code>sudo tee -a /etc/yum.repos.d/google-cloud-sdk.repo << EOM
+[google-cloud-cli]
+name=Google Cloud CLI
+baseurl=https://packages.cloud.google.com/yum/repos/cloud-sdk-el9-x86_64
+enabled=1
+gpgcheck=1
+repo_gpgcheck=0
+gpgkey=https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+EOM
+</code></pre>
+                        <p>- if using Fedora 34 or 35 install</p>
+                        <pre><code>sudo dnf install libxcrypt-compat.x86_64
+</code></pre>
+                        <pre><code>sudo dnf install google-cloud-cli
+</code></pre>
+                        <p>- reference a file to install additional components</p>
+                        <pre><code>google-cloud-cli-anthos-auth
+google-cloud-cli-app-engine-go
+google-cloud-cli-app-engine-grpc
+google-cloud-cli-app-engine-java
+google-cloud-cli-app-engine-python
+google-cloud-cli-app-engine-python-extras
+google-cloud-cli-bigtable-emulator
+google-cloud-cli-cbt
+google-cloud-cli-cloud-build-local
+google-cloud-cli-cloud-run-proxy
+google-cloud-cli-config-connector
+google-cloud-cli-datastore-emulator
+google-cloud-cli-firestore-emulator
+google-cloud-cli-gke-gcloud-auth-plugin
+google-cloud-cli-kpt
+google-cloud-cli-kubectl-oidc
+google-cloud-cli-local-extract
+google-cloud-cli-minikube
+google-cloud-cli-nomos
+google-cloud-cli-pubsub-emulator
+google-cloud-cli-skaffold
+google-cloud-cli-spanner-emulator
+google-cloud-cli-terraform-validator
+google-cloud-cli-tests
+kubectl
+</code></pre>
+                        <p>- gcloud auth login works best with chrome browser</p>
+                        <pre><code>gcloud init
+gcloud auth login
+</code></pre>
+
+                        <strong>Amazon Web Services (AWS)</strong>
+                        <pre><code>
+</code></pre>
+
+                        <hr>
+
+                        <h2><a href="https://docs.oracle.com/en/operating-systems/oracle-linux/cockpit/cockpit-kvm.html">Virtual Machine Creation</a></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="static/scripts/search.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+</body>
+</html>

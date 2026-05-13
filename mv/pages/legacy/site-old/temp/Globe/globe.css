@@ -1,0 +1,66 @@
+body { background: #1e293b; color: #f1f5f9; font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; }
+#globe-container { width: 75vw; height: 75vh; }
+.alerts-section { flex: 1; position: relative; width: 100%; }
+.alerts-popup { position: sticky; top: 2rem; z-index: 10; background: rgba(30,41,59,0.98); border-radius: 16px; box-shadow: 0 8px 32px rgba(59,130,246,0.18); border: 1px solid rgba(255,255,255,0.10); padding: 1.5rem 1.2rem; min-height: 120px; }
+.alert-list { list-style: none; padding: 0; margin: 0; }
+.alert-item { margin-bottom: 1.2rem; }
+.alert-content { background: rgba(220,38,38,0.12); border-left: 5px solid #ef4444; border-radius: 12px; padding: 1.2rem 1.2rem 1.2rem 1.5rem; box-shadow: 0 2px 12px rgba(59,130,246,0.08); display: flex; align-items: flex-start; gap: 1rem; }
+.alert-icon { font-size: 1.5rem; color: #ef4444; margin-top: 2px; }
+.alert-title { font-weight: 700; color: #f1f5f9; font-size: 1.08rem; }
+.alert-message { color: #e0e7ef; margin: 0.2rem 0 0.4rem 0; }
+.alert-timestamp { font-size: 0.93rem; color: #64748b; }
+.no-alerts { background: rgba(59,130,246,0.10); border-radius: 12px; padding: 1.2rem 1.2rem; color: #a5b4fc; text-align: center; }
+.alert-category { font-size: 1.1rem; font-weight: bold; margin: 1.2rem 0 0.5rem 0; color: #fbbf24; }
+.alert-category.critical { color: #ef4444; }
+.alert-category.high { color: #f59e42; }
+.alert-category.medium { color: #38bdf8; }
+.query-section {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    background: rgba(30,41,59,0.98);
+    padding: 1rem;
+    border-radius: 12px;
+    z-index: 1000;
+}
+.satellite-marker {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+}
+.satellite-marker.LEO { background: #ff4444; }
+.satellite-marker.MEO { background: #44ff44; }
+.satellite-marker.GEO { background: #4444ff; }
+.ground-station {
+    width: 20px;
+    height: 20px;
+    background: #ffff00;
+    border: 3px solid #ffffff;
+    border-radius: 50%;
+}
+.los-line {
+    stroke: rgba(255,255,255,0.4);
+    stroke-width: 1;
+    stroke-dasharray: 4;
+}
+.quantum-node {
+    width: 24px;
+    height: 24px;
+    background: #7e22ce;
+    border: 3px solid #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 0 15px #7e22ce;
+}
+.quantum-link {
+    stroke: #7e22ce;
+    stroke-width: 2;
+    stroke-dasharray: 8;
+    animation: quantumPulse 3s infinite linear;
+}
+@keyframes quantumPulse {
+    0% { stroke-dashoffset: 24; }
+    100% { stroke-dashoffset: 0; }
+}
