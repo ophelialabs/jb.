@@ -76,4 +76,16 @@
   <url>
     <loc>http://localhost:3000/readme-6</loc>
   </url>
+  <url>
+    <loc>http://localhost:3000/index-2</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/index2</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/index-3</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/index2-1</loc>
+  </url>
 </urlset>
