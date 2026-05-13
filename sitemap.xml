@@ -31,4 +31,10 @@
   <url>
     <loc>http://localhost:3000/2-2-1</loc>
   </url>
+  <url>
+    <loc>http://localhost:3000/index</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/readme-2</loc>
+  </url>
 </urlset>
