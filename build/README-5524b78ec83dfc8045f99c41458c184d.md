@@ -1,0 +1,6 @@
+- [Colosseum](https://www.protocols.io/view/assembly-instructions-for-colosseum-261ge422dv47/v2/materials)
+- [Colosseum BOM](https://docs.google.com/spreadsheets/d/1Z83jh0TSUGW6AqqXLzAsNthaGQMtfY0oZQ2VZEOLgi0/edit?pli=1&gid=0#gid=0)
+- [Customizable HPLC fraction collection](https://www.sciencedirect.com/science/article/pii/S2468067224001068#s0020)
+- [LC/MS Installation](https://www.agilent.com/cs/library/usermanuals/public/03-954019-55R1.pdf?srsltid=AfmBOoqJzL9xoXE7MV1WNYmh38S114GdiCseZ5hrFVcim08FoQhBJ0-q)
+- [RotoMate](https://www.sciencedirect.com/science/article/pii/S2468067221000407)
+- [Osmar](https://www.hardware-x.com/article/S2468-0672(17)30028-7/fulltext)
