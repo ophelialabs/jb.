@@ -48,5 +48,186 @@ $ sudo dnf install -y cockpit-machines</code></pre>
 <a href="linux/el9_mtt.md">Mtt</a>
 <a href="linux/el9_db.md">Database</a>
 
+    ##  Create Install Media  ##
+24.10>USB>FAT32
+xorriso-dd-target -with_sudo -list_all
+# Verify storage device is not mounted
+sudo umount /dev/sda1
+# Prompted guide
+xorisso-dd-target -with_sudo -plug_test -DO_WRITE -image_file ./<image.iso>
+
+
+/** CENTOS **/
+# Check Master pre-req
+sudo su -
+# For RAM
+cat /proc/meminfo
+cat /proc/meminfo | grep MemTotal | awk '{print ($2 / 1024) / 1024 ,
+# For CPU
+cat /proc/cpuinfo | grep processor
+#  Accessible filesystems
+cat etc/fstab
+# Disable Swap for current session
+swapoff -a
+# Disable swap permanently
+sed -i'/swap/s/^\(.*\)$/#\1/g'etc/fstab
+# Accessible Filesystems
+cat /etc/fstab
+
+/** Needs Verification **/
+# Disable SELINUX
+sed -i --follow-symlinks 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
+# Verify 
+cat /etc/sysconfig/selinux | grep SELINUX=
+/** Needs Verification **/
+
+
+setenforce0
+
+cat <<EOF>> /etc/hosts
+>
+> 192.168.1.31  master1
+> 192.168.1.32  workernode1
+> 192.168.1.33  workernode2
+>EOF
+
+# Ping
+ping -c 2 workernode1
+systemctl stop firewalld.service
+systemctl disable firewalld
+systemctl status firewalld
+
+modprobe br_netfilter
+lsmod | grep br_netfilter
+echo '1' > /proc/sys/net/bridge/bridge-nf-call-iptables
+sysctl -a | grep net.bridge.bridge-nf-call-iptables
+
+# Remove existing docker
+sudo yum -y remove docker docker-client docker-client-latest docker-common docker-latest docker-latest-logrotate docker-logrotate docker-engine buildah
+
+yum install -y yum-utils
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+yum install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+containerd config default | sudo tee /etc/containerd/config.toml | grep SystemdCgroup
+sed -i 's/SystemdCgroup = false/SystemdCgroup = true/g' /etc/containerd/config.toml
+cat /etc/containerd/config.toml | grep SystemdCgroup
+systemctl start docker
+systemctl enable docker
+docker run hello-world
+
+cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
+> [kubernetes]
+> name=Kubernetes
+> baseurl=https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+> exclude=kubelet kubeadm kubectl
+> EOF
+[kubernetes]
+name=Kubernetes
+baseurl=https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+exclude=kubelet kubeadm kubectl
+
+yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
+systemctl enable kubelet
+systemctl start kubelet
+swapoff -a
+kubeadm init
+
+# Copy kubeadm join
+export KUBECONFIG=/etc/kubernetes/admin.conf
+
+# Alternatively if no root access
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u) :$(id -g) $HOME/.kube/config
+
+kubectl get nodes
+# Networking addons
+https://kubernetes.io/docs/concepts/cluser/administration/addons/#networking-and-network-policy
+kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
+# Give some time
+kubectl get nodes
+
+kubectl get pods -A
+cat > pod1.yaml
+kubectl create -f pod1.yaml
+# Will be pending forever
+kubectl get pod
+
+kubectl describe master1.example.com | grep -i taint
+kubectl delete -f pod1.yaml
+cat > script.sh
+vi script.sh
+delete up to kubeadm join disc token
+:wq
+sh script.sh
+# Execute same sccript on workernode1
+cat > script.sh
+# Workernode2
+chmod 775 script.sh
+date
+sh script.sh ; date
+# Master
+kubectl get pods
+yum install bash-completion
+source /usr/share/bash-completion/bash_completion
+echo 'source < (kubectl completion bash)' >>~/.bashrc
+kubectl completion bash > /etc/bash_completion.d/kubectl
+kubectl get node
+cat > pod.yaml
+kubectl create -f pod.yaml
+kubectl get po
+
+
+##    Podman    ##
+sudo dnf update
+sudo dnf -y install dnf-plugins-core
+sudo dnf install pass
+dnf info container-tools
+sudo dnf install container-tools
+https://podman-desktop.io/downloads/linux
+
+>AMD64 binary tar.gz>extract>podman-desktop>run
+tar -xvzf podman-desktop-1.15.0.tar.gz -C <./filepath>
+
+sudo dnf update
+sudo dnf install qemu-kvm libvirt virt-install virt-viewer
+for drv in qemu network nodedev nwfilter secret storage interface; do systemctl start virt${drv}d{,-ro,-admin}.socket; done
+virt-host-validate
+
+# Install Helm
+https://github.com/helm/helm/releases
+tar -xvzf helm-v3.17.0-rc.1-linux-amd64.tar.gz -C ./usr/local/bin/helm
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/
+
+# Install Kubectl
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+sudo dnf install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+kubectl version --client
+
+# Install VS Code - .rpm package
+https://code.visualstudio.com/download#
+cd Downloads
+ls
+sudo dnf install <file.rpm>
+
+# Install Odo
+curl -L https://developers.redhat.com/content-gateway/rest/mirror/pub/openshift-v4/clients/odo/v3.16.1/odo-linux-amd64 -o odo
+curl -L https://developers.redhat.com/content-gateway/rest/mirror/pub/openshift-v4/clients/odo/v3.16.1/odo-linux-amd64.sha256 -o odo.sha256
+echo "$(<odo.sha256)  odo" | shasum -a 256 --check
+sudo install -o root -g root -m 0755 odo /usr/local/bin/odo
+
+VS Code KUBERNETES 
+/** 
+CLUSTERS
+
+HELM REPOS
+bitnami
+kubernetes-dashboard
+
+CLOUDS
+Azure
+Red Hat OpenShift
+**/
 </body>
 </html>
