@@ -106,3 +106,95 @@ $ rm kubectl.sha256
 
 # Windows
 (Use curl)
+
+KUBERNETES
+1. Download the latest release with the command:
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+2.  Checksum
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
+   
+3. Validate
+echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
+
+4. Install kubectl
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+
+5. Test to ensure the version you installed is up-to-date:
+kubectl version –-client
+or
+kubectl version --client –-output=yaml
+
+6. Install GO
+golang.org/dl/>copy link location
+wget url
+ll
+tar -xzvf <file>
+./go/bin/go
+sudo mv go /usr/local/
+ll /usr/local
+vi ~/.bashrc
+
+# Add go to path
+export PATH=$PATH:/usr/local/go/bin
+
+source ~/.bash.rc
+
+7. Install kind
+/** Kind is well-suited for CI/CD environments **/
+go install sigs.k8s.io/kind@v0.26.0
+
+8. Install minikube
+/** single node/ better for testing applications in a production-like environment **/
+curl -LO https://github.com/kubernetes/minikube/releases/latest/download/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube && rm minikube-linux-amd64
+
+9. Install Helm
+# Download desired version
+https://github.com/helm/helm/releases
+tar -zxvf helm-v3.0.0-linux-amd64.tar.gz
+mv linux-amd64/helm /usr/local/bin/helm
+
+/** commenting out section for better placement **/
+#Initialize a Helm repo
+helm repo add bitnami https://charts.bitnami.com/bitnami
+# Deploy a Helm Release named "kubernetes-dashboard" using the kubernetes-dashboard chart
+helm upgrade --install kubernetes-dashboard kubernetes-dashboard/kubernetes-dashboard --create-namespace --namespace kubernetes-dashboard
+/** Now, vscode>kubernetes ext>Helm repos dropdown will display Bitnami and kubernetes-dashboard **/
+# Add kubernetes-dashboard repository
+helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/
+bitnami/
+/**                                            **/
+
+
+# create your cluster-<cluster-name>-config.yml
+/** create yaml file (vim/nano or vscode>create new file
+ESPECIALLY handy when trying to create more than one node **/
+
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+  - role: control-plane
+  - role: worker
+  - role: worker
+  - role: worker
+
+kubeadmConfigPatches:
+- |
+  apiVersion: kubelet.config.k8s.io/v1beta1
+  kind: KubeletConfiguration
+  evictionHard:
+    nodefs.available: "0%"
+
+  group: kubeadm.k8s.io
+  version: v1beta3
+  kind: ClusterConfiguration
+  patch: |
+    - op: add
+      path: /apiServer/certSANs/-
+      value: my-hostname
+
+# Add dashboards to cluster
+helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/
+# Grafana :3000
+# Prometheus :9090
+# Strelka :9980
