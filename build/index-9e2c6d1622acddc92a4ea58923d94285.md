@@ -21,14 +21,8 @@
 - Viva ([Engage](https://www.microsoft.com/en-us/microsoft-viva/engage) / Yammer) / VS Code (Viva Connections) to deploy custom [SharePoint Framework solutions](https://www.youtube.com/watch?v=GXfnIZJZDzk) / [CPK](https://cloud.copilotkit.ai/sign-up) ([MAF](https://docs.copilotkit.ai/microsoft-agent-framework) / [Strands](https://docs.copilotkit.ai/aws-strands))
 - .env is now in [Studio](https://www.microsoft.com/en-us/microsoft-365-copilot/microsoft-copilot-studio)>Topics>Variables also in Power Apps>[Solutions](https://learn.microsoft.com/en-us/power-apps/maker/data-platform/solutions-overview)>[AZ Key Vault](https://azure.microsoft.com/en-us/products/key-vault) or [Wizard](https://learn.microsoft.com/en-us/microsoft-copilot-studio/guidance/kit-setup-wizard)
 - VS Code is the SPFx Standard: While Visual Studio is optimized for .NET and C#, VS Code is designed specifically for high-performance front-end web development.
-- *Use [landscape](https://github.com/cncf/landscape2/blob/main/ADOPTERS.md)* to create a more easily accessible curated list(s) of tools
-
 ---
 
-## Pipe
-1. [Manufacturing]()
-2. [Comm]()
-3. [Data Acq & Transpo]()
 
 ---
 
